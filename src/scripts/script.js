@@ -9,6 +9,7 @@ var dungeonSizeArray = initializeDungeonSizeArray();
 var dungeonTypeArray = initializeDungeonTypeArray();
 var dungeonStartArray = initializeDungeonStartArray();
 var stairArray = initializeStairArray();
+var obstacleArray = initializeObstacleArray();
 
 window.onload = function() {
 
@@ -19,6 +20,7 @@ window.onload = function() {
   var trapRoller = document.getElementById("trap-roller");
   var dungeonRoller = document.getElementById("dungeon-roller");
   var stairRoller = document.getElementById("stair-roller");
+  var obstacleRoller = document.getElementById("obstacle-roller");
 
   // Result elements
   var contentLabel = document.getElementById("content-label");
@@ -75,6 +77,15 @@ window.onload = function() {
 
     return false;
   }
+
+  obstacleRoller.onclick = function() {
+    var obstacle = rollObstacle();
+    contentLabel.innerHTML = "Obstacle";
+    contentResult.innerHTML = obstacle;
+
+    return false;
+  }
+
 
   return false;
 }
@@ -1343,3 +1354,98 @@ function rollStair() {
 }
 
 /*********   STAIR END *********/
+
+
+
+/*********   OBSTACLE START *********/
+
+function initializeObstacleArray() {
+  var obstacleArray = [
+    [1,"1","Antilife aura","Radius of 1d10 × 10 ft.","",1,1,10,"multiply",10,"radius",0,0,"none",0,"","While in the aura, living creatures can’t regain hit points"],
+    [2,"2","Battering winds","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Reduce speed by half, impose disadvantage on ranged attack rolls"],
+    [3,"3","Blade barrier blocks passage","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","3d8 piercing damage to pass"],
+    [4,"4–8","Cave-in","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Passage blocked"],
+    [5,"4–8","Cave-in","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Passage blocked"],
+    [6,"4–8","Cave-in","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Passage blocked"],
+    [7,"4–8","Cave-in","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Passage blocked"],
+    [8,"4–8","Cave-in","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Passage blocked"],
+    [9,"9–12","Chasm","1d4 × 10 ft. wide and 2d6 × 10 ft. deep,","",2,1,10,"multiply",10,"wide",2,10,"multiply",10,"deep","Possibly connected to other levels of the dungeon"],
+    [10,"9–12","Chasm","1d4 × 10 ft. wide and 2d6 × 10 ft. deep,","",2,1,10,"multiply",10,"wide",2,10,"multiply",10,"deep","Possibly connected to other levels of the dungeon"],
+    [11,"9–12","Chasm","1d4 × 10 ft. wide and 2d6 × 10 ft. deep,","",2,1,10,"multiply",10,"wide",2,10,"multiply",10,"deep","Possibly connected to other levels of the dungeon"],
+    [12,"9–12","Chasm","1d4 × 10 ft. wide and 2d6 × 10 ft. deep,","",2,1,10,"multiply",10,"wide",2,10,"multiply",10,"deep","Possibly connected to other levels of the dungeon"],
+    [13,"13–14","Flooding","2d10 ft. of water in the area","",1,1,10,"none",0,"of water in the area",2,10,"multiply",10,"deep","Create nearby upward-sloping passages, raised floors, or rising stairs to contain the water"],
+    [14,"13–14","Flooding","2d10 ft. of water in the area","",1,1,10,"none",0,"of water in the area",0,0,"none",0,"","Create nearby upward-sloping passages, raised floors, or rising stairs to contain the water"],
+    [15,"15","Lava","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","50% chance of stone bridge crossing it"],
+    [16,"16","Overgrown mushrooms","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Must be hacked down to proceed. 25% chance of a mold or fungus dungeon hazard hidden among them."],
+    [17,"17","Poisonous gas","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Deals 1d6 poison damage per minute of exposure"],
+    [18,"18","Reverse gravity","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","Effect causes creatures to fall toward the ceiling"],
+    [19,"19","Wall of fire blocks passage","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","3d8 elemental damage to pass"],
+    [20,"20","Wall of force blocks passage","Immediate area","Immediate area",0,0,0,"none",0,"",0,0,"none",0,"","3d8 elemental damage to pass"]
+  ];
+  return obstacleArray;
+};
+
+function objectifyObstacleRow(obstacleRowNum) {
+  var obstacleRow = obstacleArray[obstacleRowNum - 1];
+  var obstacleDataObject = {
+    rollResult: obstacleRow[0],
+    rollResultRange: obstacleRow[1],
+    type: obstacleRow[2],
+    sizeText: obstacleRow[3],
+    sizeSuffix: obstacleRow[4],
+    sizeDiceRollsNumber: obstacleRow[5],
+    sizeDice1Rolls: obstacleRow[6],
+    sizeDice1Type: obstacleRow[7],
+    sizeDice1modifierType: obstacleRow[8],
+    sizeDice1modifierValue: obstacleRow[9],
+    sizeDice1Suffix: obstacleRow[10],
+    sizeDice2Rolls: obstacleRow[11],
+    sizeDice2Type: obstacleRow[12],
+    sizeDice2modifierType: obstacleRow[13],
+    sizeDice2modifierValue: obstacleRow[14],
+    sizeDice2Suffix: obstacleRow[15],
+    notes: obstacleRow[16]
+  }
+  console.log(JSON.stringify(obstacleDataObject));
+  return obstacleDataObject;
+}
+
+function rollObstacle() {
+  var obstacleRollResult = rollDice(20);
+  var obstacleDataObject = objectifyObstacleRow(obstacleRollResult);
+
+  var obstacleString = obstacleDataObject.type;
+
+  if(obstacleDataObject.sizeDiceRollsNumber == 0) {
+    obstacleString += "<br />Affects " + obstacleDataObject.sizeText;
+    obstacleString += "<br />" + obstacleDataObject.notes;
+    return obstacleString;
+  }
+
+  var obstacleAffectedAreaNum1 = 0;
+
+  for(let index = 0; index < obstacleDataObject.sizeDice1Rolls; index++) {
+    obstacleAffectedAreaNum1 += rollDice(obstacleDataObject.sizeDice1Type);
+  }
+  obstacleAffectedAreaNum1 = applyModifier(obstacleAffectedAreaNum1, obstacleDataObject.sizeDice1modifierType, obstacleDataObject.sizeDice1modifierValue);
+  obstacleString += "<br />" + obstacleAffectedAreaNum1 + " ft"
+  obstacleString += " " + obstacleDataObject.sizeDice1Suffix;
+  
+  if(obstacleDataObject.sizeDiceRollsNumber == 2) {
+    var obstacleAffectedAreaNum2 = 0;
+
+    for(let index = 0; index < obstacleDataObject.sizeDice2Rolls; index++) {
+      obstacleAffectedAreaNum2 += rollDice(obstacleDataObject.sizeDice1Type);
+    }
+
+    obstacleAffectedAreaNum2 = applyModifier(obstacleAffectedAreaNum2, obstacleDataObject.sizeDice2modifierType, obstacleDataObject.sizeDice2modifierValue);
+    obstacleString += " x " + obstacleAffectedAreaNum2 + " ft";
+    obstacleString += " " + obstacleDataObject.sizeDice2Suffix;
+  }
+
+  obstacleString += "<br />" + obstacleDataObject.notes;
+
+  return obstacleString;
+}
+
+/*********   OBSTACLE END *********/
