@@ -61,6 +61,21 @@ section {
   width: 100%;
 }
 
+#modifier-wrapper {
+  margin: .25em;
+  border: #376241 3px solid;
+  text-align: center;
+  color: #376241;
+  padding: .25em;
+}
+
+#modifier {
+  text-align: center;
+  border: #376241 1px solid;
+  font-size: large;
+  width: 50%;
+}
+
 @media (max-width: 1024px) {
 
   .roll-button {
