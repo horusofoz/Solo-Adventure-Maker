@@ -3,6 +3,7 @@ var roomContentArray = initializeRoomContentArray();
 var passageLayoutArray = initializePassageLayoutArray();
 var passageContentArray = initializePassageContentArray();
 var doorArray = initializeDoorArray();
+var secretDoorArray = initializeSecretDoorArray();
 var leadsToArray = initializeLeadsToArray();
 var trapArray = initializeTrapArray();
 var dungeonSizeArray = initializeDungeonSizeArray();
@@ -17,6 +18,7 @@ window.onload = function() {
   var roomRoller = document.getElementById("room-roller");
   var passageRoller = document.getElementById("passage-roller");
   var doorRoller = document.getElementById("door-roller");
+  var secretDoorRoller = document.getElementById("secret-door-roller");
   var trapRoller = document.getElementById("trap-roller");
   var dungeonRoller = document.getElementById("dungeon-roller");
   var stairRoller = document.getElementById("stair-roller");
@@ -53,6 +55,15 @@ window.onload = function() {
 
     return false;
   }
+
+  secretDoorRoller.onclick = function() {
+    var secretDoor = rollSecretDoor();
+    contentLabel.innerHTML = "Secret Door";
+    contentResult.innerHTML = secretDoor;
+
+    return false;
+  }
+
 
   trapRoller.onclick = function() {
     var trap = rollTrap();
@@ -153,6 +164,32 @@ function rollPercentile(threshold, modifierType = "none", modifierValue = 0) {
   }
 
   return false;
+}
+
+function rollLeadsTo(leadsToNum) {
+  var leadsToString = "Leads to ";
+  var leadsToDataObject = objectifyLeadsToRow(leadsToNum);
+  console.log(JSON.stringify(leadsToDataObject));
+  var leadsToRoll = rollDice(leadsToDataObject.diceType);
+  
+  switch(leadsToRoll) {
+    case 1:
+      leadsToString += leadsToDataObject.result1;
+      break;
+    case 2:
+      leadsToString += leadsToDataObject.result2;
+      break;
+    case 3:
+      leadsToString += leadsToDataObject.result3;
+      break;
+    case 4:
+      leadsToString += leadsToDataObject.result1;
+      break;
+    default:
+      // code block
+  }
+
+  return leadsToString;
 }
 
 /*********   SHARED END   *********/
@@ -939,7 +976,7 @@ function rollDoor() {
   }
 
 
-  doorString += rollLeadsTo(doorDataObject.leadsTo);
+  doorString += "<br />" + rollLeadsTo(doorDataObject.leadsTo);
   doorString += addDoorLocks(doorDataObject);
   doorString += addDoorTraps(doorDataObject);
 
@@ -985,33 +1022,61 @@ function addDoorTraps(doorDataObject) {
   return doorTrapString;
 }
 
-function rollLeadsTo(leadsToNum) {
-  var leadsToString = "<br />Leads to ";
-  var leadsToDataObject = objectifyLeadsToRow(leadsToNum);
-  console.log(JSON.stringify(leadsToDataObject));
-  var leadsToRoll = rollDice(leadsToDataObject.diceType);
-  
-  switch(leadsToRoll) {
-    case 1:
-      leadsToString += leadsToDataObject.result1;
-      break;
-    case 2:
-      leadsToString += leadsToDataObject.result2;
-      break;
-    case 3:
-      leadsToString += leadsToDataObject.result3;
-      break;
-    case 4:
-      leadsToString += leadsToDataObject.result1;
-      break;
-    default:
-      // code block
-  }
 
-  return leadsToString;
-}
 
 /*********   DOOR END *********/
+
+/********* SECRET DOOR START *********/
+
+function initializeSecretDoorArray() {
+  var secretDoorArray = [
+    [1,0,3,"Add 40","Secret door opens into a room. +40 to Room Contents table roll"],
+    [2,0,3,"Add 40","Secret door opens into a room. +40 to Room Contents table roll"],
+    [3,0,5,"Add 40","Secret door opens onto passage. Roll passage table, + 40 to Passage Contents roll."],
+    [4,0,5,"Add 40","Secret door opens onto passage. Roll passage table, + 40 to Passage Contents roll."],
+    [5,100,2,"Add 50","Trapped secret door. Roll on trap table, then on (d4) 1-2: Passage, 3-4: Room. Add 50 to your Passage Contents or Room Contents roll."],
+    [6,100,2,"Add 50","Trapped secret door. Roll on trap table, then on (d4) 1-2: Passage, 3-4: Room. Add 50 to your Passage Contents or Room Contents roll."]
+  ];
+  
+  return secretDoorArray;
+}
+
+function objectifySecretDoorRow(secretDoorRowNum) {
+  var secretDoorRow = secretDoorArray[secretDoorRowNum - 1];
+
+  var secretDoorDataObject = {
+    rollResult: secretDoorRow[0],
+    trappedChance: secretDoorRow[1],
+    leadsTo: secretDoorRow[2],
+    leadsToModifier: secretDoorRow[3]
+  };
+  return secretDoorDataObject
+}
+
+function rollSecretDoor() {
+  var secretDoorRollResult = rollDice(6);
+  var secretDoorDataObject = objectifySecretDoorRow(secretDoorRollResult);
+
+  var secretDoorString = "";
+
+  if(secretDoorDataObject.trappedChance > 0) {
+    secretDoorTrap = rollTrap();
+    secretDoorString += secretDoorTrap;
+  }
+
+  var secretDoorLeadsTo = rollLeadsTo(secretDoorDataObject.leadsTo);
+
+  if(secretDoorString !== "") {
+    secretDoorString += "<br />";
+  }
+  secretDoorString += secretDoorLeadsTo;
+
+  secretDoorString += "<br />" + secretDoorDataObject.leadsToModifier + " modifier to contents roll";
+
+  return secretDoorString;
+}
+
+/********* SECRET DOOR END *********/
 
 /*********   TRAP START *********/
 
@@ -1344,7 +1409,7 @@ function rollStair() {
   var stairDataObject = objectifyStairRow(stairRollResult);
 
   stairString = "Stair goes " + stairDataObject.direction + " " + stairDataObject.levels + " levels";
-  stairString += rollLeadsTo(stairDataObject.leadsTo);
+  stairString += "<br />" + rollLeadsTo(stairDataObject.leadsTo);
   
   if(stairDataObject.note !=="") {
     stairString += "<br />" + stairDataObject.note;
@@ -1354,8 +1419,6 @@ function rollStair() {
 }
 
 /*********   STAIR END *********/
-
-
 
 /*********   OBSTACLE START *********/
 
