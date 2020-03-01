@@ -1662,3 +1662,5 @@ function rollClue() {
   var clueDataObject = objectifyClueRow(clueRollResult);
   return clueDataObject.text;
 }
+
+/******* CLUE END ***********/
