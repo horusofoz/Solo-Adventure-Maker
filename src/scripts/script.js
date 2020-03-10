@@ -1967,9 +1967,9 @@ function rollQuest() {
   var questType = rollQuestType();
   var questSource = rollQuestSource();
 
-  var result = "PROBLEM:<br />" + questType.problem;
-  result += "<br /><br />OBJECTIVE:<br />" + questType.objective;
-  result += "<br /><br />SOURCE:<br />" + questSource.source;
+  var result = "PROBLEM: " + questType.problem;
+  result += "<br />OBJECTIVE: " + questType.objective;
+  result += "<br />SOURCE: " + questSource.source;
   return result;
 }
 
