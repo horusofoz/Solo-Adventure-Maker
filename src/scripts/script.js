@@ -185,7 +185,7 @@ function rollPercentile(threshold, modifierType = "none", modifierValue = 0) {
 }
 
 function rollLeadsTo(leadsToNum) {
-  var leadsToString = "Leads to ";
+  var leadsToString = "";
   var leadsToDataObject = objectifyLeadsToRow(leadsToNum);
   var leadsToRoll = rollDice(leadsToDataObject.diceType);
   
@@ -917,11 +917,11 @@ function initializeDoorArray() {
     [43,"41-45","Stone door","",100,16,16,0,0,100,1,"Locked and trapped stone door. DC 15 perception to find trap. If trap disarmed / avoided / triggered, roll d4 to determine what’s on the other side. 1: Passage, 2: Stairs, 3-4: Room."],
     [44,"41-45","Stone door","",100,15,16,0,0,100,1,"Locked and trapped stone door. DC 15 perception to find trap. If trap disarmed / avoided / triggered, roll d4 to determine what’s on the other side. 1: Passage, 2: Stairs, 3-4: Room."],
     [45,"41-45","Stone door","",100,16,16,0,0,100,1,"Locked and trapped stone door. DC 15 perception to find trap. If trap disarmed / avoided / triggered, roll d4 to determine what’s on the other side. 1: Passage, 2: Stairs, 3-4: Room."],
-    [46,"46-50","Secret door","",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
-    [47,"46-50","Secret door","",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
-    [48,"46-50","Secret door","",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
-    [49,"46-50","Secret door","",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
-    [50,"46-50","Secret door","",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
+    [46,"46-50","Secret door","Q/A role to see if PC finds it.",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
+    [47,"46-50","Secret door","Q/A role to see if PC finds it.",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
+    [48,"46-50","Secret door","Q/A role to see if PC finds it.",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
+    [49,"46-50","Secret door","Q/A role to see if PC finds it.",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
+    [50,"46-50","Secret door","Q/A role to see if PC finds it.",0,0,0,0,0,0,4,"Secret door. Does your PC know it’s there? Through to (roll d4) 1: hidden passage, 2-4: Hidden chamber."],
     [51,"51-55","Archway","",0,0,0,0,0,0,5,"Entrance, then 10 ft through to an adjacent passageway. Empty archway, no door."],
     [52,"51-55","Archway","",0,0,0,0,0,0,5,"Entrance, then 10 ft through to an adjacent passageway. Empty archway, no door."],
     [53,"51-55","Archway","",0,0,0,0,0,0,5,"Entrance, then 10 ft through to an adjacent passageway. Empty archway, no door."],
@@ -998,16 +998,16 @@ function objectifyDoorRow(doorRowNum) {
 
 function initializeLeadsToArray() {
   var leadsToArray = [
-    [1,4,"passage","stairs","room","room"],
-    [2,4,"passage","passage","room","room"],
-    [3,4,"room","room","room","room"],
-    [4,4,"passage","room","room","room"],
-    [5,4,"passage","passage","passage","passage"],
-    [6,4,"stairs","stairs","stairs","stairs"],
-    [7,4,"door","door","door","door"],
-    [8,4,"dead end","dead end","dead end","dead end"],
-    [9,4,"dead end","dead end","passage","passage"]
-  ]
+    [1,4,"Passage","Stairs","Room","Room"],
+    [2,4,"Passage","Passage","Room","Room"],
+    [3,4,"Room","Room","Room","Room"],
+    [4,4,"Passage","Room","Room","Room"],
+    [5,4,"Passage","Passage","Passage","Passage"],
+    [6,4,"Stairs","Stairs","Stairs","Stairs"],
+    [7,4,"Door","Door","Door","Door"],
+    [8,4,"Dead End","Dead End","Dead End","Dead End"],
+    [9,4,"Dead End","Dead End","Passage","Passage"]
+  ];
   return leadsToArray;
 }
 
@@ -1030,14 +1030,13 @@ function rollDoor() {
   var doorRollResult = rollDice(100);
   var doorDataObject = objectifyDoorRow(doorRollResult);
 
-  var doorString = doorDataObject.description;
+  var doorString = "TYPE: " + doorDataObject.description;
 
   if (doorDataObject.descriptionExtended !== "") {
-    doorString += "<br />" + doorDataObject.descriptionExtended;
+    doorString += "<br />NOTE: " + doorDataObject.descriptionExtended;
   }
 
-
-  doorString += "<br />" + rollLeadsTo(doorDataObject.leadsTo);
+  doorString += "<br />LEADS TO: " + rollLeadsTo(doorDataObject.leadsTo);
   doorString += addDoorLocks(doorDataObject);
   doorString += addDoorTraps(doorDataObject);
 
@@ -1126,16 +1125,12 @@ function rollSecretDoor() {
   var secretDoorDataObject = objectifySecretDoorRow(secretDoorRollResult);
 
   var secretDoorString = "";
-
   
   var secretDoorLeadsTo = rollLeadsTo(secretDoorDataObject.leadsTo);
 
-  if(secretDoorString !== "") {
-    secretDoorString += "<br />";
-  }
-  secretDoorString += secretDoorLeadsTo;
+  secretDoorString += "LEADS TO: " + secretDoorLeadsTo;
 
-  secretDoorString += "<br />" + secretDoorDataObject.leadsToModifier + " modifier to contents roll";
+  secretDoorString += "<br />NOTE: " + secretDoorDataObject.leadsToModifier + " modifier to contents roll";
 
   if(secretDoorDataObject.trappedChance > 0) {
     secretDoorTrap = rollTrap();
@@ -1487,11 +1482,16 @@ function rollStair() {
   var stairRollResult = rollDice(20);
   var stairDataObject = objectifyStairRow(stairRollResult);
 
+  var stairString = "";
+  stairString += "DIRECTION: " + stairDataObject.direction;
+  stairString += "<br />LEVELS: " + stairDataObject.levels;
+  stairString += "<br />LEADS TO: " + rollLeadsTo(stairDataObject.leadsTo);
+/*
   stairString = "Stair goes " + stairDataObject.direction + " " + stairDataObject.levels + " levels";
   stairString += "<br />" + rollLeadsTo(stairDataObject.leadsTo);
-  
+  */
   if(stairDataObject.note !=="") {
-    stairString += "<br />" + stairDataObject.note;
+    stairString += "<br />NOTE: " + stairDataObject.note;
   }
 
   return stairString;
