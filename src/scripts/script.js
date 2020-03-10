@@ -1556,11 +1556,11 @@ function rollObstacle() {
   var obstacleRollResult = rollDice(20);
   var obstacleDataObject = objectifyObstacleRow(obstacleRollResult);
 
-  var obstacleString = obstacleDataObject.type;
+  var obstacleString = "TYPE: " + obstacleDataObject.type;
 
   if(obstacleDataObject.sizeDiceRollsNumber == 0) {
-    obstacleString += "<br />Affects " + obstacleDataObject.sizeText;
-    obstacleString += "<br />" + obstacleDataObject.notes;
+    obstacleString += "<br />SIZE: Affects " + obstacleDataObject.sizeText;
+    obstacleString += "<br />NOTE: " + obstacleDataObject.notes;
     return obstacleString;
   }
 
@@ -1570,7 +1570,7 @@ function rollObstacle() {
     obstacleAffectedAreaNum1 += rollDice(obstacleDataObject.sizeDice1Type);
   }
   obstacleAffectedAreaNum1 = applyModifier(obstacleAffectedAreaNum1, obstacleDataObject.sizeDice1modifierType, obstacleDataObject.sizeDice1modifierValue);
-  obstacleString += "<br />" + obstacleAffectedAreaNum1 + " ft"
+  obstacleString += "<br />SIZE: " + obstacleAffectedAreaNum1 + " ft"
   obstacleString += " " + obstacleDataObject.sizeDice1Suffix;
   
   if(obstacleDataObject.sizeDiceRollsNumber == 2) {
@@ -1585,7 +1585,7 @@ function rollObstacle() {
     obstacleString += " " + obstacleDataObject.sizeDice2Suffix;
   }
 
-  obstacleString += "<br />" + obstacleDataObject.notes;
+  obstacleString += "<br />NOTE: " + obstacleDataObject.notes;
 
   return obstacleString;
 }
