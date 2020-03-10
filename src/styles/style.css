@@ -62,19 +62,33 @@ section {
 
 /***** TAB END ****/
 
-/***** DUNGEON START *****/
-.dungeon-roll-button {
-  border: 3px solid #376241;
+/***** SHARED START *****/
+
+.roll-button {
   padding: .25em;
-  font-size: x-large;
-  color: #376241;
   text-align: center;
+  font-size: x-large;
   margin: .25em;
   background-color: white;
   font-family: 'Roboto Condensed',Helvetica,sans-serif;
 }
 
-.dungeon-roll-button:hover {
+@media (max-width: 1024px) {
+
+  .roll-button {
+    font-size: large;
+  }  
+}
+
+/***** SHARED END *****/
+
+/***** DUNGEON START *****/
+.dungeon-button {
+  border: 3px solid #376241;
+  color: #376241;
+}
+
+.dungeon-button:hover {
   background-color: #376241;
   color: #FFFFFF;
 }
@@ -116,18 +130,12 @@ section {
 
 /***** QUEST START *****/
 
-.quest-roll-button {
+.quest-button {
   border: 3px solid #8b0000;
-  padding: .25em;
-  font-size: x-large;
   color: #8b0000;
-  text-align: center;
-  margin: .25em;
-  background-color: white;
-  font-family: 'Roboto Condensed',Helvetica,sans-serif;
 }
 
-.quest-roll-button:hover {
+.quest-button:hover {
   background-color: #8b0000;
   color: #FFFFFF;
 }
@@ -158,13 +166,4 @@ section {
 
 #content-column {
   width: 100%;
-}
-
-
-
-@media (max-width: 1024px) {
-
-  .roll-button {
-    font-size: large;
-  }  
 }
