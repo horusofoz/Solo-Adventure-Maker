@@ -11,7 +11,6 @@ body, html {
 main {
   display: flex;
   flex-direction: column;
-  background-color: pink;
   min-height: 100vh
 }
 
@@ -24,16 +23,15 @@ section {
 
 /***** TAB START ****/
 
-.tabcontent {
-  display: flex;
+.tab-content {
+  display: none;
   flex-direction: row;
-  background-color: #bee9c2;
   width: 100%;
   height: 100%;
   flex: 1;
 }
 
-.tablink {
+.tab-link {
   background-color: #555;
   color: white;
   border: none;
@@ -53,13 +51,19 @@ section {
 }
 
 #tab-button-dungeon {
-  background-color: #bee9c2;
-  color: #376241;
+  background-color: #376241;
+  color: #FFFFFF;
+}
+
+#tab-button-quest {
+  background-color: #8b0000;
+  color: #FFFFFF;
 }
 
 /***** TAB END ****/
 
-.roll-button {
+/***** DUNGEON START *****/
+.dungeon-roll-button {
   border: 3px solid #376241;
   padding: .25em;
   font-size: x-large;
@@ -70,27 +74,83 @@ section {
   font-family: 'Roboto Condensed',Helvetica,sans-serif;
 }
 
-.roll-button:hover {
+.dungeon-roll-button:hover {
   background-color: #376241;
   color: #FFFFFF;
 }
 
-.content-wrapper {
+.dungeon-content-wrapper {
   margin: .25em;
   border: #376241 3px solid;
   width: 98%;
 }
 
-.content-label {
+.dungeon-content-label {
   font-size: x-large;
   background-color: #bee9c2;
   color: #376241;
   padding: .25em;
 }
 
-.content-result {
+.dungeon-content-result {
+  padding: .25em;
+  background-color: #FFFFFF;
+}
+
+#dungeon-modifier-wrapper {
+  margin: .25em;
+  border: #376241 3px solid;
+  text-align: center;
+  color: #376241;
   padding: .25em;
 }
+
+#dungeon-modifier {
+  text-align: center;
+  border: #376241 1px solid;
+  font-size: large;
+  width: 50%;
+}
+
+/***** DUNGEON END *****/
+
+/***** QUEST START *****/
+
+.quest-roll-button {
+  border: 3px solid #8b0000;
+  padding: .25em;
+  font-size: x-large;
+  color: #8b0000;
+  text-align: center;
+  margin: .25em;
+  background-color: white;
+  font-family: 'Roboto Condensed',Helvetica,sans-serif;
+}
+
+.quest-roll-button:hover {
+  background-color: #8b0000;
+  color: #FFFFFF;
+}
+
+.quest-content-wrapper {
+  margin: .25em;
+  border: #8b0000 3px solid;
+  width: 98%;
+}
+
+.quest-content-label {
+  font-size: x-large;
+  background-color: #ffeded;
+  color: #8b0000;
+  padding: .25em;
+}
+
+.quest-content-result {
+  padding: .25em;
+  background-color: #FFFFFF;
+}
+
+/***** QUEST END *****/
 
 #button-column {
   width: 25%;
@@ -100,20 +160,7 @@ section {
   width: 100%;
 }
 
-#modifier-wrapper {
-  margin: .25em;
-  border: #376241 3px solid;
-  text-align: center;
-  color: #376241;
-  padding: .25em;
-}
 
-#modifier {
-  text-align: center;
-  border: #376241 1px solid;
-  font-size: large;
-  width: 50%;
-}
 
 @media (max-width: 1024px) {
 

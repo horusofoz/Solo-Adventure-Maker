@@ -16,34 +16,46 @@
 <body>
 
   <main id="main-container">
-    <div id="tab-dungeon" class="tabcontent">
+    <div id="tab-dungeon" class="tab-content">
       <section id="button-column">
-        <div id="modifier-wrapper">
-          <label for="modifier">Modifier</label>
-          <input type="text" id="modifier" name="modifier">
+        <div id="dungeon-modifier-wrapper">
+          <label for="dungeon-modifier">Modifier</label>
+          <input type="text" id="dungeon-modifier" name="dungeon-modifier">
         </div>
 
-        <button class="roll-button" id="room-roller">Room</button>
-        <button class="roll-button" id="passage-roller">Passage</button>
-        <button class="roll-button" id="door-roller">Door</button>
-        <button class="roll-button" id="secret-door-roller">Secret Door</button>
-        <button class="roll-button" id="stair-roller">Stair</button>
-        <button class="roll-button" id="trap-roller">Trap</button>
-        <button class="roll-button" id="obstacle-roller">Obstacle</button>
-        <button class="roll-button" id="clue-roller">Clue</button>
-        <button class="roll-button" id="dungeon-roller">Dungeon</button>
-        <button class="roll-button" id="quest-roller">Quest</button>
+        <button class="dungeon-roll-button" id="room-roller">Room</button>
+        <button class="dungeon-roll-button" id="passage-roller">Passage</button>
+        <button class="dungeon-roll-button" id="door-roller">Door</button>
+        <button class="dungeon-roll-button" id="secret-door-roller">Secret Door</button>
+        <button class="dungeon-roll-button" id="stair-roller">Stair</button>
+        <button class="dungeon-roll-button" id="trap-roller">Trap</button>
+        <button class="dungeon-roll-button" id="obstacle-roller">Obstacle</button>
+        <button class="dungeon-roll-button" id="dungeon-roller">Dungeon</button>
       </section>
       <section id="content-column">
-        <div id="passage-wrapper" class="content-wrapper">
-          <div id="content-label" class="content-label">Dungeon Maker</div>
-          <div id="content-result" class="content-result">Select an element to generate it.</div>
+        <div class="dungeon-content-wrapper">
+          <div id="dungeon-content-label" class="dungeon-content-label">Dungeon Maker</div>
+          <div id="dungeon-content-result" class="dungeon-content-result">Select an element to generate it.</div>
         </div>
       </section>
   </div>
+
+  <div id="tab-quest" class="tab-content">
+    <section id="button-column">
+      <button class="quest-roll-button" id="quest-roller">Quest</button>
+      <button class="quest-roll-button" id="clue-roller">Clue</button>
+    </section>
+    <section id="content-column">
+      <div class="quest-content-wrapper">
+        <div id="quest-content-label" class="quest-content-label">Quest Maker</div>
+        <div id="quest-content-result" class="quest-content-result">Select an element to generate it.</div>
+      </div>
+    </section>
+  </div>
+
   <div id="tabs-wrapper">
-    <button id="tab-button-dungeon" class="tablink"><span>Dungeon</span></button>
-    <button id="tab-button-quest" class="tablink"><span>Quest</span></button>
+    <button id="tab-button-dungeon" class="tab-link"><span>Dungeon</span></button>
+    <button id="tab-button-quest" class="tab-link"><span>Quest</span></button>
   </div>
   </main>
 

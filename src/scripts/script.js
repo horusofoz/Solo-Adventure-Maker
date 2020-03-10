@@ -30,96 +30,128 @@ window.onload = function() {
   var questRoller = document.getElementById("quest-roller");
 
   // Result elements
-  var contentLabel = document.getElementById("content-label");
-  var contentResult = document.getElementById("content-result");
+  var dungeonContentLabel = document.getElementById("dungeon-content-label");
+  var dungeonContentResult = document.getElementById("dungeon-content-result");
+  var questContentLabel = document.getElementById("quest-content-label");
+  var questContentResult = document.getElementById("quest-content-result");
+  
+  // Tab buttons
+  var tabButtonDungeon = document.getElementById("tab-button-dungeon");
+  var tabButtonQuest = document.getElementById("tab-button-quest");
 
   roomRoller.onclick = function() {
     
     var room = rollRoom();
-    contentLabel.innerHTML = "Room";
-    contentResult.innerHTML = room.layout;
-    contentResult.innerHTML += room.content;
+    dungeonContentLabel.innerHTML = "Room";
+    dungeonContentResult.innerHTML = room.layout;
+    dungeonContentResult.innerHTML += room.content;
     return false;
   }
 
   passageRoller.onclick = function() {
     var passage = rollPassage();
-    contentLabel.innerHTML = "Passage";
-    contentResult.innerHTML = passage.layout;
-    contentResult.innerHTML += passage.content;
+    dungeonContentLabel.innerHTML = "Passage";
+    dungeonContentResult.innerHTML = passage.layout;
+    dungeonContentResult.innerHTML += passage.content;
 
     return false;
   }
 
   doorRoller.onclick = function() {
     var door = rollDoor();
-    contentLabel.innerHTML = "Door";
-    contentResult.innerHTML = door;
+    dungeonContentLabel.innerHTML = "Door";
+    dungeonContentResult.innerHTML = door;
 
     return false;
   }
 
   secretDoorRoller.onclick = function() {
     var secretDoor = rollSecretDoor();
-    contentLabel.innerHTML = "Secret Door";
-    contentResult.innerHTML = secretDoor;
+    dungeonContentLabel.innerHTML = "Secret Door";
+    dungeonContentResult.innerHTML = secretDoor;
 
     return false;
   }
 
   trapRoller.onclick = function() {
     var trap = rollTrap();
-    contentLabel.innerHTML = "Trap";
-    contentResult.innerHTML = trap;
+    dungeonContentLabel.innerHTML = "Trap";
+    dungeonContentResult.innerHTML = trap;
 
     return false;
   }
 
   dungeonRoller.onclick = function() {
     var dungeon = rollDungeon();
-    contentLabel.innerHTML = "Dungeon";
-    contentResult.innerHTML = dungeon;
+    dungeonContentLabel.innerHTML = "Dungeon";
+    dungeonContentResult.innerHTML = dungeon;
 
     return false;
   }
 
   stairRoller.onclick = function() {
     var stair = rollStair();
-    contentLabel.innerHTML = "Stair";
-    contentResult.innerHTML = stair;
+    dungeonContentLabel.innerHTML = "Stair";
+    dungeonContentResult.innerHTML = stair;
 
     return false;
   }
 
   obstacleRoller.onclick = function() {
     var obstacle = rollObstacle();
-    contentLabel.innerHTML = "Obstacle";
-    contentResult.innerHTML = obstacle;
+    dungeonContentLabel.innerHTML = "Obstacle";
+    dungeonContentResult.innerHTML = obstacle;
 
     return false;
   }
 
   clueRoller.onclick = function() {
     var clue = rollClue();
-    contentLabel.innerHTML = "Clue";
-    contentResult.innerHTML = clue;
+    questContentLabel.innerHTML = "Clue";
+    questContentResult.innerHTML = clue;
 
     return false;
   }
 
   questRoller.onclick = function() {
     var quest = rollQuest();
-    contentLabel.innerHTML = "Quest";
-    contentResult.innerHTML = quest;
+    questContentLabel.innerHTML = "Quest";
+    questContentResult.innerHTML = quest;
 
     return false;
   }
 
+  tabButtonDungeon.onclick = function() {
+    switchTabs("tab-dungeon");
+    return false;
+  }
+
+  tabButtonQuest.onclick = function() {
+    switchTabs("tab-quest");
+    return false;
+  }
+
+  tabButtonDungeon.click();
 
   return false;
 }
 
 /*********   SHARED START *********/
+
+function switchTabs(tab) {
+  
+  // Hide all elements with class "tab-content" by default
+  var i, tabContent, tabLinks;
+  tabContent = document.getElementsByClassName("tab-content");
+  
+  tabContent = document.getElementsByClassName("tab-content");
+  for (i = 0; i < tabContent.length; i++) {
+    tabContent[i].style.display = "none";
+  }
+
+  // Show the specific tab content
+  document.getElementById(tab).style.display = "flex";
+}
 
 function enforceMinMaxValue(type, value, minMaxValue) {
   var result = value;
@@ -212,6 +244,8 @@ function rollLeadsTo(leadsToNum) {
 /*********   SHARED END   *********/
 
 
+
+
 /*********   ROOM START *********/
 
 function rollRoom() {
@@ -221,9 +255,9 @@ function rollRoom() {
 
   var roomContentRollResult = rollDice(100);
 
-  var modifier = document.getElementById("modifier").value;
+  var modifier = document.getElementById("dungeon-modifier").value;
   modifier = parseInt(modifier, 10);
-  document.getElementById("modifier").value = "";
+  document.getElementById("dungeon-modifier").value = "";
 
   if(modifier > 0) {
     roomContentRollResult += modifier;
@@ -748,9 +782,9 @@ function rollPassage() {
 
   var passageContentRollResult = rollDice(100);
 
-  var modifier = document.getElementById("modifier").value;
+  var modifier = document.getElementById("dungeon-modifier").value;
   modifier = parseInt(modifier, 10);
-  document.getElementById("modifier").value = "";
+  document.getElementById("dungeon-modifier").value = "";
 
   if(modifier > 0) {
     passageContentRollResult += modifier;
