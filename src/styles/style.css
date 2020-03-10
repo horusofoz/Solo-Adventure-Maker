@@ -10,7 +10,9 @@ body, html {
 /***** MAIN START *****/
 main {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  background-color: pink;
+  min-height: 100vh
 }
 
 section {
@@ -19,6 +21,43 @@ section {
 }
 
 /***** MAIN END *****/
+
+/***** TAB START ****/
+
+.tabcontent {
+  display: flex;
+  flex-direction: row;
+  background-color: #bee9c2;
+  width: 100%;
+  height: 100%;
+  flex: 1;
+}
+
+.tablink {
+  background-color: #555;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  width: 50%;
+  font-family: 'Roboto Condensed',Helvetica,sans-serif;
+  font-size: x-large;
+  
+}
+
+#tabs-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+#tab-button-dungeon {
+  background-color: #bee9c2;
+  color: #376241;
+}
+
+/***** TAB END ****/
 
 .roll-button {
   border: 3px solid #376241;
@@ -39,7 +78,7 @@ section {
 .content-wrapper {
   margin: .25em;
   border: #376241 3px solid;
-  width: 95%;
+  width: 98%;
 }
 
 .content-label {

@@ -242,7 +242,7 @@ function rollRoom() {
 
 function setRoomContent(roomContentDataObject) {
 
-  console.log("Room Content Table Row:\n" + JSON.stringify(roomContentDataObject));
+  /*console.log("Room Content Table Row:\n" + JSON.stringify(roomContentDataObject));*/
 
   var roomContentString = "<br />CONTENTS"
 
