@@ -12,6 +12,8 @@ var dungeonStartArray = initializeDungeonStartArray();
 var stairArray = initializeStairArray();
 var obstacleArray = initializeObstacleArray();
 var clueArray = initializeClueArray();
+var questTypeArray = initializeQuestTypeArray();
+var questSourceArray = initializeQuestSourceArray();
 
 window.onload = function() {
 
@@ -25,6 +27,7 @@ window.onload = function() {
   var stairRoller = document.getElementById("stair-roller");
   var obstacleRoller = document.getElementById("obstacle-roller");
   var clueRoller = document.getElementById("clue-roller");
+  var questRoller = document.getElementById("quest-roller");
 
   // Result elements
   var contentLabel = document.getElementById("content-label");
@@ -100,6 +103,14 @@ window.onload = function() {
     var clue = rollClue();
     contentLabel.innerHTML = "Clue";
     contentResult.innerHTML = clue;
+
+    return false;
+  }
+
+  questRoller.onclick = function() {
+    var quest = rollQuest();
+    contentLabel.innerHTML = "Quest";
+    contentResult.innerHTML = quest;
 
     return false;
   }
@@ -281,6 +292,8 @@ function setRoomLayout(roomLayoutDataObject) {
   var roomLayoutExitTypes = rollExitTypes(roomLayoutExits);
   var roomLayoutShape = roomLayoutDataObject.shape;
 
+
+  
   var roomLayoutString = roomLayoutSize + " " + roomLayoutShape;
 
   if (roomLayoutExits === 0) {
@@ -1664,3 +1677,268 @@ function rollClue() {
 }
 
 /******* CLUE END ***********/
+
+
+/******* QUEST START ***********/
+
+// Make quest type array
+function initializeQuestTypeArray() {
+  var questTypeArray = [
+    [1,"Unjust killing","Revenge"],
+    [2,"Unjust killing","Revenge"],
+    [3,"Unjust killing","Revenge"],
+    [4,"Unjust killing","Revenge"],
+    [5,"Crime committed, criminal disappeared","Apprehend / Bounty Hunt"],
+    [6,"Crime committed, criminal disappeared","Apprehend / Bounty Hunt"],
+    [7,"Crime committed, criminal disappeared","Apprehend / Bounty Hunt"],
+    [8,"Crime committed, criminal disappeared","Apprehend / Bounty Hunt"],
+    [9,"Item lost","Retrieval"],
+    [10,"Item lost","Retrieval"],
+    [11,"Item lost","Retrieval"],
+    [12,"Item lost","Retrieval"],
+    [13,"Tyrant(s) threaten town / business / population (monster / humanoid)","Repel / Sabotage / Deceive / Sabotage / Extort / Entrap"],
+    [14,"Tyrant(s) threaten town / business / population (monster / humanoid)","Repel / Sabotage / Deceive / Sabotage / Extort / Entrap"],
+    [15,"Tyrant(s) threaten town / business / population (monster / humanoid)","Repel / Sabotage / Deceive / Sabotage / Extort / Entrap"],
+    [16,"Tyrant(s) threaten town / business / population (monster / humanoid)","Repel / Sabotage / Deceive / Sabotage / Extort / Entrap"],
+    [17,"Environmental disturbance / Strange Weather / Infestation / Plague","Investigate / Solve"],
+    [18,"Environmental disturbance / Strange Weather / Infestation / Plague","Investigate / Solve"],
+    [19,"Environmental disturbance / Strange Weather / Infestation / Plague","Investigate / Solve"],
+    [20,"Environmental disturbance / Strange Weather / Infestation / Plague","Investigate / Solve"],
+    [21,"Magical chaos / Curse","Investigate / Lift curse / destroy magic"],
+    [22,"Magical chaos / Curse","Investigate / Lift curse / destroy magic"],
+    [23,"Magical chaos / Curse","Investigate / Lift curse / destroy magic"],
+    [24,"Magical chaos / Curse","Investigate / Lift curse / destroy magic"],
+    [25,"Kidnapping / Hostage situation","Rescue / Recover"],
+    [26,"Kidnapping / Hostage situation","Rescue / Recover"],
+    [27,"Kidnapping / Hostage situation","Rescue / Recover"],
+    [28,"Kidnapping / Hostage situation","Rescue / Recover"],
+    [29,"Adventurer left some time ago, but is lost","Rescue"],
+    [30,"Adventurer left some time ago, but is lost","Rescue"],
+    [31,"Adventurer left some time ago, but is lost","Rescue"],
+    [32,"Adventurer left some time ago, but is lost","Rescue"],
+    [33,"Something is rumoured, but undiscovered (Artefact, legendary place)","Explore / Discover"],
+    [34,"Something is rumoured, but undiscovered (Artefact, legendary place)","Explore / Discover"],
+    [35,"Something is rumoured, but undiscovered (Artefact, legendary place)","Explore / Discover"],
+    [36,"Something is rumoured, but undiscovered (Artefact, legendary place)","Explore / Discover"],
+    [37,"Riches rumoured within secure, guarded place","Loot"],
+    [38,"Riches rumoured within secure, guarded place","Loot"],
+    [39,"Riches rumoured within secure, guarded place","Loot"],
+    [40,"Riches rumoured within secure, guarded place","Loot"],
+    [41,"Invasion","Repel / Divert"],
+    [42,"Invasion","Repel / Divert"],
+    [43,"Invasion","Repel / Divert"],
+    [44,"Invasion","Repel / Divert"],
+    [45,"Person suspected of something","Spy / Gather information"],
+    [46,"Person suspected of something","Spy / Gather information"],
+    [47,"Person suspected of something","Spy / Gather information"],
+    [48,"Person suspected of something","Spy / Gather information"],
+    [49,"Important item / message / person needs transporting","Transport / smuggle / escort"],
+    [50,"Important item / message / person needs transporting","Transport / smuggle / escort"],
+    [51,"Important item / message / person needs transporting","Transport / smuggle / escort"],
+    [52,"Important item / message / person needs transporting","Transport / smuggle / escort"],
+    [53,"Nefarious / dangerous item being transported","Waylay / Hijack"],
+    [54,"Nefarious / dangerous item being transported","Waylay / Hijack"],
+    [55,"Nefarious / dangerous item being transported","Waylay / Hijack"],
+    [56,"Nefarious / dangerous item being transported","Waylay / Hijack"],
+    [57,"Dangerous item exposed / up for grabs","Find / Destroy"],
+    [58,"Dangerous item exposed / up for grabs","Find / Destroy"],
+    [59,"Dangerous item exposed / up for grabs","Find / Destroy"],
+    [60,"Dangerous item exposed / up for grabs","Find / Destroy"],
+    [61,"Corrupt noble","Investigate / Implicate / Incriminate / Expose"],
+    [62,"Corrupt noble","Investigate / Implicate / Incriminate / Expose"],
+    [63,"Corrupt noble","Investigate / Implicate / Incriminate / Expose"],
+    [64,"Corrupt noble","Investigate / Implicate / Incriminate / Expose"],
+    [65,"Commodity shortage (goods, workforce)","Transport supplies"],
+    [66,"Commodity shortage (goods, workforce)","Transport supplies"],
+    [67,"Commodity shortage (goods, workforce)","Transport supplies"],
+    [68,"Commodity shortage (goods, workforce)","Transport supplies"],
+    [69,"Mystery unresolved","Research / Explore / Decode"],
+    [70,"Mystery unresolved","Research / Explore / Decode"],
+    [71,"Mystery unresolved","Research / Explore / Decode"],
+    [72,"Mystery unresolved","Research / Explore / Decode"],
+    [73,"Adventurer thrown into life-threatening situation (environmental or otherwise)","Survive"],
+    [74,"Adventurer thrown into life-threatening situation (environmental or otherwise)","Survive"],
+    [75,"Adventurer thrown into life-threatening situation (environmental or otherwise)","Survive"],
+    [76,"Adventurer thrown into life-threatening situation (environmental or otherwise)","Survive"],
+    [77,"Worthy creature’s life threatened (humanoid / animal / monster)","Protect, eliminate threat"],
+    [78,"Worthy creature’s life threatened (humanoid / animal / monster)","Protect, eliminate threat"],
+    [79,"Worthy creature’s life threatened (humanoid / animal / monster)","Protect, eliminate threat"],
+    [80,"Worthy creature’s life threatened (humanoid / animal / monster)","Protect, eliminate threat"],
+    [81,"Execution of innocent party planned","Prevent"],
+    [82,"Execution of innocent party planned","Prevent"],
+    [83,"Execution of innocent party planned","Prevent"],
+    [84,"Execution of innocent party planned","Prevent"],
+    [85,"Siege (anything from a small party of goblins surrounding a farmhouse to an army of Imperial Blades surrounding a city!)","Break"],
+    [86,"Siege (anything from a small party of goblins surrounding a farmhouse to an army of Imperial Blades surrounding a city!)","Break"],
+    [87,"Siege (anything from a small party of goblins surrounding a farmhouse to an army of Imperial Blades surrounding a city!)","Break"],
+    [88,"Siege (anything from a small party of goblins surrounding a farmhouse to an army of Imperial Blades surrounding a city!)","Break"],
+    [89,"Huge battle about to erupt","Negotiate / Prepare / Mediate / Participate"],
+    [90,"Huge battle about to erupt","Negotiate / Prepare / Mediate / Participate"],
+    [91,"Huge battle about to erupt","Negotiate / Prepare / Mediate / Participate"],
+    [92,"Huge battle about to erupt","Negotiate / Prepare / Mediate / Participate"],
+    [93,"Spiritually beneficial place rumoured","Visit / Gain boon"],
+    [94,"Spiritually beneficial place rumoured","Visit / Gain boon"],
+    [95,"Spiritually beneficial place rumoured","Visit / Gain boon"],
+    [96,"Spiritually beneficial place rumoured","Visit / Gain boon"],
+    [97,"Foolish individual committed innocent blunder","PC hired to conceal evidence / Return item / Placate"],
+    [98,"Foolish individual committed innocent blunder","PC hired to conceal evidence / Return item / Placate"],
+    [99,"Foolish individual committed innocent blunder","PC hired to conceal evidence / Return item / Placate"],
+    [100,"Foolish individual committed innocent blunder","PC hired to conceal evidence / Return item / Placate"]
+  ];
+  return questTypeArray;
+};
+
+// Make quest type row object
+function objectifyQuestTypeRow(questTypeRowNum) {
+  var questTypeRow = questTypeArray[questTypeRowNum - 1];
+  var questTypeDataObject = {
+    rollResult: questTypeRow[0],
+    problem: questTypeRow[1],
+    objective: questTypeRow[2]
+  };
+  return questTypeDataObject;
+}
+
+// Roll quest type
+function rollQuestType() {
+  var questTypeRollResult = rollDice(100);
+  var questTypeDataObject = objectifyQuestTypeRow(questTypeRollResult);
+  return questTypeDataObject;
+}
+
+// Make quest source array
+function initializeQuestSourceArray() {
+  var questSourceArray = [
+    [1,"Notice board"],
+    [2,"Notice board"],
+    [3,"Notice board"],
+    [4,"NPC"],
+    [5,"NPC"],
+    [6,"NPC"],
+    [7,"Tavern rumour"],
+    [8,"Tavern rumour"],
+    [9,"Tavern rumour"],
+    [10,"Stumble into situation"],
+    [11,"Stumble into situation"],
+    [12,"Stumble into situation"],
+    [13,"Stumble into situation"],
+    [14,"Guild affiliate"],
+    [15,"Guild affiliate"],
+    [16,"Guild affiliate"],
+    [17,"Fellow adventurer"],
+    [18,"Fellow adventurer"],
+    [19,"Fellow adventurer"],
+    [20,"Mysterious scroll with info on it"],
+    [21,"Mysterious scroll with info on it"],
+    [22,"Mysterious scroll with info on it"],
+    [23,"Hidden piece of paper inside a basic reward / purchase a PC makes"],
+    [24,"Hidden piece of paper inside a basic reward / purchase a PC makes"],
+    [25,"Hidden piece of paper inside a basic reward / purchase a PC makes"],
+    [26,"Treasure map"],
+    [27,"Treasure map"],
+    [28,"Treasure map"],
+    [29,"Found journal - Owner missing"],
+    [30,"Found journal - Owner missing"],
+    [31,"Found journal - Owner missing"],
+    [32,"Partial map"],
+    [33,"Partial map"],
+    [34,"Partial map"],
+    [35,"Inheritance - be it a place, an item, or a title."],
+    [36,"Inheritance - be it a place, an item, or a title."],
+    [37,"Inheritance - be it a place, an item, or a title."],
+    [38,"Geas or Quest Spell"],
+    [39,"Geas or Quest Spell"],
+    [40,"Geas or Quest Spell"],
+    [41,"Unholy visions"],
+    [42,"Unholy visions"],
+    [43,"Unholy visions"],
+    [44,"A lost map or letter found"],
+    [45,"A lost map or letter found"],
+    [46,"A lost map or letter found"],
+    [47,"Sent on mission by friend or relative"],
+    [48,"Sent on mission by friend or relative"],
+    [49,"Sent on mission by friend or relative"],
+    [50,"A dream"],
+    [51,"A dream"],
+    [52,"A dream"],
+    [53,"Local temple gives you the quest"],
+    [54,"Local temple gives you the quest"],
+    [55,"Local temple gives you the quest"],
+    [56,"Rumour picked up at guard station"],
+    [57,"Rumour picked up at guard station"],
+    [58,"Rumour picked up at guard station"],
+    [59,"Merchant’s Guild / merchants"],
+    [60,"Merchant’s Guild / merchants"],
+    [61,"Merchant’s Guild / merchants"],
+    [62,"Noble family entrusts you"],
+    [63,"Noble family entrusts you"],
+    [64,"Noble family entrusts you"],
+    [65,"Event sparks a memory"],
+    [66,"Event sparks a memory"],
+    [67,"Event sparks a memory"],
+    [68,"Divine inspiration"],
+    [69,"Divine inspiration"],
+    [70,"Divine inspiration"],
+    [71,"Overheard conversation"],
+    [72,"Overheard conversation"],
+    [73,"Overheard conversation"],
+    [74,"Passing traveller"],
+    [75,"Passing traveller"],
+    [76,"Passing traveller"],
+    [77,"Entrusted with delivering a parcel. Something compels you to peek inside!"],
+    [78,"Entrusted with delivering a parcel. Something compels you to peek inside!"],
+    [79,"Entrusted with delivering a parcel. Something compels you to peek inside!"],
+    [80,"Herald makes proclamation in market square"],
+    [81,"Herald makes proclamation in market square"],
+    [82,"Herald makes proclamation in market square"],
+    [83,"Herald makes proclamation in market square"],
+    [84,"Orders from higher command, guild or society (from afar perhaps)"],
+    [85,"Orders from higher command, guild or society (from afar perhaps)"],
+    [86,"Orders from higher command, guild or society (from afar perhaps)"],
+    [87,"Orders from higher command, guild or society (from afar perhaps)"],
+    [88,"Note on dead creature"],
+    [89,"Note on dead creature"],
+    [90,"Note on dead creature"],
+    [91,"You awake with a map tattooed on you!"],
+    [92,"You awake with a map tattooed on you!"],
+    [93,"You awake with a map tattooed on you!"],
+    [94,"Natural disaster reveals something"],
+    [95,"Natural disaster reveals something"],
+    [96,"Natural disaster reveals something"],
+    [97,"Natural disaster reveals something"],
+    [98,"A friend has died as a result of this situation, you must avenge!"],
+    [99,"A friend has died as a result of this situation, you must avenge!"],
+    [100,"A friend has died as a result of this situation, you must avenge!"]
+  ];
+  return questSourceArray;
+}
+
+// Make quest source row object
+function objectifyQuestSourceRow(questSourceRowNum) {
+  var questSourceRow = questSourceArray[questSourceRowNum - 1];
+  var questSourceDataObject = {
+    rollResult: questSourceRow[0],
+    source: questSourceRow[1]
+  };
+  return questSourceDataObject;
+}
+
+// Roll quest source
+function rollQuestSource() {
+  var questSourceRollResult = rollDice(100);
+  var questSourceDataObject = objectifyQuestSourceRow(questSourceRollResult);
+  return questSourceDataObject;
+}
+
+// Roll quest
+function rollQuest() {
+  var questType = rollQuestType();
+  var questSource = rollQuestSource();
+
+  var result = "PROBLEM:<br />" + questType.problem;
+  result += "<br /><br />OBJECTIVE:<br />" + questType.objective;
+  result += "<br /><br />SOURCE:<br />" + questSource.source;
+  return result;
+}
+
+/******* QUEST END ***********/
