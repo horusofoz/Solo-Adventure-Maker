@@ -14,6 +14,7 @@ var obstacleArray = initializeObstacleArray();
 var clueArray = initializeClueArray();
 var questTypeArray = initializeQuestTypeArray();
 var questSourceArray = initializeQuestSourceArray();
+var verbArray = initializeVerbArray();
 
 window.onload = function() {
 
@@ -34,6 +35,7 @@ window.onload = function() {
   var muneInterventionRoller = document.getElementById("mune-intervention-roller");
   var muneTwneneRoller = document.getElementById("mune-twene-roller");
   var satQuestionRoller = document.getElementById("sat-question-roller");
+  var portentRoller = document.getElementById("portent-roller");
 
   // Result elements
   var dungeonContentLabel = document.getElementById("dungeon-content-label");
@@ -47,6 +49,7 @@ window.onload = function() {
   var tabButtonDungeon = document.getElementById("tab-button-dungeon");
   var tabButtonQuest = document.getElementById("tab-button-quest");
   var tabButtonOracle = document.getElementById("tab-button-oracle");
+  var tabButtonHelp = document.getElementById("tab-button-help");
 
   // DUNGEON BUTTON FUNCTIONS
   roomRoller.onclick = function() {
@@ -161,6 +164,13 @@ satQuestionRoller.onclick = function() {
   oracleContentResult.innerHTML = satAnswer;
 }
 
+portentRoller.onclick = function() {
+  var portent = rollPortent();
+
+  oracleContentLabel.innerHTML = "Portent";
+  oracleContentResult.innerHTML = portent;
+}
+
 // TAB BUTTON FUNCTIONS
   tabButtonDungeon.onclick = function() {
     switchTabs("tab-dungeon");
@@ -177,7 +187,12 @@ satQuestionRoller.onclick = function() {
     return false;
   }
 
-  tabButtonOracle.click();
+  tabButtonHelp.onclick = function() {
+    switchTabs("tab-help");
+    return false;
+  }
+
+  tabButtonDungeon.click();
 
   return false;
 }
@@ -289,9 +304,6 @@ function rollLeadsTo(leadsToNum) {
 
 /*********   SHARED END   *********/
 
-
-
-
 /*********   ROOM START *********/
 
 function rollRoom() {
@@ -303,8 +315,6 @@ function rollRoom() {
 
   var modifier = document.getElementById("dungeon-content-modifier").value;
   modifier = parseInt(modifier, 10);
-
-  console.log(modifier);
 
   document.getElementById("dungeon-content-modifier").value = "";
 
@@ -2190,42 +2200,579 @@ function rollMuneTwene() {
 function rollSATQuestion() {
   var answer = "";
   var rollResult = rollDice(20);
+
+  var questionModifier = document.getElementById("sat-question-modifier").value;
+  document.getElementById("sat-question-modifier").value = "0";
+
+  questionModifier = parseInt(questionModifier, 10);
+  rollResult += questionModifier; 
   
   rollResult = enforceMinMaxValue("minimum", rollResult, "1");
   rollResult = enforceMinMaxValue("maximum", rollResult, "20");
   
   switch(rollResult) {
     case 1:
-	case 2:
-	case 3:
-	case 4:
-	case 5:
-	case 6:
-      answer = "No";
-      break;
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        answer = "No";
+        break;
     case 7:
-	case 8:
-	case 9:
-	case 10:
-	case 11:
-	case 12:
-      answer = "Maybe";
-      break;
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+        answer = "Maybe";
+        break;
     case 13:
-	case 14:
-	case 15:
-	case 16:
-	case 17:
-	case 18:
-	case 19:
-	case 20:
-      answer = "Yes";
-      break;
-	default:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+        answer = "Yes";
+        break;
+    default:
 	  answer = "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
   }
 
   return answer;
+}
+
+function initializeVerbArray() {
+  var verbArray = [
+    [1,"Boast"],
+    [2,"Fret"],
+    [3,"Salute"],
+    [4,"Exhibit"],
+    [5,"Preach"],
+    [6,"Deliver"],
+    [7,"Infringe"],
+    [8,"Jostle"],
+    [9,"Avert"],
+    [10,"Sob"],
+    [11,"Lurk"],
+    [12,"Bet"],
+    [13,"Glimpse"],
+    [14,"Restrain"],
+    [15,"Bribe"],
+    [16,"Collapse"],
+    [17,"Distress"],
+    [18,"Escape"],
+    [19,"Dispute"],
+    [20,"Assassinate"],
+    [21,"Plead"],
+    [22,"Concoct"],
+    [23,"Destroy"],
+    [24,"Resurrect"],
+    [25,"Provide"],
+    [26,"Offend"],
+    [27,"Bargain"],
+    [28,"Free"],
+    [29,"Parade"],
+    [30,"Solicit"],
+    [31,"Enquire"],
+    [32,"Bestow"],
+    [33,"Alert"],
+    [34,"Demolish"],
+    [35,"Infect"],
+    [36,"Prohibit"],
+    [37,"Drink"],
+    [38,"Queue"],
+    [39,"Revolt"],
+    [40,"Prowl"],
+    [41,"Infest"],
+    [42,"Gob"],
+    [43,"Contact"],
+    [44,"Harass"],
+    [45,"Antagonize"],
+    [46,"Force"],
+    [47,"Deface"],
+    [48,"Dash"],
+    [49,"Disrupt"],
+    [50,"Shove"],
+    [51,"Banish"],
+    [52,"Condemn"],
+    [53,"Despair"],
+    [54,"Ban"],
+    [55,"Inflict"],
+    [56,"Assault"],
+    [57,"Seize"],
+    [58,"Flirt"],
+    [59,"Frustrate"],
+    [60,"Push"],
+    [61,"Overpower"],
+    [62,"Lament"],
+    [63,"Aid"],
+    [64,"Raid"],
+    [65,"Guard"],
+    [66,"Cremate"],
+    [67,"Bite"],
+    [68,"Blab"],
+    [69,"Involve"],
+    [70,"Dupe"],
+    [71,"Experiment"],
+    [72,"Discipline"],
+    [73,"Hit"],
+    [74,"Spill"],
+    [75,"Address"],
+    [76,"Fall"],
+    [77,"Confiscate"],
+    [78,"Disturb"],
+    [79,"Nag"],
+    [80,"Dispel"],
+    [81,"Discuss"],
+    [82,"Bother"],
+    [83,"Rebel"],
+    [84,"Smash"],
+    [85,"Riot"],
+    [86,"Arrange"],
+    [87,"Apprehend"],
+    [88,"Pursue"],
+    [89,"Intimidate"],
+    [90,"Disgrace"],
+    [91,"Choke"],
+    [92,"Fling"],
+    [93,"Decorate"],
+    [94,"Beg"],
+    [95,"Inspect"],
+    [96,"Shout"],
+    [97,"Careen"],
+    [98,"Astonish"],
+    [99,"Oppress"],
+    [100,"Research"],
+    [101,"End"],
+    [102,"Ship"],
+    [103,"Look"],
+    [104,"Aggravate"],
+    [105,"Persecute"],
+    [106,"Laugh"],
+    [107,"Ensnare"],
+    [108,"Beckon"],
+    [109,"Misspell"],
+    [110,"Flee"],
+    [111,"Congregate"],
+    [112,"Interfere"],
+    [113,"Silence"],
+    [114,"Command"],
+    [115,"Rescue"],
+    [116,"Inflame"],
+    [117,"Abuse"],
+    [118,"Defuse"],
+    [119,"Give"],
+    [120,"Grapple"],
+    [121,"Grieve"],
+    [122,"Declare"],
+    [123,"Fund"],
+    [124,"Overhear"],
+    [125,"Foretell"],
+    [126,"Sell"],
+    [127,"Enrage"],
+    [128,"Resist"],
+    [129,"Ransack"],
+    [130,"Scare"],
+    [131,"Persuade"],
+    [132,"Faint"],
+    [133,"Endorse"],
+    [134,"Lose"],
+    [135,"Remark"],
+    [136,"Praise"],
+    [137,"Agitate"],
+    [138,"Prophesize"],
+    [139,"Goggle"],
+    [140,"Confront"],
+    [141,"Implore"],
+    [142,"Duplicate"],
+    [143,"Goad"],
+    [144,"Capture"],
+    [145,"Leap"],
+    [146,"Broadcast"],
+    [147,"Ask"],
+    [148,"Pollute"],
+    [149,"Deride"],
+    [150,"Bemoan"],
+    [151,"Exclaim"],
+    [152,"Interrogate"],
+    [153,"Purchase"],
+    [154,"Insult"],
+    [155,"Secure"],
+    [156,"Intoxicate"],
+    [157,"Demand"],
+    [158,"Badmouth"],
+    [159,"Beguile"],
+    [160,"Disgust"],
+    [161,"Build"],
+    [162,"Cheat"],
+    [163,"Crowd"],
+    [164,"Caress"],
+    [165,"Enlighten"],
+    [166,"Falsify"],
+    [167,"Enrich"],
+    [168,"Bleed"],
+    [169,"Obscure"],
+    [170,"Decay"],
+    [171,"Pronounce"],
+    [172,"Enroll"],
+    [173,"Enlist"],
+    [174,"Punch"],
+    [175,"Enshrine"],
+    [176,"Jaywalk"],
+    [177,"Sing"],
+    [178,"Blunder"],
+    [179,"Scamper"],
+    [180,"Enforce"],
+    [181,"Mesmerize"],
+    [182,"Invite"],
+    [183,"Annihilate"],
+    [184,"Display"],
+    [185,"Dazzle"],
+    [186,"Fake"],
+    [187,"Disguise"],
+    [188,"Beautify"],
+    [189,"Loot"],
+    [190,"Bellow"],
+    [191,"Disappear"],
+    [192,"Congratulate"],
+    [193,"Gossip"],
+    [194,"Perform"],
+    [195,"Recite"],
+    [196,"Infuriate"],
+    [197,"Patrol"],
+    [198,"Repair"],
+    [199,"Spy"],
+    [200,"Endanger"],
+    [201,"Impede"],
+    [202,"Entice"],
+    [203,"Charm"],
+    [204,"Catch"],
+    [205,"Break"],
+    [206,"Besiege"],
+    [207,"Crown"],
+    [208,"Endear"],
+    [209,"Dress"],
+    [210,"Gaze"],
+    [211,"Mock"],
+    [212,"Drown"],
+    [213,"Dishonor"],
+    [214,"Fracture"],
+    [215,"Evacuate"],
+    [216,"Aim"],
+    [217,"Debate"],
+    [218,"Denounce"],
+    [219,"Alarm"],
+    [220,"Stop"],
+    [221,"March"],
+    [222,"Leer"],
+    [223,"Bewilder"],
+    [224,"Provoke"],
+    [225,"Punish"],
+    [226,"Strike"],
+    [227,"Rush"],
+    [228,"Exaggerate"],
+    [229,"Argue"],
+    [230,"Deduce"],
+    [231,"Strangle"],
+    [232,"Massacre"],
+    [233,"Startle"],
+    [234,"Excavate"],
+    [235,"Fuss"],
+    [236,"Bow"],
+    [237,"Reward"],
+    [238,"Dismount"],
+    [239,"Help"],
+    [240,"Hurtle"],
+    [241,"Humiliate"],
+    [242,"Gamble"],
+    [243,"Rob"],
+    [244,"Observe"],
+    [245,"Hamper"],
+    [246,"Injure"],
+    [247,"Exchange"],
+    [248,"Defeat"],
+    [249,"Rage"],
+    [250,"Sleep"],
+    [251,"Complain"],
+    [252,"Displease"],
+    [253,"Barter"],
+    [254,"Ignite"],
+    [255,"Prosecute"],
+    [256,"Distill"],
+    [257,"Imprison"],
+    [258,"Stab"],
+    [259,"Assemble"],
+    [260,"Attack"],
+    [261,"Babble"],
+    [262,"Plunder"],
+    [263,"Collaborate"],
+    [264,"Pelt"],
+    [265,"Belch"],
+    [266,"Attempt"],
+    [267,"Defend"],
+    [268,"Carve"],
+    [269,"Climb"],
+    [270,"Chase"],
+    [271,"Segregate"],
+    [272,"Contaminate"],
+    [273,"Scrounge"],
+    [274,"Narrate"],
+    [275,"Execute"],
+    [276,"Jeer"],
+    [277,"Erect"],
+    [278,"Pounce"],
+    [279,"Corrupt"],
+    [280,"Appeal"],
+    [281,"Evict"],
+    [282,"Customize"],
+    [283,"Dare"],
+    [284,"Betray"],
+    [285,"Mimic"],
+    [286,"Accuse"],
+    [287,"Show"],
+    [288,"Bid"],
+    [289,"Query"],
+    [290,"Gift"],
+    [291,"Drum"],
+    [292,"Alter"],
+    [293,"Arise"],
+    [294,"Dance"],
+    [295,"Brag"],
+    [296,"Evade"],
+    [297,"Scavenge"],
+    [298,"Engineer"],
+    [299,"Cook"],
+    [300,"Obstruct"],
+    [301,"Kiss"],
+    [302,"Mutilate"],
+    [303,"Conceal"],
+    [304,"Earn"],
+    [305,"Notify"],
+    [306,"Drag"],
+    [307,"Entangle"],
+    [308,"Forge"],
+    [309,"Applaud"],
+    [310,"Deal"],
+    [311,"Mutate"],
+    [312,"Quarrel"],
+    [313,"Petition"],
+    [314,"Bash"],
+    [315,"Search"],
+    [316,"Gallop"],
+    [317,"Frighten"],
+    [318,"Parley"],
+    [319,"Befriend"],
+    [320,"Enter"],
+    [321,"Bait"],
+    [322,"Divert"],
+    [323,"Dodge"],
+    [324,"Blame"],
+    [325,"Explode"],
+    [326,"Near"],
+    [327,"Disperse"],
+    [328,"Dig"],
+    [329,"Giggle"],
+    [330,"Disarm"],
+    [331,"Escort"],
+    [332,"Decompose"],
+    [333,"Reveal"],
+    [334,"Instigate"],
+    [335,"Kick"],
+    [336,"Murder"],
+    [337,"Conflict"],
+    [338,"Annoy"],
+    [339,"Construct"],
+    [340,"Bless"],
+    [341,"Elude"],
+    [342,"Entertain"],
+    [343,"Run"],
+    [344,"Gleam"],
+    [345,"Claim"],
+    [346,"Enchant"],
+    [347,"Bewitch"],
+    [348,"Hold"],
+    [349,"Disrespect"],
+    [350,"Maim"],
+    [351,"Celebrate"],
+    [352,"Blurt"],
+    [353,"Attend"],
+    [354,"Follow"],
+    [355,"Harm"],
+    [356,"Enlarge"],
+    [357,"Love"],
+    [358,"Freeze"],
+    [359,"Bawl"],
+    [360,"Recount"],
+    [361,"Blast"],
+    [362,"Ridicule"],
+    [363,"Manhandle"],
+    [364,"Amuse"],
+    [365,"Arouse"],
+    [366,"Order"],
+    [367,"Play"],
+    [368,"Gesture"],
+    [369,"Protect"],
+    [370,"Steal"],
+    [371,"Examine"],
+    [372,"Fumble"],
+    [373,"Overturn"],
+    [374,"Approach"],
+    [375,"Glare"],
+    [376,"Conjure"],
+    [377,"Contestconverse"],
+    [378,"Rejoice"],
+    [379,"Collide"],
+    [380,"Decree"],
+    [381,"Ambush"],
+    [382,"Belittle"],
+    [383,"Compliment"],
+    [384,"Promote"],
+    [385,"Consider"],
+    [386,"Meddle"],
+    [387,"Investigate"],
+    [388,"Scream"],
+    [389,"Employ"],
+    [390,"Exclude"],
+    [391,"Gather"],
+    [392,"Speak"],
+    [393,"Deceive"],
+    [394,"Corner"],
+    [395,"Challenge"],
+    [396,"Discover"],
+    [397,"Practice"],
+    [398,"Avenge"],
+    [399,"Berate"],
+    [400,"Expose"],
+    [401,"Flaunt"],
+    [402,"Auction"],
+    [403,"Spit"],
+    [404,"Hurry"],
+    [405,"Abolish"],
+    [406,"Forgive"],
+    [407,"Pry"],
+    [408,"Stage"],
+    [409,"Barricade"],
+    [410,"Lecture"],
+    [411,"Foresee"],
+    [412,"Mob"],
+    [413,"Fashion"],
+    [414,"Engage"],
+    [415,"Confuse"],
+    [416,"Inform"],
+    [417,"Penalize"],
+    [418,"Slaughter"],
+    [419,"Abandon"],
+    [420,"Lunge"],
+    [421,"Kill"],
+    [422,"Drop"],
+    [423,"Frame"],
+    [424,"Devour"],
+    [425,"Hide"],
+    [426,"Amaze"],
+    [427,"Market"],
+    [428,"Eat"],
+    [429,"Decline"],
+    [430,"Bark"],
+    [431,"Renege"],
+    [432,"Grab"],
+    [433,"Baptize"],
+    [434,"Irritate"],
+    [435,"Protest"],
+    [436,"Dedicate"],
+    [437,"Inspire"],
+    [438,"Consecrate"],
+    [439,"Proclaim"],
+    [440,"Audition"],
+    [441,"Dump"],
+    [442,"Damage"],
+    [443,"Bequeath"],
+    [444,"Discriminate"],
+    [445,"Enjoy"],
+    [446,"Seduce"],
+    [447,"Carry"],
+    [448,"Joke"],
+    [449,"Arrest"],
+    [450,"Recruit"],
+    [451,"Subdue"],
+    [452,"Suffer"],
+    [453,"Summon"],
+    [454,"Surround"],
+    [455,"Suspect"],
+    [456,"Take"],
+    [457,"Taunt"],
+    [458,"Tease"],
+    [459,"Tempt"],
+    [460,"Terrify"],
+    [461,"Terrorize"],
+    [462,"Thank"],
+    [463,"Threaten"],
+    [464,"Throw"],
+    [465,"Torment"],
+    [466,"Torture"],
+    [467,"Trade"],
+    [468,"Transform"],
+    [469,"Translate"],
+    [470,"Transport"],
+    [471,"Dream"],
+    [472,"Trap"],
+    [473,"Travel"],
+    [474,"Tug"],
+    [475,"Unite"],
+    [476,"Unleash"],
+    [477,"Unload"],
+    [478,"Unveil"],
+    [479,"Vandalize"],
+    [480,"Vanish"],
+    [481,"Victimize"],
+    [482,"Violate"],
+    [483,"Volunteer"],
+    [484,"Wait"],
+    [485,"Warn"],
+    [486,"Wave"],
+    [487,"Weep"],
+    [488,"Welcome"],
+    [489,"Whittle"],
+    [490,"Wield"],
+    [491,"Win"],
+    [492,"Wink"],
+    [493,"Witness"],
+    [494,"Worship"],
+    [495,"Wound"],
+    [496,"Wreck"],
+    [497,"Wrestle"],
+    [498,"Write"],
+    [499,"Yell"],
+    [500,"Yield"]
+  ];
+  return verbArray;
+}
+
+function objectifyVerbRow(verbRowNum) {
+  var verbRow = verbArray[verbRowNum - 1];
+  let verbDataObject = {
+    rollResult: verbRow[0],
+    verb: verbRow[1],
+  };
+  return verbDataObject;
+}
+
+function rollVerb() {
+  var verbRollResult = rollDice(500);
+  var verb = objectifyVerbRow(verbRollResult);
+  var answer = verb.verb;
+
+  return answer;
+}
+
+function rollPortent() {
+  var word1 = rollVerb();
+  var word2 = rollVerb();
+
+  var portent = word1 + " " + word2;
+  return portent;
 }
 
 /****** ORACLE END *********/

@@ -56,12 +56,17 @@ section {
 }
 
 #tab-button-quest {
-  background-color: #8b0000;
+  background-color: #154865;
   color: #FFFFFF;
 }
 
 #tab-button-oracle {
   background-color: #5D5704;
+  color: #FFFFFF;
+}
+
+#tab-button-help {
+  background-color: #8b0000;
   color: #FFFFFF;
 }
 
@@ -160,23 +165,23 @@ section {
 /***** QUEST START *****/
 
 #tab-quest .roll-button {
-  border-color: #8b0000;
-  color: #8b0000;
+  border-color: #154865; /*#C4E1F2*/
+  color: #154865;
 }
 
 #tab-quest .roll-button:hover {
-  background-color: #8b0000;
+  background-color: #154865;
   color: #FFFFFF;
 }
 
 #tab-quest .content-wrapper {
-  border-color: #8b0000;
+  border-color: #154865;
 }
 
 #tab-quest .content-label {
   
-  background-color: #ffeded;
-  color: #8b0000;
+  background-color: #C4E1F2;
+  color: #154865;
   
 }
 
@@ -203,9 +208,26 @@ section {
   color: #5D5704;
 }
 
-#mune-question-modifier {
+.oracle-modifier {
   border-color: #5D5704;
 }
 
 
 /***** ORACLE END *****/
+
+
+/***** HELP START *****/
+
+#tab-help .roll-button {
+  border-color: #8b0000; /*#C4E1F2*/
+  color: #8b0000;
+}
+
+#tab-help .content-wrapper {
+  border-color: #8b0000;
+}
+
+#tab-help .content-label {
+  background-color: #ffeded;
+  color: #8b0000;
+}

@@ -70,7 +70,7 @@
     <section id="button-column">
       <div class="roll-modifier-wrapper">
         <label for="mune-question-modifier">MUNE Modifier</label><br />
-        <select name="mune-question-modifier" id="mune-question-modifier"  class="modifier-input">
+        <select name="mune-question-modifier" id="mune-question-modifier"  class="oracle-modifier modifier-input">
           <option value="Unlikely">Unlikely</option>
           <option value="" selected></option>
           <option value="Likely">Likely</option>
@@ -80,8 +80,25 @@
       <button class="roll-button oracle-button" id="mune-question-roller">MUNE Question</button>
       <button class="roll-button oracle-button" id="mune-intervention-roller">MUNE Intervention</button>
       <button class="roll-button oracle-button" id="mune-twene-roller">MUNE TWENE</button>
+
+      <div class="roll-modifier-wrapper">
+        <label for="sat-question-modifier">SAT Modifier</label><br />
+        <select name="sat-question-modifier" id="sat-question-modifier"  class="oracle-modifier modifier-input">
+          <option value="-6">Impossible</option>
+          <option value="-4">Highly Unlikely</option>
+          <option value="-2">Unlikely</option>
+          <option value="0" selected></option>
+          <option value="+2">Likely</option>
+          <option value="+2">Highly Likely</option>
+          <option value="+2">A Certainty</option>
+        </select>
+
+      </div>
       <button class="roll-button oracle-button" id="sat-question-roller">SAT Question</button>
+      <button class="roll-button oracle-button" id="portent-roller">Portent</button>
     </section>
+
+    
     <section id="content-column">
       <div class="content-wrapper">
         <div id="oracle-content-label" class="content-label">Oracle</div>
@@ -90,10 +107,35 @@
     </section>
   </div>
 
+  <div id="tab-help" class="tab-content">
+    <section id="button-column">
+      <!--<button class="roll-button help-button" id="help-info">Info</button>
+      <button class="roll-button help-button" id="help-links">Links</button>-->
+    </section>
+    <section id="content-column">
+      <div class="content-wrapper">
+        <div id="help-content-label" class="content-label">Help</div>
+        <div id="help-content-result" class="content-result">
+          <p>I made this tool to streamline some of the rolls and look ups for my Solo RPG experience. I'm sharing in case others find it useful.</p>
+          <p>Here are links to resources that inspired the development. I recommend each one.</p>
+          <ul>
+            <li><a href="https://dnd.wizards.com/products/tabletop-games/rpg-products/dungeon-masters-guide" target="_blank">Dungeon Master's Guide</a></li>
+            <li><a href="https://www.dmsguild.com/product/252355/The-Solo-Adventurers-Toolbox" target="_blank">Solo Adventurer's Toolbox</a></li>
+            <li><a href="https://homebrewery.naturalcrit.com/share/rkmo0t9k4Q" target="_blank">MUNE</a></li>
+            <li><a href="https://www.reddit.com/r/Solo_Roleplaying/" target="_blank">/r/Solo_Roleplaying</a></li>
+            <li><a href="https://discord.gg/jwYknJY" target="_blank">Lone Wolf Roleplaying Discord Channel</a></li>
+          </ul>
+          <p>If there's something that needs to be fixed or a feature you'd like to request, I can usually be found in the Discord channel linked below under Horusofoz.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <div id="tabs-wrapper">
     <button id="tab-button-dungeon" class="tab-link"><span>Dungeon</span></button>
     <button id="tab-button-quest" class="tab-link"><span>Quest</span></button>
     <button id="tab-button-oracle" class="tab-link"><span>Oracle</span></button>
+    <button id="tab-button-help" class="tab-link"><span>Help</span></button>
   </div>
   </main>
 
