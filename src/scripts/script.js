@@ -2052,7 +2052,30 @@ function rollQuest() {
 function rollMuneQuestion() {
   var answer = "";
   var rollResult = rollDice(6);
+  var interventionPoints = 0;
   
+  if(rollResult == 6) {
+    interventionPoints++;
+  }
+
+  var muneModifier = document.getElementById("mune-question-modifier-select").value;
+
+  if(muneModifier !== "") {
+    var modifierRollResult = rollDice(6);
+
+    if(modifierRollResult == 6) {
+      interventionPoints++;
+    }
+
+    if(muneModifier === "Likely") {
+      rollResult = Math.max(rollResult, modifierRollResult)
+    }
+    else {
+      rollResult = Math.min(rollResult, modifierRollResult)
+    }
+  
+  }
+
   switch(rollResult) {
     case 1:
       answer = "No, and...";
@@ -2070,8 +2093,16 @@ function rollMuneQuestion() {
       answer = "Yes";
       break;
     case 6:
-      answer = "Yes, and...<br /><br />Add 1 Intervention Point";
+      answer = "Yes, and..."
       break;
+  }
+
+  if(interventionPoints == 1) {
+    answer += "<br /><br />Add 1 Intervention Point";
+  }
+
+  if(interventionPoints == 2) {
+    answer += "<br /><br />Add 2 Intervention Points";
   }
 
   return answer;
