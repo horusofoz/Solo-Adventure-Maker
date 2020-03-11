@@ -74,11 +74,11 @@ section {
 
 /***** SHARED START *****/
 
-#button-column {
+.button-column {
   width: 25%;
 }
 
-#content-column {
+.content-column {
   width: 100%;
 }
 
@@ -106,7 +106,7 @@ section {
 .content-wrapper {
   margin: .25em;
   border: black 3px solid;
-  width: 98%;
+  width: auto;
 }
 
 .modifier-input {
@@ -225,9 +225,16 @@ section {
 
 #tab-help .content-wrapper {
   border-color: #8b0000;
+  width: auto;
 }
 
 #tab-help .content-label {
   background-color: #ffeded;
   color: #8b0000;
 }
+
+#tab-help .button-column {
+  width: 0%;
+}
+
+/***** HELP END *****/
