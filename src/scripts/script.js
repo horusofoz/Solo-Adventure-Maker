@@ -169,7 +169,7 @@ satQuestionRoller.onclick = function() {
     return false;
   }
 
-  tabButtonDungeon.click();
+  tabButtonOracle.click();
 
   return false;
 }

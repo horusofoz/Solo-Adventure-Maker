@@ -19,9 +19,9 @@
 
     <div id="tab-dungeon" class="tab-content">
       <section id="button-column">
-        <div id="dungeon-modifier-wrapper">
+        <div class="roll-modifier-wrapper">
           <label for="dungeon-modifier">Modifier</label><br />
-          <input type="text" id="dungeon-modifier" name="dungeon-modifier">
+          <input type="text" id="dungeon-modifier" name="dungeon-modifier" class="modifier-input">
         </div>
 
         <button class="roll-button dungeon-button" id="room-roller">Room</button>
@@ -55,7 +55,18 @@
   </div>
 
   <div id="tab-oracle" class="tab-content">
+
     <section id="button-column">
+      <div class="roll-modifier-wrapper">
+        <label for="mune-question-modifier">MUNE Modifier</label><br />
+
+        <select name="mune-question-modifier" id="mune-question-modifier-select"  class="modifier-input">
+          <option value=""></option>
+          <option value="Likely">Likely</option>
+          <option value="Unlikely">Unlikely</option>
+        </select>
+
+      </div>
       <button class="roll-button oracle-button" id="mune-question-roller">MUNE Question</button>
       <button class="roll-button oracle-button" id="mune-intervention-roller">MUNE Intervention</button>
       <button class="roll-button oracle-button" id="sat-question-roller">SAT Question</button>
