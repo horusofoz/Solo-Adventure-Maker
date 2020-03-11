@@ -26,19 +26,28 @@ window.onload = function() {
   var dungeonRoller = document.getElementById("dungeon-roller");
   var stairRoller = document.getElementById("stair-roller");
   var obstacleRoller = document.getElementById("obstacle-roller");
-  var clueRoller = document.getElementById("clue-roller");
+  
   var questRoller = document.getElementById("quest-roller");
+  var clueRoller = document.getElementById("clue-roller");
+
+  var muneQuestionRoller = document.getElementById("mune-question-roller");
+  var muneInterventionRoller = document.getElementById("mune-intervention-roller");
+  var satQuestionRoller = document.getElementById("sat-question-roller");
 
   // Result elements
   var dungeonContentLabel = document.getElementById("dungeon-content-label");
   var dungeonContentResult = document.getElementById("dungeon-content-result");
   var questContentLabel = document.getElementById("quest-content-label");
   var questContentResult = document.getElementById("quest-content-result");
+  var oracleContentLabel = document.getElementById("oracle-content-label");
+  var oracleContentResult = document.getElementById("oracle-content-result");
   
   // Tab buttons
   var tabButtonDungeon = document.getElementById("tab-button-dungeon");
   var tabButtonQuest = document.getElementById("tab-button-quest");
+  var tabButtonOracle = document.getElementById("tab-button-oracle");
 
+  // DUNGEON BUTTON FUNCTIONS
   roomRoller.onclick = function() {
     
     var room = rollRoom();
@@ -105,6 +114,7 @@ window.onload = function() {
     return false;
   }
 
+// QUEST BUTTON FUNCTIONS
   clueRoller.onclick = function() {
     var clue = rollClue();
     questContentLabel.innerHTML = "Clue";
@@ -121,6 +131,29 @@ window.onload = function() {
     return false;
   }
 
+// ORACLE BUTTON FUNCTIONS
+muneQuestionRoller.onclick = function() {
+  var muneAnswer = rollMuneQuestion();
+  
+  oracleContentLabel.innerHTML = "MUNE Question";
+  oracleContentResult.innerHTML = muneAnswer;
+}
+
+muneInterventionRoller.onclick = function() {
+  var muneIntervention = rollMuneIntervention();
+  
+  oracleContentLabel.innerHTML = "MUNE Intervention";
+  oracleContentResult.innerHTML = muneIntervention;
+}
+
+satQuestionRoller.onclick = function() {
+  var satAnswer = rollSATQuestion();
+  
+  oracleContentLabel.innerHTML = "SAT Question";
+  oracleContentResult.innerHTML = satAnswer;
+}
+
+// TAB BUTTON FUNCTIONS
   tabButtonDungeon.onclick = function() {
     switchTabs("tab-dungeon");
     return false;
@@ -128,6 +161,11 @@ window.onload = function() {
 
   tabButtonQuest.onclick = function() {
     switchTabs("tab-quest");
+    return false;
+  }
+
+  tabButtonOracle.onclick = function() {
+    switchTabs("tab-oracle");
     return false;
   }
 
@@ -2008,3 +2046,104 @@ function rollQuest() {
 }
 
 /******* QUEST END ***********/
+
+/****** ORACLE START *********/
+
+function rollMuneQuestion() {
+  var answer = "";
+  var rollResult = rollDice(6);
+  
+  switch(rollResult) {
+    case 1:
+      answer = "No, and...";
+      break;
+    case 2:
+      answer = "No";
+      break;
+    case 3:
+      answer = "No, but...";
+      break;
+    case 4:
+      answer = "Yes, but...";
+      break;
+    case 5:
+      answer = "Yes";
+      break;
+    case 6:
+      answer = "Yes, and...<br /><br />Add 1 Intervention Point";
+      break;
+  }
+
+  return answer;
+}
+
+function rollMuneIntervention() {
+  var interventionType = "";
+  var rollResult = rollDice(6);
+  
+  switch(rollResult) {
+    case 1:
+      interventionType = "New entity";
+      break;
+    case 2:
+      interventionType = "Entity positive";
+      break;
+    case 3:
+      interventionType = "Entity negative";
+      break;
+    case 4:
+      interventionType = "Advance plot";
+      break;
+    case 5:
+      interventionType = "Regress plot";
+      break;
+    case 6:
+      interventionType = "Wild";
+      break;
+  }
+
+  return interventionType;
+}
+
+function rollSATQuestion() {
+  var answer = "";
+  var rollResult = rollDice(20);
+  
+  rollResult = enforceMinMaxValue("minimum", rollResult, "1");
+  rollResult = enforceMinMaxValue("maximum", rollResult, "20");
+  
+  switch(rollResult) {
+    case 1:
+	case 2:
+	case 3:
+	case 4:
+	case 5:
+	case 6:
+      answer = "No";
+      break;
+    case 7:
+	case 8:
+	case 9:
+	case 10:
+	case 11:
+	case 12:
+      answer = "Maybe";
+      break;
+    case 13:
+	case 14:
+	case 15:
+	case 16:
+	case 17:
+	case 18:
+	case 19:
+	case 20:
+      answer = "Yes";
+      break;
+	default:
+	  answer = "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
+  }
+
+  return answer;
+}
+
+/****** ORACLE END *********/

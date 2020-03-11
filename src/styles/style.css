@@ -60,9 +60,22 @@ section {
   color: #FFFFFF;
 }
 
+#tab-button-oracle {
+  background-color: #5D5704;
+  color: #FFFFFF;
+}
+
 /***** TAB END ****/
 
 /***** SHARED START *****/
+
+#button-column {
+  width: 25%;
+}
+
+#content-column {
+  width: 100%;
+}
 
 .roll-button {
   padding: .25em;
@@ -71,44 +84,54 @@ section {
   margin: .25em;
   background-color: white;
   font-family: 'Roboto Condensed',Helvetica,sans-serif;
+  border: 3px solid black;
+}
+
+.content-label {
+  font-size: x-large;
+  padding: .25em;
+}
+
+.content-result {
+  padding: .25em;
+  background-color: #FFFFFF;
+}
+
+.content-wrapper {
+  margin: .25em;
+  border: black 3px solid;
+  width: 98%;
 }
 
 @media (max-width: 1024px) {
 
   .roll-button {
-    font-size: large;
+    font-size: medium;
   }  
 }
 
 /***** SHARED END *****/
 
 /***** DUNGEON START *****/
-.dungeon-button {
-  border: 3px solid #376241;
+
+
+#tab-dungeon .roll-button {
+  border-color: #376241;
   color: #376241;
 }
 
-.dungeon-button:hover {
+#tab-dungeon .roll-button:hover {
   background-color: #376241;
   color: #FFFFFF;
 }
 
-.dungeon-content-wrapper {
-  margin: .25em;
-  border: #376241 3px solid;
-  width: 98%;
+#tab-dungeon .content-wrapper {
+  border-color: #376241;
 }
 
 .dungeon-content-label {
-  font-size: x-large;
   background-color: #bee9c2;
   color: #376241;
-  padding: .25em;
-}
-
-.dungeon-content-result {
-  padding: .25em;
-  background-color: #FFFFFF;
 }
 
 #dungeon-modifier-wrapper {
@@ -130,40 +153,51 @@ section {
 
 /***** QUEST START *****/
 
-.quest-button {
-  border: 3px solid #8b0000;
+#tab-quest .roll-button {
+  border-color: #8b0000;
   color: #8b0000;
 }
 
-.quest-button:hover {
+#tab-quest .roll-button:hover {
   background-color: #8b0000;
   color: #FFFFFF;
 }
 
-.quest-content-wrapper {
-  margin: .25em;
-  border: #8b0000 3px solid;
-  width: 98%;
+#tab-quest .content-wrapper {
+  border-color: #8b0000;
 }
 
-.quest-content-label {
-  font-size: x-large;
+#tab-quest .content-label {
+  
   background-color: #ffeded;
   color: #8b0000;
-  padding: .25em;
-}
-
-.quest-content-result {
-  padding: .25em;
-  background-color: #FFFFFF;
+  
 }
 
 /***** QUEST END *****/
 
-#button-column {
-  width: 25%;
+/***** ORACLE START *****/
+
+#tab-oracle .roll-button {
+  border-color: #5D5704;
+  color: #5D5704;
 }
 
-#content-column {
-  width: 100%;
+#tab-oracle .roll-button:hover {
+  background-color: #5D5704;
+  color: #FFFFFF;
 }
+
+#tab-oracle .content-wrapper {
+  border-color: #5D5704;
+}
+
+#tab-oracle .content-label {
+  
+  background-color: #FCFCBF;
+  color: #5D5704;
+  
+}
+
+/***** ORACLE END *****/
+

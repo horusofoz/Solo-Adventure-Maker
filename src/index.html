@@ -16,6 +16,7 @@
 <body>
 
   <main id="main-container">
+
     <div id="tab-dungeon" class="tab-content">
       <section id="button-column">
         <div id="dungeon-modifier-wrapper">
@@ -33,9 +34,9 @@
         <button class="roll-button dungeon-button" id="dungeon-roller">Dungeon</button>
       </section>
       <section id="content-column">
-        <div class="dungeon-content-wrapper">
-          <div id="dungeon-content-label" class="dungeon-content-label">Dungeon Maker</div>
-          <div id="dungeon-content-result" class="dungeon-content-result">Select an element to generate it.</div>
+        <div class="content-wrapper">
+          <div id="dungeon-content-label" class="content-label dungeon-content-label">Dungeon Maker</div>
+          <div id="dungeon-content-result" class="content-result">Select an element to generate it.</div>
         </div>
       </section>
   </div>
@@ -46,9 +47,23 @@
       <button class="roll-button quest-button" id="clue-roller">Clue</button>
     </section>
     <section id="content-column">
-      <div class="quest-content-wrapper">
-        <div id="quest-content-label" class="quest-content-label">Quest Maker</div>
-        <div id="quest-content-result" class="quest-content-result">Select an element to generate it.</div>
+      <div class="content-wrapper">
+        <div id="quest-content-label" class="content-label">Quest Maker</div>
+        <div id="quest-content-result" class="content-result">Select an element to generate it.</div>
+      </div>
+    </section>
+  </div>
+
+  <div id="tab-oracle" class="tab-content">
+    <section id="button-column">
+      <button class="roll-button oracle-button" id="mune-question-roller">MUNE Question</button>
+      <button class="roll-button oracle-button" id="mune-intervention-roller">MUNE Intervention</button>
+      <button class="roll-button oracle-button" id="sat-question-roller">SAT Question</button>
+    </section>
+    <section id="content-column">
+      <div class="content-wrapper">
+        <div id="oracle-content-label" class="content-label">Oracle</div>
+        <div id="oracle-content-result" class="content-result">Ask your question mortal.</div>
       </div>
     </section>
   </div>
@@ -56,6 +71,7 @@
   <div id="tabs-wrapper">
     <button id="tab-button-dungeon" class="tab-link"><span>Dungeon</span></button>
     <button id="tab-button-quest" class="tab-link"><span>Quest</span></button>
+    <button id="tab-button-oracle" class="tab-link"><span>Oracle</span></button>
   </div>
   </main>
 
