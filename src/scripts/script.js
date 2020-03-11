@@ -32,6 +32,7 @@ window.onload = function() {
 
   var muneQuestionRoller = document.getElementById("mune-question-roller");
   var muneInterventionRoller = document.getElementById("mune-intervention-roller");
+  var muneTwneneRoller = document.getElementById("mune-twene-roller");
   var satQuestionRoller = document.getElementById("sat-question-roller");
 
   // Result elements
@@ -144,6 +145,13 @@ muneInterventionRoller.onclick = function() {
   
   oracleContentLabel.innerHTML = "MUNE Intervention";
   oracleContentResult.innerHTML = muneIntervention;
+}
+
+muneTwneneRoller.onclick = function() {
+  var tweneResult = rollMuneTwene();
+  
+  oracleContentLabel.innerHTML = "MUNE TWENE";
+  oracleContentResult.innerHTML = tweneResult;
 }
 
 satQuestionRoller.onclick = function() {
@@ -293,9 +301,12 @@ function rollRoom() {
 
   var roomContentRollResult = rollDice(100);
 
-  var modifier = document.getElementById("dungeon-modifier").value;
+  var modifier = document.getElementById("dungeon-content-modifier").value;
   modifier = parseInt(modifier, 10);
-  document.getElementById("dungeon-modifier").value = "";
+
+  console.log(modifier);
+
+  document.getElementById("dungeon-content-modifier").value = "";
 
   if(modifier > 0) {
     roomContentRollResult += modifier;
@@ -820,9 +831,9 @@ function rollPassage() {
 
   var passageContentRollResult = rollDice(100);
 
-  var modifier = document.getElementById("dungeon-modifier").value;
+  var modifier = document.getElementById("dungeon-content-modifier").value;
   modifier = parseInt(modifier, 10);
-  document.getElementById("dungeon-modifier").value = "";
+  document.getElementById("dungeon-content-modifier").value = "";
 
   if(modifier > 0) {
     passageContentRollResult += modifier;
@@ -2058,7 +2069,7 @@ function rollMuneQuestion() {
     interventionPoints++;
   }
 
-  var muneModifier = document.getElementById("mune-question-modifier-select").value;
+  var muneModifier = document.getElementById("mune-question-modifier").value;
 
   if(muneModifier !== "") {
     var modifierRollResult = rollDice(6);
@@ -2073,7 +2084,7 @@ function rollMuneQuestion() {
     else {
       rollResult = Math.min(rollResult, modifierRollResult)
     }
-  
+    document.getElementById("mune-question-modifier").value = "";
   }
 
   switch(rollResult) {
@@ -2134,6 +2145,46 @@ function rollMuneIntervention() {
   }
 
   return interventionType;
+}
+
+function rollMuneTwene() {
+  var result = "";
+  var rollResult = rollDice(10);
+  
+  switch(rollResult) {
+    case 1:
+      result = "Increase simple element";
+      break;
+    case 2:
+      result = "Decrease simple element";
+      break;
+    case 3:
+      result = "Add simple element";
+      break;
+    case 4:
+      result = "Remove simple element";
+      break;
+    case 5:
+      result = "Increase major element";
+      break;
+    case 6:
+      result = "Decrease major element";
+      break;
+    case 7:
+      result = "Add major element";
+      break;
+    case 8:
+      result = "Remove major element";
+      break;
+    case 9:
+      result = "Wild positive";
+      break;
+    case 10:
+      result = "Wild negative";
+      break;
+  }
+
+  return result;
 }
 
 function rollSATQuestion() {

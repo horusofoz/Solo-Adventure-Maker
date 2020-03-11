@@ -151,7 +151,7 @@ section {
   color: #376241;
 }
 
-#dungeon-modifier {
+#dungeon-content-modifier {
   border-color: #376241;
 }
 
@@ -203,9 +203,8 @@ section {
   color: #5D5704;
 }
 
-#mune-question-modifier-select {
+#mune-question-modifier {
   border-color: #5D5704;
-  appearance: none;
 }
 
 

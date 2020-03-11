@@ -20,8 +20,19 @@
     <div id="tab-dungeon" class="tab-content">
       <section id="button-column">
         <div class="roll-modifier-wrapper">
-          <label for="dungeon-modifier">Modifier</label><br />
-          <input type="text" id="dungeon-modifier" name="dungeon-modifier" class="modifier-input">
+          <label for="dungeon-content-modifier">Content Modifier</label><br />
+          <select name="dungeon-content-modifier" id="dungeon-content-modifier"  class="modifier-input">
+            <option value="-20">-20</option>
+            <option value="-15">-15</option>
+            <option value="-10">-10</option>
+            <option value="0" selected></option>
+            <option value="10">+10</option>
+            <option value="15">+15</option>
+            <option value="20">+20</option>
+            <option value="30">+30</option>
+            <option value="40">+40</option>
+            <option value="50">+50</option>
+          </select>
         </div>
 
         <button class="roll-button dungeon-button" id="room-roller">Room</button>
@@ -59,16 +70,16 @@
     <section id="button-column">
       <div class="roll-modifier-wrapper">
         <label for="mune-question-modifier">MUNE Modifier</label><br />
-
-        <select name="mune-question-modifier" id="mune-question-modifier-select"  class="modifier-input">
-          <option value=""></option>
-          <option value="Likely">Likely</option>
+        <select name="mune-question-modifier" id="mune-question-modifier"  class="modifier-input">
           <option value="Unlikely">Unlikely</option>
+          <option value="" selected></option>
+          <option value="Likely">Likely</option>
         </select>
 
       </div>
       <button class="roll-button oracle-button" id="mune-question-roller">MUNE Question</button>
       <button class="roll-button oracle-button" id="mune-intervention-roller">MUNE Intervention</button>
+      <button class="roll-button oracle-button" id="mune-twene-roller">MUNE TWENE</button>
       <button class="roll-button oracle-button" id="sat-question-roller">SAT Question</button>
     </section>
     <section id="content-column">
