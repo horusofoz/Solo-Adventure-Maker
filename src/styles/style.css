@@ -70,6 +70,10 @@ section {
   color: #FFFFFF;
 }
 
+#tab-button-encounter {
+  background-color: #503875;
+}
+
 /***** TAB END ****/
 
 /***** SHARED START *****/
@@ -215,6 +219,34 @@ section {
 
 /***** ORACLE END *****/
 
+
+/***** ENCOUNTER START *****/
+
+#tab-encounter .roll-button {
+  border-color: #503875;
+  color: #503875;
+}
+
+#tab-encounter .roll-button:hover {
+  background-color: #503875;
+  color: #FFFFFF;
+}
+
+#tab-encounter .content-wrapper {
+  border-color: #503875;
+}
+
+#tab-encounter .content-label {
+  background-color: #E4D9ED;
+  color: #503875;
+}
+
+.encounter-modifier {
+  border-color: #503875;
+}
+
+
+/***** ENCOUNTER END *****/
 
 /***** HELP START *****/
 

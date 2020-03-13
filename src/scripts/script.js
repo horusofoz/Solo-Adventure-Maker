@@ -14,11 +14,13 @@ var obstacleArray = initializeObstacleArray();
 var clueArray = initializeClueArray();
 var questTypeArray = initializeQuestTypeArray();
 var questSourceArray = initializeQuestSourceArray();
+var encounterWildernessArray = initializeEncounterWildernessArray();
+var encounterUrbanArray = initializeUrbanEncounterArray();
 var verbArray = initializeVerbArray();
 
 window.onload = function() {
 
-  // Button elements
+  // Dungeon Elements
   var roomRoller = document.getElementById("room-roller");
   var passageRoller = document.getElementById("passage-roller");
   var doorRoller = document.getElementById("door-roller");
@@ -27,28 +29,35 @@ window.onload = function() {
   var dungeonRoller = document.getElementById("dungeon-roller");
   var stairRoller = document.getElementById("stair-roller");
   var obstacleRoller = document.getElementById("obstacle-roller");
-  
+  var dungeonContentLabel = document.getElementById("dungeon-content-label");
+  var dungeonContentResult = document.getElementById("dungeon-content-result");
+
+  // Quest Elements  
   var questRoller = document.getElementById("quest-roller");
   var clueRoller = document.getElementById("clue-roller");
+  var questContentLabel = document.getElementById("quest-content-label");
+  var questContentResult = document.getElementById("quest-content-result");
 
+  // Oracle Elements
   var muneQuestionRoller = document.getElementById("mune-question-roller");
   var muneInterventionRoller = document.getElementById("mune-intervention-roller");
   var muneTwneneRoller = document.getElementById("mune-twene-roller");
   var satQuestionRoller = document.getElementById("sat-question-roller");
   var portentRoller = document.getElementById("portent-roller");
-
-  // Result elements
-  var dungeonContentLabel = document.getElementById("dungeon-content-label");
-  var dungeonContentResult = document.getElementById("dungeon-content-result");
-  var questContentLabel = document.getElementById("quest-content-label");
-  var questContentResult = document.getElementById("quest-content-result");
   var oracleContentLabel = document.getElementById("oracle-content-label");
   var oracleContentResult = document.getElementById("oracle-content-result");
-  
+
+  // Encounter Elements
+  var encounterUrbanRoller = document.getElementById("urban-encounter-roller");
+  var encounterWildernessRoller = document.getElementById("wilderness-encounter-roller");
+  var encounterContentLabel = document.getElementById("encounter-content-label");
+  var encounterContentResult = document.getElementById("encounter-content-result");
+
   // Tab buttons
   var tabButtonDungeon = document.getElementById("tab-button-dungeon");
   var tabButtonQuest = document.getElementById("tab-button-quest");
   var tabButtonOracle = document.getElementById("tab-button-oracle");
+  var tabButtonEncounter = document.getElementById("tab-button-encounter");
   var tabButtonHelp = document.getElementById("tab-button-help");
 
   // DUNGEON BUTTON FUNCTIONS
@@ -171,6 +180,21 @@ portentRoller.onclick = function() {
   oracleContentResult.innerHTML = portent;
 }
 
+// ENCOUNTER BUTTON FUNCTIONS
+
+encounterUrbanRoller.onclick = function() {
+  var urbanEncounter = rollEncounterUrban();
+  encounterContentLabel.innerHTML = "Urban Encounter";
+  encounterContentResult.innerHTML = urbanEncounter;
+}
+
+encounterWildernessRoller.onclick = function() {
+  var wildernessEncounter = rollEncounterWilderness();
+
+  encounterContentLabel.innerHTML = "Wilderness Encounter";
+  encounterContentResult.innerHTML = wildernessEncounter;
+}
+
 // TAB BUTTON FUNCTIONS
   tabButtonDungeon.onclick = function() {
     switchTabs("tab-dungeon");
@@ -184,6 +208,11 @@ portentRoller.onclick = function() {
 
   tabButtonOracle.onclick = function() {
     switchTabs("tab-oracle");
+    return false;
+  }
+
+  tabButtonEncounter.onclick = function() {
+    switchTabs("tab-encounter");
     return false;
   }
 
@@ -2776,3 +2805,258 @@ function rollPortent() {
 }
 
 /****** ORACLE END *********/
+
+
+/******* ENCOUNTER START ***********/
+
+function initializeUrbanEncounterArray() {
+  var encounterUrbanArray = [
+    [1,"You witness a crime and they have a chance to stop the criminal. If you do, you win the favor of the local constabulary. If you try to but fail, the guard gives you an opportunity to help track down the criminal. If you do nothing, you must convince the guard you are not an accomplice."],
+    [2,"Stampede of pigs"],
+    [3,"A cry rings out through the town. “An army is massing outside the gates!” Are they human, orc, mind flayer? You had better go and find out, or flee right now!"],
+    [4,"A mysterious hooded beggar conspicuously ducks into an alley as they walk by - they appeared to have a disfigurement. Perhaps they were just trying to hide from people."],
+    [5,"A guided tour proceeds past, as the guide drops a particularly tasty snippet of local knowledge which the PC was unaware of."],
+    [6,"A shady figure beckons from an alley. They have wondrous items for sale, they say."],
+    [7,"Two old ladies, witches of some sort by the look of them, beg you to take a creature off their hands. (Roll Creature Table, Chapter 14). “It never shuts up!” they tell you. “Please, we’ll pay you! We just want to be rid of the damnded thing!” The creature is the trapped soul of a former adventurer..."],
+    [8,"Two men are arguing about something. One turns to a PC and says, "],
+    [9,"Quest board with rewards for deeds done. Someone has rats in their cellar, missing townsperson in the woods neaby, simple things (or complex!) that give you little things to do that keep you exploring the city, making contacts, and earning gold/interesting items. Use Chapter 14 tables or Q/A rolls to generate."],
+    [10,"A card shark/con artist is busking in the street, a large crowd gathers."],
+    [11,"Two local thugs are strong arming a merchant for gold. You can help the merchant, but doing so annoys the local gang. Variation: The merchant is a thief, and the thugs are trying to recover their stolen money."],
+    [12,"You notice a group of villagers attempting to put out a nearby house fire. This looks like it could easily spread to neighbouring houses, possibly affecting the whole town."],
+    [13,"A peddler attempts to sell you a trinket or minor magic item."],
+    [14,"A giant rat crawls out of a storm drain and gets into a fight with a dog."],
+    [15,"Minor earthquake shakes things up and in the ensuing panic looters take advantage. Does the party join them, or stop them?"],
+    [16,"Merchant asking for help stopping local children with slingshots."],
+    [17,"A young urchin is in an ally, cornered by either thugs or stray dogs."],
+    [18,"Street is having a block party tomorrow and need help setting up."],
+    [19,"Someone sentenced to death: You happen across the hanging/beheading scene before it concludes, what do you do?"],
+    [20,"Monster: Level appropriate easy encounter."],
+    [21,"Monster: Level appropriate easy encounter."],
+    [22,"Monster: Level appropriate easy encounter."],
+    [23,"Monster: Level appropriate easy encounter."],
+    [24,"Monster: Level appropriate easy encounter."],
+    [25,"Monster: Level appropriate easy encounter."],
+    [26,"A con man is selling jewels and rare components that you might need."],
+    [27,"A chamber pot is emptied from above. Make a DC 13 dex save to avoid. If unsuccessful, you disadvantage all charisma and stealth related rolls until you have a bath and change clothes. (Optional: make a con save vs filth fever)."],
+    [28,"A scrap of paper is pressed into your hand by a young man, who looks at you desperately before turning and running away. You turn over the note and read it. “Please help, he’s coming for us all!”"],
+    [29,"A member of the local guard asks you what your business is in town."],
+    [30,"“Stop, thief!” You feel your arms being grabbed. The local guard apprehend you,accusing you of stealing jewels belonging to a noble/royal. Searching your clothes, and/or bag, they successfully turn up the jewels in question. You, however, have never seen them before."],
+    [31,"A lady / young man on a balcony blows you a kiss and then runs away."],
+    [32,"A beggar crouches in a dark corner, clearly diseased."],
+    [33,"Someone mistakes you for a mercenary, famous performer, or an old friend. They have face blindness. 2% of the population have it."],
+    [34,"A bard strikes up a song and starts following you around."],
+    [35,"A beggar notices the group and offers to guide them around in exchange for coin."],
+    [36,"Bar fight bursts out into the street and may involve the PC."],
+    [37,"Propositioned. Person of the night propositions a player. But they may not be all they seem..."],
+    [38,"A drunkard sees you and mistakes them for friends or enemies or perhaps throws up on you."],
+    [39,"A person who claims to be a fan of the PC begins to follow them around"],
+    [40,"Snake Oil Salesman has gathered a crowd, and has actors in the group to fool people into buying worthless potions. Bonus: they're not worthless, but definitely not as advertised. A healing potion that's really gaseous form? Make Q/A rolls to determine results."],
+    [41,"Group of smugglers coming out of a sewer grate with a crate of goods."],
+    [42,"An old female fortune teller beckons to you from her tent."],
+    [43,"A man tumbles out a tavern window. He’s fully dressed in nobleman’s garb. A female half-orc jumps out after him, letting out a warcry as he gets up and runs for his life screaming for help. Do you help her and run him down or do you get in her way? Possible: No matter who you help they both begin attacking you!"],
+    [44,"A street dog runs past with a human hand in its mouth - wearing a large, very obvious jeweled ring. Dog chase or find out what happened to the owner of the ring (and hand)."],
+    [45,"Someone's horse is spooked and charges through the streets. whether it’s dragging a wagon or just a rider, it is panicked and needs to be stopped."],
+    [46,"You find a map, discarded, on the street, or just a fragment of one, which arouses your curiosity. It shows a ruin, and there is a sketch of an artifact. Magical? Perhaps a local mage could help you decode this..."],
+    [47,"A drunk just wakes up nearby. “Wha… where am I?! My… my weapons! My belongings! They’re gone!”"],
+    [48,"You stop to listen to a talented storyteller relate a story about a famous adventurer and his beast companion. Part of the story is unresolved, however, and gets you thinking..."],
+    [49,"You feel a thwack in the side of your head, and turn to see that a bunch of drunk young nobles are pelting passers by with rotten vegetables, laughing as they do so!"],
+    [50,"Monster: Level appropriate medium encounter."],
+    [51,"Monster: Level appropriate medium encounter."],
+    [52,"Monster: Level appropriate medium encounter."],
+    [53,"Monster: Level appropriate medium encounter."],
+    [54,"Monster: Level appropriate medium encounter."],
+    [55,"Monster: Level appropriate medium encounter."],
+    [56,"Your sharp eye spots a pickpocket deftly relieve a noblewoman of an expensive necklace."],
+    [57,"A wizard is carrying a bagful of potions when suddenly the bag rips (perhaps it catches on a nail sticking out of a building, or it catches on a passing cart) and several potions drop out and smash on the ground, exploding with various dramatic effects."],
+    [58,"A jeweller emerges from his shop, screaming that he’s been robbed by dwarves. A nearby dwarf asks him for proof, but all he has to say is, “Of course it’s dwarves, they lust after gems constantly!”"],
+    [59,"A female priest is castigating a businesswoman who has set up her wares before the temple (of Lathander, perhaps? Any good-aligned god). Except this business is no ordinary business - a female slaver is parading her wares, selling slaves to whoever’s buying."],
+    [60,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics / dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use oracle questions or portents to find out what."],
+    [61,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics / dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use oracle questions or portents to find out what."],
+    [62,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics / dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use oracle questions or portents to find out what."],
+    [63,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. use oracle questions or portents to found out what."],
+    [64,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. use oracle questions or portents to found out what."],
+    [65,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. use oracle questions or portents to found out what."],
+    [66,"NPC met, who gives PC information about possible quest. Generate quest. (Optional)"],
+    [67,"NPC met, who gives PC information about possible quest. Generate quest. (Optional)"],
+    [68,"NPC met, who gives PC information about possible quest. Generate quest. (Optional)"],
+    [69,"NPC met, who gives PC information about possible quest. Generate quest. (Optional)"],
+    [70,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [71,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [72,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [73,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [74,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [75,"Monster: Level-appropriate hard encounter. Monster on the loose, marauding through the streets."],
+    [76,"You are stopped by the local guard who want to congratulate you on your recent successful quest. How do they know?"],
+    [77,"the rumour goes, something is going on in the sacred catacombs beneath the PC hears a rumour about a job that a local priest might have. Apparently, or so streets."],
+    [78,"You pass a house which is all boarded up, the gates locked. A passerby informs you that this is the house of a local nobleman who hasn’t been seen in years."],
+    [79,"You see a dice game going on in an alley off the street you are walking down."],
+    [80,"A cleric stands atop a box on the roadside, spouting vitriol and nasty rumours about the town’s leader or leaders. The cleric has attracted quite a crowd."],
+    [81,"A group of protestors has set up outside the Town Hall, protesting the new road which is planned to run right through the middle of their settlement, some distance out of town."],
+    [82,"A merchant asks you to mind his cart for him while he chases a thief who has stolen merchandise from it. He then leaves, and doesn’t return for a very long time..."],
+    [83,"A street urchin appears, promising divine favour if the PC comes and volunteers an hour of service at a nearby temple."],
+    [84,"A shopkeeper is attacking a wasp nest outside of his shop with a broom. He dislodges it and it crashes to the ground, engulfing him in a Swarm of Insects!"],
+    [85,"Two half-orcs are engaged in a full-on brawl outside a nearby tavern. Apparently one thinks the other cheated at dice."],
+    [86,"Religious pilgrims making their way quietly through the streets are being mocked and jeered by a group of elven teenagers"],
+    [87," A tattered cloak blows up the street. Catching hold of it, you find a note in one of its pockets."],
+    [88,"Someone has released a hallucinogenic substance into the air, and people are in various states of intoxication."],
+    [89,"A distraught mother cannot find her child and is convinced it has been kidnapped. She is moving from person to person, begging for help."],
+    [90,"A sudden gust of wind whips through the town, sending stalls toppling over, hats flying, stacks of parchment fluttering down the street. Perhaps the PC discovers something as a result."],
+    [91,"A dwarf, armed with greataxe, is threatening a cowering halfling, who is shaking with fear. The dwarf is living with rage, but has just been disarmed by the town guard. What’s the situation here? Has the halfling wronged him in some way?"],
+    [92,"An overturned cart ahead is causing gridlock - the street is jammed with traffic."],
+    [93,"“Ay oop luv, looking for a good time?” A prostitute (any sex or race) begins soliciting you earnestly."],
+    [94,"Suddenly, out of the blue, you see a mage of some sort simply appear in the middle of the street/alley."],
+    [95,"NPC appears with quest"],
+    [96,"NPC appears with quest"],
+    [97,"NPC appears with quest"],
+    [98,"NPC appears with quest"],
+    [99,"NPC appears with quest"],
+    [100,"Monster: Level appropriate deadly encounter."]
+  ];
+  return encounterUrbanArray;
+};
+
+function objectifyEncounterUrbanRow(encounterUrbanRowNum) {
+  
+  console.log(JSON.stringify(encounterUrbanRow));
+  
+  var encounterUrbanRow = encounterUrbanArray[encounterUrbanRowNum - 1];
+
+  var encounterUrbanDataObject = {
+    rollResult: encounterUrbanRow[0],
+    text: encounterUrbanRow[1]
+  };
+  return encounterUrbanDataObject;
+}
+
+function rollEncounterUrban() {
+  var encounterUrbanRollResult = rollDice(100);
+  var encounterUrbanDataObject = objectifyEncounterUrbanRow(encounterUrbanRollResult);
+  var encounterUrbanString = encounterUrbanDataObject.text;
+  return encounterUrbanString;
+}
+
+function initializeEncounterWildernessArray() {
+  var encounterWildernessArray = [
+    [1,"Small dungeon or crypt found. Purpose and history unknown."],
+    [2,"Small dungeon or crypt found. Purpose and history unknown."],
+    [3,"Small dungeon or crypt found. Purpose and history unknown."],
+    [4,"Small dungeon or crypt found. Purpose and history unknown."],
+    [5,"Ready-made camp found, or cosy cave, that could potentially be used as shelter for the night, or a base while exploring. Inhabited?"],
+    [6,"A small creek, babbling pleasantly. Or a large crack, bubbling pungently."],
+    [7,"A storm on the horizon, lightning dancing underneath dark grey clouds."],
+    [8,"A sinkhole has opened up nearby."],
+    [9,"Abandoned, empty town."],
+    [10,"Abandoned, empty town."],
+    [11,"NPC met, who gives PC information about possible quest. Generate a quest."],
+    [12,"NPC met, who gives PC information about possible quest. Generate a quest."],
+    [13,"NPC met, who gives PC information about possible quest. Generate a quest."],
+    [14,"NPC met, who gives PC information about possible quest. Generate a quest."],
+    [15,"NPC met, who gives PC information about possible quest. Generate a quest."],
+    [16,"Abandoned campsite found. Use Q/A rolls to find out more."],
+    [17,"A tree with what looks like Druid markings."],
+    [18,"You find survivors of some sort of attack, and they have a tale to tell..."],
+    [19,"Plundered barrow / burial mound. But did they get everything? And what still waits there? (50% mostly empty)"],
+    [20,"On the road, a dropped item. A backpack, a purse with interesting contents / a hat with a note\ntucked inside / an engraved ring… could be anything. Use Q/A roll to with a note tucked inside / an engraved ring… could be anything. Use Q/A roll to find out details."],
+    [21,"Interesting traveller. This character has obviously seen some things..."],
+    [22,"Cemetery. Some of the graves have been looted, and most of the tombstones are so old that the names have worn off."],
+    [23,"Prisoner(s) being escorted in a heavily-armoured cart."],
+    [24,"Interesting geological feature. Use Q/A mechanic to find out what."],
+    [25,"You find a discarded backpack with some intriguing contents."],
+    [26,"An odd noise is coming from some distance ahead..."],
+    [27,"Strange lights in the nearby hills are attracting your attention."],
+    [28,"You stumble across an orchard, filled with ripe and delicious fruit. The owner is nowhere in sight."],
+    [29,"Bounty hunters, searching for a fugitive. “You seen anyone?” (Who they are working for is unclear)"],
+    [30,"Sudden and abrupt change in weather"],
+    [31,"Abandoned mine, dwarven or otherwise."],
+    [32,"You hear howling in the distance. It could be wolves, but the sound is strange somehow..."],
+    [33,"Debris from a recent, large battle. Who fought here, and who won? How recent was this?"],
+    [34,"Humanoid corpse. 25% you find a clue"],
+    [35,"A bird (or some other creature – roll Creature Table Chapter 14) begins talking to you, in fluent Common! And not just mindless parroting..."],
+    [36,"A royal/noble personage and their entourage passes in an opulent carriage."],
+    [37,"A flock of birds (vultures? ravens?) circles over a point somewhere overhead"],
+    [38,"You find an old, ruined monument. Is it to a god, a famous local figure, or something else?"],
+    [39,"A traveller with information/warning about a situation in the next settlement."],
+    [40,"Unmarked settlement: town/village/hamlet. Human?"],
+    [41,"You reach a bridge over a small river. The bridge is washed out. Travellers are waiting here, unsure what to do."],
+    [42,"You find an injured beast"],
+    [43,"A farmer invites you into his house for a meal, and possibly some of his home brew ale/mead as well"],
+    [44,"Overturned/broken-down cart. Is it attended?"],
+    [45,"Monster ambush. Level-appropriate easy encounter. Go to Chapter 16."],
+    [46,"Monster ambush. Level-appropriate easy encounter."],
+    [47,"Monster ambush. Level-appropriate easy encounter."],
+    [48,"Monster ambush. Level-appropriate easy encounter."],
+    [49,"Monster ambush. Level-appropriate easy encounter."],
+    [50,"Monster ambush. Level-appropriate easy encounter."],
+    [51,"An animal wanders across your path. It glances up at you but doesn’t seem particularly bothered by your presence."],
+    [52,"Trapped creature (humanoid? monster? What type of trap?)"],
+    [53,"An abandoned/ruined structure of some kind, which may or may not have a subterranean component."],
+    [54,"An abandoned/ruined structure of some kind, which may or may not have a subterranean component."],
+    [55,"An abandoned/ruined structure of some kind, which may or may not have a subterranean component."],
+    [56,"An old hermit. What’s he babbling about?"],
+    [57,"A creepy and unsettling token/sign."],
+    [58,"Traveling merchant"],
+    [59,"A traveling adventurer who is impressed and wants to join your party."],
+    [60,"Monster Encounter: Level-appropriate medium encounter."],
+    [61,"Monster Encounter: Level-appropriate medium encounter."],
+    [62,"Monster Encounter: Level-appropriate medium encounter."],
+    [63,"Monster Encounter: Level-appropriate medium encounter."],
+    [64,"Monster Encounter: Level-appropriate medium encounter."],
+    [65,"Monster Encounter: Level-appropriate medium encounter."],
+    [66,"A traveller, resting by the side of the road, begins pointing and laughing uproariously at you. Is she mad?"],
+    [67,"Heavily-guarded transport passes."],
+    [68,"Travelling sage/archivist"],
+    [69,"Bandits (human or otherwise) demand a toll from you."],
+    [70,"Monster: Level appropriate hard encounter."],
+    [71,"Monster: Level appropriate hard encounter."],
+    [72,"Monster: Level appropriate hard encounter."],
+    [73,"Monster: Level appropriate hard encounter."],
+    [74,"Monster: Level appropriate hard encounter."],
+    [75,"Monster: Level appropriate hard encounter."],
+    [76,"A starving family begging for food or gold"],
+    [77,"A tribe who owns the land demands a tribute from you for passage (and in return will escort you through – whether you like it or not)."],
+    [78,"A travelling troupe of performers (80% Friendly)"],
+    [79,"A travelling merchant, but his wares are not the ordinary. Indeed, much of it is illegal in some way. Is he a smuggler? A drug dealer? A heist thief?"],
+    [80,"Hunters/travellers/adventurers. Camped up and relaxing."],
+    [81,"You see a low rocky hill, where faces have been carved into the rocks, along with the shapes of various beasts. It is artfully done, and seems to tell some sort of story."],
+    [82,"You see a track leading away from the road and into the forest/hills. Who knows where it leads..."],
+    [83,"Bandits waylay you and demand all your money"],
+    [84,"On a lonely stretch of road, you see a lone cabin, but cannot tell if it is inhabited or not."],
+    [85,"A long-forgotten battlefield. How many died here?"],
+    [86,"A tower, visible off the road some distance."],
+    [87,"Patrol from the nearest settlement"],
+    [88,"Unmarked settlement"],
+    [89,"The road disappears and the place looks nothing like on the map."],
+    [90,"NPC appears with quest."],
+    [91,"NPC appears with quest."],
+    [92,"NPC appears with quest."],
+    [93,"NPC appears with quest."],
+    [94,"NPC appears with quest."],
+    [95,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."],
+    [96,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."],
+    [97,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."],
+    [98,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."],
+    [99,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."],
+    [100,"Monster! Level-appropriate encounter. 1-3: Hard, 4: Deadly."]
+  ];
+  return encounterWildernessArray;
+}
+
+function objectifyEncounterWildernessRow(encounterWildernessRowNum) {
+  var encounterWildernessRow = encounterWildernessArray[encounterWildernessRowNum - 1];
+  var encounterWildernessDataObject = {
+    rollResult: encounterWildernessRow[0],
+    text: encounterWildernessRow[1]
+  };
+  console.log(JSON.stringify(encounterWildernessDataObject));
+  return encounterWildernessDataObject;
+}
+
+function rollEncounterWilderness() {
+  var encounterWildernessRollResult = rollDice(100);
+  var encounterWildernessDataObject = objectifyEncounterWildernessRow(encounterWildernessRollResult);
+  var encounterWildernessString = encounterWildernessDataObject.text;
+  return encounterWildernessString;
+}
+
+
+/******* ENCOUNTER END ***********/
