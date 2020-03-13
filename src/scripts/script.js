@@ -2236,8 +2236,8 @@ function rollSATQuestion() {
   questionModifier = parseInt(questionModifier, 10);
   rollResult += questionModifier; 
   
-  rollResult = enforceMinMaxValue("minimum", rollResult, "1");
-  rollResult = enforceMinMaxValue("maximum", rollResult, "20");
+  rollResult = enforceMinMaxValue("minimum", rollResult, 1);
+  rollResult = enforceMinMaxValue("maximum", rollResult, 20);
   
   switch(rollResult) {
     case 1:
@@ -2263,11 +2263,14 @@ function rollSATQuestion() {
     case 17:
     case 18:
     case 19:
+        answer = "Yes";
+      break;
     case 20:
         answer = "Yes";
-        break;
+		answer += " add 1 Intervention Point";
+		break;
     default:
-	  answer = "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
+	  answer = rollResult + " " + "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
   }
 
   return answer;
