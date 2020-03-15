@@ -50,6 +50,7 @@ window.onload = function() {
   // Encounter Elements
   var encounterUrbanRoller = document.getElementById("urban-encounter-roller");
   var encounterWildernessRoller = document.getElementById("wilderness-encounter-roller");
+  var encounterDifficultyRoller = document.getElementById("encounter-difficulty-roller");
   var encounterContentLabel = document.getElementById("encounter-content-label");
   var encounterContentResult = document.getElementById("encounter-content-result");
 
@@ -193,6 +194,13 @@ encounterWildernessRoller.onclick = function() {
 
   encounterContentLabel.innerHTML = "Wilderness Encounter";
   encounterContentResult.innerHTML = wildernessEncounter;
+}
+
+encounterDifficultyRoller.onclick = function() {
+  var encounterDifficulty = rollEncounterDifficulty();
+
+  encounterContentLabel.innerHTML = "Encounter Difficulty";
+  encounterContentResult.innerHTML = encounterDifficulty;
 }
 
 // TAB BUTTON FUNCTIONS
@@ -3061,5 +3069,28 @@ function rollEncounterWilderness() {
   return encounterWildernessString;
 }
 
+function rollEncounterDifficulty() {
+  var answer = "";
+  var rollResult = rollDice(6);
+
+  switch(rollResult) {
+    case 1:
+    case 2:
+      answer = "Easy";
+      break;
+    case 3:
+    case 4:
+      answer = "Medium";
+      break;
+    case 5:
+      answer = "Hard";
+      break;
+    case 6:
+      answer = "Deadly"
+      break;
+  }
+
+  return answer;
+}
 
 /******* ENCOUNTER END ***********/
