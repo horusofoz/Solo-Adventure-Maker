@@ -16,6 +16,7 @@ var questTypeArray = initializeQuestTypeArray();
 var questSourceArray = initializeQuestSourceArray();
 var encounterWildernessArray = initializeEncounterWildernessArray();
 var encounterUrbanArray = initializeUrbanEncounterArray();
+var monsterIntentionArray = initializeMonsterIntentionArray();
 var monsterReactionArray = initializeMonsterReactionArray();
 var verbArray = initializeVerbArray();
 
@@ -54,6 +55,7 @@ window.onload = function() {
   var encounterWildernessRoller = document.getElementById("wilderness-encounter-roller");
   var encounterCombatRoller = document.getElementById("encounter-combat-roller");
   var monsterReactionRoller = document.getElementById("monster-reaction-roller");
+  var monsterIntentionRoller = document.getElementById("monster-intention-roller");
   var encounterContentLabel = document.getElementById("encounter-content-label");
   var encounterContentResult = document.getElementById("encounter-content-result");
 
@@ -204,6 +206,13 @@ encounterCombatRoller.onclick = function() {
 
   encounterContentLabel.innerHTML = "Combat Encounter";
   encounterContentResult.innerHTML = combatEncounter;
+}
+
+monsterIntentionRoller.onclick = function() {
+  var monsterIntention = rollMonsterIntention();
+
+  encounterContentLabel.innerHTML = "Monster Intention";
+  encounterContentResult.innerHTML = monsterIntention;
 }
 
 monsterReactionRoller.onclick = function() {
@@ -3102,6 +3111,130 @@ function rollCombatEncounter() {
   }
 
   return answer;
+}
+
+function initializeMonsterIntentionArray() {
+  var monsterIntentionArray = [
+    [1,"Monster flees, scared witless at the sight of you!"],
+    [2,"Monster flees, scared witless at the sight of you!"],
+    [3,"Monster flees, scared witless at the sight of you!"],
+    [4,"Monster flees, scared witless at the sight of you!"],
+    [5,"Monster is curious and will stay some distance away, checking you out before approaching; if a beast, may be open to befriending. Make charisma check with advantage. If successful, you could take as companion."],
+    [6,"Monster is curious and will stay some distance away, checking you out before approaching; if a beast, may be open to befriending. Make charisma check with advantage. If successful, you could take as companion."],
+    [7,"Monster is curious and will stay some distance away, checking you out before approaching; if a beast, may be open to befriending. Make charisma check with advantage. If successful, you could take as companion."],
+    [8,"Monster is curious and will stay some distance away, checking you out before approaching; if a beast, may be open to befriending. Make charisma check with advantage. If successful, you could take as companion."],
+    [9,"Monster is curious and will stay some distance away, checking you out before approaching; if a beast, may be open to befriending. Make charisma check with advantage. If successful, you could take as companion."],
+    [10,"Monster will stalk you, always staying well out of range, perhaps waiting for you to become wounded or disadvantaged in some way."],
+    [11,"Monster will stalk you, always staying well out of range, perhaps waiting for you to become wounded or disadvantaged in some way."],
+    [12,"Monster will stalk you, always staying well out of range, perhaps waiting for you to become wounded or disadvantaged in some way."],
+    [13,"Monster will stalk you, always staying well out of range, perhaps waiting for you to become wounded or disadvantaged in some way."],
+    [14,"Monster will stalk you, always staying well out of range, perhaps waiting for you to become wounded or disadvantaged in some way."],
+    [15,"Monster will stay at distance and make ranged attacks, picking away at you. If you try to come near, it will flee."],
+    [16,"Monster will stay at distance and make ranged attacks, picking away at you. If you try to come near, it will flee."],
+    [17,"Monster will stay at distance and make ranged attacks, picking away at you. If you try to come near, it will flee."],
+    [18,"Monster will stay at distance and make ranged attacks, picking away at you. If you try to come near, it will flee."],
+    [19,"Monster will stay at distance and make ranged attacks, picking away at you. If you try to come near, it will flee."],
+    [20,"Monster may want you caught and kept alive rather than killed. It will fight you to the point of unconsciousness, and then will take you away and attempt to keep you alive for some purpose."],
+    [21,"Monster may want you caught and kept alive rather than killed. It will fight you to the point of unconsciousness, and then will take you away and attempt to keep you alive for some purpose."],
+    [22,"Monster may want you caught and kept alive rather than killed. It will fight you to the point of unconsciousness, and then will take you away and attempt to keep you alive for some purpose."],
+    [23,"Monster may want you caught and kept alive rather than killed. It will fight you to the point of unconsciousness, and then will take you away and attempt to keep you alive for some purpose."],
+    [24,"Monster may want you caught and kept alive rather than killed. It will fight you to the point of unconsciousness, and then will take you away and attempt to keep you alive for some purpose."],
+    [25,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [26,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [27,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [28,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [29,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [30,"Monster is highly alert and on guard. Any stealth checks to approach it are made at disadvantage"],
+    [31,"Monster simply attacks, purely out of instinct."],
+    [32,"Monster simply attacks, purely out of instinct."],
+    [33,"Monster simply attacks, purely out of instinct."],
+    [34,"Monster simply attacks, purely out of instinct."],
+    [35,"Monster simply attacks, purely out of instinct."],
+    [36,"Monster simply attacks, purely out of instinct."],
+    [37,"Monster simply attacks, purely out of instinct."],
+    [38,"Monster simply attacks, purely out of instinct."],
+    [39,"Monster simply attacks, purely out of instinct."],
+    [40,"Monster simply attacks, purely out of instinct."],
+    [41,"Monster simply attacks, purely out of instinct."],
+    [42,"Monster simply attacks, purely out of instinct."],
+    [43,"Monster simply attacks, purely out of instinct."],
+    [44,"Monster simply attacks, purely out of instinct."],
+    [45,"Monster simply attacks, purely out of instinct."],
+    [46,"Monster simply attacks, purely out of instinct."],
+    [47,"Monster simply attacks, purely out of instinct."],
+    [48,"Monster simply attacks, purely out of instinct."],
+    [49,"Monster simply attacks, purely out of instinct."],
+    [50,"Monster simply attacks, purely out of instinct."],
+    [51,"Monster simply attacks, purely out of instinct."],
+    [52,"Monster simply attacks, purely out of instinct."],
+    [53,"Monster simply attacks, purely out of instinct."],
+    [54,"Monster simply attacks, purely out of instinct."],
+    [55,"Monster simply attacks, purely out of instinct."],
+    [56,"Monster simply attacks, purely out of instinct."],
+    [57,"Monster simply attacks, purely out of instinct."],
+    [58,"Monster simply attacks, purely out of instinct."],
+    [59,"Monster simply attacks, purely out of instinct."],
+    [60,"Monster simply attacks, purely out of instinct."],
+    [61,"Monster simply attacks, purely out of instinct."],
+    [62,"Monster simply attacks, purely out of instinct."],
+    [63,"Monster simply attacks, purely out of instinct."],
+    [64,"Monster simply attacks, purely out of instinct."],
+    [65,"Monster simply attacks, purely out of instinct."],
+    [66,"Monster simply attacks, purely out of instinct."],
+    [67,"Monster simply attacks, purely out of instinct."],
+    [68,"Monster simply attacks, purely out of instinct."],
+    [69,"Monster simply attacks, purely out of instinct."],
+    [70,"Monster simply attacks, purely out of instinct."],
+    [71,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [72,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [73,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [74,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [75,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [76,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [77,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [78,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [79,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [80,"Monster views this area as its territory and you as a challenger. It attacks immediately, trying to drive you backward. It might make strength checks to push you back."],
+    [81,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [82,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [83,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [84,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [85,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [86,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [87,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [88,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [89,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [90,"Monster has offspring (or something it wants to protect) nearby, and sees you as a threat. It attacks immediately, possibly guarding a certain area."],
+    [91,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [92,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [93,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [94,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [95,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [96,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [97,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [98,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [99,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."],
+    [100,"Monster barrels straight into combat, seeing your presence here as a personal affront. It is incited to extreme rage."]
+  ];
+  return monsterIntentionArray;
+};
+
+function objectifyMonsterIntentionRow(MonsterIntentionRowNum) {
+  
+  var MonsterIntentionRow = monsterIntentionArray[MonsterIntentionRowNum - 1];
+
+  var MonsterIntentionDataObject = {
+    rollResult: MonsterIntentionRow[0],
+    text: MonsterIntentionRow[1]
+  };
+  return MonsterIntentionDataObject;
+};
+
+function rollMonsterIntention() {
+  var MonsterIntentionRollResult = rollDice(100);
+  var MonsterIntentionDataObject = objectifyMonsterIntentionRow(MonsterIntentionRollResult);
+  var MonsterIntentionString = MonsterIntentionDataObject.text;
+  return MonsterIntentionString;
 }
 
 function initializeMonsterReactionArray() {
