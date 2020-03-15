@@ -58,7 +58,7 @@ window.onload = function() {
   var tabButtonQuest = document.getElementById("tab-button-quest");
   var tabButtonOracle = document.getElementById("tab-button-oracle");
   var tabButtonEncounter = document.getElementById("tab-button-encounter");
-  var tabButtonHelp = document.getElementById("tab-button-help");
+  var tabButtonAbout = document.getElementById("tab-button-about");
 
   // DUNGEON BUTTON FUNCTIONS
   roomRoller.onclick = function() {
@@ -216,12 +216,12 @@ encounterWildernessRoller.onclick = function() {
     return false;
   }
 
-  tabButtonHelp.onclick = function() {
-    switchTabs("tab-help");
+  tabButtonAbout.onclick = function() {
+    switchTabs("tab-about");
     return false;
   }
 
-  tabButtonDungeon.click();
+  tabButtonAbout.click();
 
   return false;
 }
@@ -1739,7 +1739,7 @@ function initializeClueArray() {
     [19,"You notice a bright flash of purplish light just out of the corner of your eye"],
     [20,"The room/corpse is covered in a thin layer of frost."],
     [21,"A note with only the name of the nearby town written in it."],
-    [22,"Stones patterned in a directional arrow with the words Help me under it."],
+    [22,"Stones patterned in a directional arrow with the words about me under it."],
     [23,"Part of a map"],
     [24,"Broken weapon with runes on it"],
     [25,"A holy symbol"],
@@ -2516,7 +2516,7 @@ function initializeVerbArray() {
     [236,"Bow"],
     [237,"Reward"],
     [238,"Dismount"],
-    [239,"Help"],
+    [239,"about"],
     [240,"Hurtle"],
     [241,"Humiliate"],
     [242,"Gamble"],
@@ -2814,7 +2814,7 @@ function rollPortent() {
 
 function initializeUrbanEncounterArray() {
   var encounterUrbanArray = [
-    [1,"You witness a crime and they have a chance to stop the criminal. If you do, you win the favor of the local constabulary. If you try to but fail, the guard gives you an opportunity to help track down the criminal. If you do nothing, you must convince the guard you are not an accomplice."],
+    [1,"You witness a crime and they have a chance to stop the criminal. If you do, you win the favor of the local constabulary. If you try to but fail, the guard gives you an opportunity to about track down the criminal. If you do nothing, you must convince the guard you are not an accomplice."],
     [2,"Stampede of pigs"],
     [3,"A cry rings out through the town. “An army is massing outside the gates!” Are they human, orc, mind flayer? You had better go and find out, or flee right now!"],
     [4,"A mysterious hooded beggar conspicuously ducks into an alley as they walk by - they appeared to have a disfigurement. Perhaps they were just trying to hide from people."],
@@ -2824,14 +2824,14 @@ function initializeUrbanEncounterArray() {
     [8,"Two men are arguing about something. One turns to a PC and says, "],
     [9,"Quest board with rewards for deeds done. Someone has rats in their cellar, missing townsperson in the woods neaby, simple things (or complex!) that give you little things to do that keep you exploring the city, making contacts, and earning gold/interesting items. Use Chapter 14 tables or Q/A rolls to generate."],
     [10,"A card shark/con artist is busking in the street, a large crowd gathers."],
-    [11,"Two local thugs are strong arming a merchant for gold. You can help the merchant, but doing so annoys the local gang. Variation: The merchant is a thief, and the thugs are trying to recover their stolen money."],
+    [11,"Two local thugs are strong arming a merchant for gold. You can about the merchant, but doing so annoys the local gang. Variation: The merchant is a thief, and the thugs are trying to recover their stolen money."],
     [12,"You notice a group of villagers attempting to put out a nearby house fire. This looks like it could easily spread to neighbouring houses, possibly affecting the whole town."],
     [13,"A peddler attempts to sell you a trinket or minor magic item."],
     [14,"A giant rat crawls out of a storm drain and gets into a fight with a dog."],
     [15,"Minor earthquake shakes things up and in the ensuing panic looters take advantage. Does the party join them, or stop them?"],
-    [16,"Merchant asking for help stopping local children with slingshots."],
+    [16,"Merchant asking for about stopping local children with slingshots."],
     [17,"A young urchin is in an ally, cornered by either thugs or stray dogs."],
-    [18,"Street is having a block party tomorrow and need help setting up."],
+    [18,"Street is having a block party tomorrow and need about setting up."],
     [19,"Someone sentenced to death: You happen across the hanging/beheading scene before it concludes, what do you do?"],
     [20,"Monster: Level appropriate easy encounter."],
     [21,"Monster: Level appropriate easy encounter."],
@@ -2841,7 +2841,7 @@ function initializeUrbanEncounterArray() {
     [25,"Monster: Level appropriate easy encounter."],
     [26,"A con man is selling jewels and rare components that you might need."],
     [27,"A chamber pot is emptied from above. Make a DC 13 dex save to avoid. If unsuccessful, you disadvantage all charisma and stealth related rolls until you have a bath and change clothes. (Optional: make a con save vs filth fever)."],
-    [28,"A scrap of paper is pressed into your hand by a young man, who looks at you desperately before turning and running away. You turn over the note and read it. “Please help, he’s coming for us all!”"],
+    [28,"A scrap of paper is pressed into your hand by a young man, who looks at you desperately before turning and running away. You turn over the note and read it. “Please about, he’s coming for us all!”"],
     [29,"A member of the local guard asks you what your business is in town."],
     [30,"“Stop, thief!” You feel your arms being grabbed. The local guard apprehend you,accusing you of stealing jewels belonging to a noble/royal. Searching your clothes, and/or bag, they successfully turn up the jewels in question. You, however, have never seen them before."],
     [31,"A lady / young man on a balcony blows you a kiss and then runs away."],
@@ -2856,10 +2856,10 @@ function initializeUrbanEncounterArray() {
     [40,"Snake Oil Salesman has gathered a crowd, and has actors in the group to fool people into buying worthless potions. Bonus: they're not worthless, but definitely not as advertised. A healing potion that's really gaseous form? Make Q/A rolls to determine results."],
     [41,"Group of smugglers coming out of a sewer grate with a crate of goods."],
     [42,"An old female fortune teller beckons to you from her tent."],
-    [43,"A man tumbles out a tavern window. He’s fully dressed in nobleman’s garb. A female half-orc jumps out after him, letting out a warcry as he gets up and runs for his life screaming for help. Do you help her and run him down or do you get in her way? Possible: No matter who you help they both begin attacking you!"],
+    [43,"A man tumbles out a tavern window. He’s fully dressed in nobleman’s garb. A female half-orc jumps out after him, letting out a warcry as he gets up and runs for his life screaming for about. Do you about her and run him down or do you get in her way? Possible: No matter who you about they both begin attacking you!"],
     [44,"A street dog runs past with a human hand in its mouth - wearing a large, very obvious jeweled ring. Dog chase or find out what happened to the owner of the ring (and hand)."],
     [45,"Someone's horse is spooked and charges through the streets. whether it’s dragging a wagon or just a rider, it is panicked and needs to be stopped."],
-    [46,"You find a map, discarded, on the street, or just a fragment of one, which arouses your curiosity. It shows a ruin, and there is a sketch of an artifact. Magical? Perhaps a local mage could help you decode this..."],
+    [46,"You find a map, discarded, on the street, or just a fragment of one, which arouses your curiosity. It shows a ruin, and there is a sketch of an artifact. Magical? Perhaps a local mage could about you decode this..."],
     [47,"A drunk just wakes up nearby. “Wha… where am I?! My… my weapons! My belongings! They’re gone!”"],
     [48,"You stop to listen to a talented storyteller relate a story about a famous adventurer and his beast companion. Part of the story is unresolved, however, and gets you thinking..."],
     [49,"You feel a thwack in the side of your head, and turn to see that a bunch of drunk young nobles are pelting passers by with rotten vegetables, laughing as they do so!"],
@@ -2902,7 +2902,7 @@ function initializeUrbanEncounterArray() {
     [86,"Religious pilgrims making their way quietly through the streets are being mocked and jeered by a group of elven teenagers"],
     [87," A tattered cloak blows up the street. Catching hold of it, you find a note in one of its pockets."],
     [88,"Someone has released a hallucinogenic substance into the air, and people are in various states of intoxication."],
-    [89,"A distraught mother cannot find her child and is convinced it has been kidnapped. She is moving from person to person, begging for help."],
+    [89,"A distraught mother cannot find her child and is convinced it has been kidnapped. She is moving from person to person, begging for about."],
     [90,"A sudden gust of wind whips through the town, sending stalls toppling over, hats flying, stacks of parchment fluttering down the street. Perhaps the PC discovers something as a result."],
     [91,"A dwarf, armed with greataxe, is threatening a cowering halfling, who is shaking with fear. The dwarf is living with rage, but has just been disarmed by the town guard. What’s the situation here? Has the halfling wronged him in some way?"],
     [92,"An overturned cart ahead is causing gridlock - the street is jammed with traffic."],

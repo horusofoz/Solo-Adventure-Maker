@@ -30,7 +30,7 @@ section {
   height: 100%;
   flex: 1;
 }
-
+ 
 .tab-link {
   background-color: #555;
   color: white;
@@ -65,7 +65,7 @@ section {
   color: #FFFFFF;
 }
 
-#tab-button-help {
+#tab-button-about {
   background-color: #8b0000;
   color: #FFFFFF;
 }
@@ -248,25 +248,25 @@ section {
 
 /***** ENCOUNTER END *****/
 
-/***** HELP START *****/
+/***** about START *****/
 
-#tab-help .roll-button {
+#tab-about .roll-button {
   border-color: #8b0000; /*#C4E1F2*/
   color: #8b0000;
 }
 
-#tab-help .content-wrapper {
+#tab-about .content-wrapper {
   border-color: #8b0000;
   width: auto;
 }
 
-#tab-help .content-label {
+#tab-about .content-label {
   background-color: #ffeded;
   color: #8b0000;
 }
 
-#tab-help .button-column {
+#tab-about .button-column {
   width: 0%;
 }
 
-/***** HELP END *****/
+/***** about END *****/
