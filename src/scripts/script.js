@@ -16,7 +16,9 @@ var questTypeArray = initializeQuestTypeArray();
 var questSourceArray = initializeQuestSourceArray();
 var encounterWildernessArray = initializeEncounterWildernessArray();
 var encounterUrbanArray = initializeUrbanEncounterArray();
+var monsterReactionArray = initializeMonsterReactionArray();
 var verbArray = initializeVerbArray();
+
 
 window.onload = function() {
 
@@ -50,7 +52,8 @@ window.onload = function() {
   // Encounter Elements
   var encounterUrbanRoller = document.getElementById("urban-encounter-roller");
   var encounterWildernessRoller = document.getElementById("wilderness-encounter-roller");
-  var encounterDifficultyRoller = document.getElementById("encounter-difficulty-roller");
+  var encounterCombatRoller = document.getElementById("encounter-combat-roller");
+  var monsterReactionRoller = document.getElementById("monster-reaction-roller");
   var encounterContentLabel = document.getElementById("encounter-content-label");
   var encounterContentResult = document.getElementById("encounter-content-result");
 
@@ -196,12 +199,20 @@ encounterWildernessRoller.onclick = function() {
   encounterContentResult.innerHTML = wildernessEncounter;
 }
 
-encounterDifficultyRoller.onclick = function() {
-  var encounterDifficulty = rollEncounterDifficulty();
+encounterCombatRoller.onclick = function() {
+  var combatEncounter = rollCombatEncounter();
 
-  encounterContentLabel.innerHTML = "Encounter Difficulty";
-  encounterContentResult.innerHTML = encounterDifficulty;
+  encounterContentLabel.innerHTML = "Combat Encounter";
+  encounterContentResult.innerHTML = combatEncounter;
 }
+
+monsterReactionRoller.onclick = function() {
+  var monsterReaction = rollMonsterReaction();
+
+  encounterContentLabel.innerHTML = "Monster Reaction";
+  encounterContentResult.innerHTML = monsterReaction;
+}
+
 
 // TAB BUTTON FUNCTIONS
   tabButtonDungeon.onclick = function() {
@@ -3069,7 +3080,7 @@ function rollEncounterWilderness() {
   return encounterWildernessString;
 }
 
-function rollEncounterDifficulty() {
+function rollCombatEncounter() {
   var answer = "";
   var rollResult = rollDice(6);
 
@@ -3093,4 +3104,127 @@ function rollEncounterDifficulty() {
   return answer;
 }
 
+function initializeMonsterReactionArray() {
+  var monsterReactionArray = [
+    [1,"If monster has dropped to less than 50% hp, it flees (provoking an opportunity attack if necessary), taking double movement."],
+    [2,"If monster has dropped to less than 50% hp, it flees (provoking an opportunity attack if necessary), taking double movement."],
+    [3,"If monster has dropped to less than 50% hp, it flees (provoking an opportunity attack if necessary), taking double movement."],
+    [4,"If monster has dropped to less than 50% hp, it flees (provoking an opportunity attack if necessary), taking double movement."],
+    [5,"f you scored 25% or more of the creature’s hp in damage during the last round, creature makes a wis check (DC=PC's wisdom intimidation modifier). If it fails, it moves away from you quickly (taking dash), and provoking an opportunity attack if necessary. If it succeeds, it attacks normally."],
+    [6,"f you scored 25% or more of the creature’s hp in damage during the last round, creature makes a wis check (DC=PC's wisdom intimidation modifier). If it fails, it moves away from you quickly (taking dash), and provoking an opportunity attack if necessary. If it succeeds, it attacks normally."],
+    [7,"f you scored 25% or more of the creature’s hp in damage during the last round, creature makes a wis check (DC=PC's wisdom intimidation modifier). If it fails, it moves away from you quickly (taking dash), and provoking an opportunity attack if necessary. If it succeeds, it attacks normally."],
+    [8,"f you scored 25% or more of the creature’s hp in damage during the last round, creature makes a wis check (DC=PC's wisdom intimidation modifier). If it fails, it moves away from you quickly (taking dash), and provoking an opportunity attack if necessary. If it succeeds, it attacks normally."],
+    [9,"If you scored 50% or more of the creature’s hp in damage during the last round, creature makes a wisdom check (DC=PC's wisdom+intimidation mod). If it fails, the creature disengages and then moves away from the PC up to its movement allowance. Otherwise, it attacks normally"],
+    [10,"If you scored 50% or more of the creature’s hp in damage during the last round, creature makes a wisdom check (DC=PC's wisdom+intimidation mod). If it fails, the creature disengages and then moves away from the PC up to its movement allowance. Otherwise, it attacks normally"],
+    [11,"If you scored 50% or more of the creature’s hp in damage during the last round, creature makes a wisdom check (DC=PC's wisdom+intimidation mod). If it fails, the creature disengages and then moves away from the PC up to its movement allowance. Otherwise, it attacks normally"],
+    [12,"If you scored 50% or more of the creature’s hp in damage during the last round, creature makes a wisdom check (DC=PC's wisdom+intimidation mod). If it fails, the creature disengages and then moves away from the PC up to its movement allowance. Otherwise, it attacks normally"],
+    [13,"Creature makes an attack, then moves away, provoking an opportunity attack if necessary"],
+    [14,"Creature makes an attack, then moves away, provoking an opportunity attack if necessary"],
+    [15,"Creature makes an attack, then moves away, provoking an opportunity attack if necessary"],
+    [16,"Creature makes an attack, then moves away, provoking an opportunity attack if necessary"],
+    [17,"If there is more than one enemy attacking the PC, they all attack and then move away in different directions. PC can only choose one on which to make an opportunity attack."],
+    [18,"If there is more than one enemy attacking the PC, they all attack and then move away in different directions. PC can only choose one on which to make an opportunity attack."],
+    [19,"If there is more than one enemy attacking the PC, they all attack and then move away in different directions. PC can only choose one on which to make an opportunity attack."],
+    [20,"If there is more than one enemy attacking the PC, they all attack and then move away in different directions. PC can only choose one on which to make an opportunity attack."],
+    [21,"If there is more than one enemy attacking the PC, one stays in melee and attacks, while another stays at ranged or disengages and moves away to make ranged attacks (if it has ranged attacks), possibly risking an attack of opportunity if enemy has hp to spare. Otherwise, it stays in melee. If there is only one creature, it attacks as normal."],
+    [22,"If there is more than one enemy attacking the PC, one stays in melee and attacks, while another stays at ranged or disengages and moves away to make ranged attacks (if it has ranged attacks), possibly risking an attack of opportunity if enemy has hp to spare. Otherwise, it stays in melee. If there is only one creature, it attacks as normal."],
+    [23,"If there is more than one enemy attacking the PC, one stays in melee and attacks, while another stays at ranged or disengages and moves away to make ranged attacks (if it has ranged attacks), possibly risking an attack of opportunity if enemy has hp to spare. Otherwise, it stays in melee. If there is only one creature, it attacks as normal."],
+    [24,"If there is more than one enemy attacking the PC, one stays in melee and attacks, while another stays at ranged or disengages and moves away to make ranged attacks (if it has ranged attacks), possibly risking an attack of opportunity if enemy has hp to spare. Otherwise, it stays in melee. If there is only one creature, it attacks as normal."],
+    [25,"If there is more than one enemy attacking the PC, they move to flank the PC on opposite sides."],
+    [26,"If there is more than one enemy attacking the PC, they move to flank the PC on opposite sides."],
+    [27,"If there is more than one enemy attacking the PC, they move to flank the PC on opposite sides."],
+    [28,"If there is more than one enemy attacking the PC, they move to flank the PC on opposite sides."],
+    [29,"If combat has not yet started, the monster is busy with something else and does not initially see the PC as a threat. If the PC does not attack, they can probably pass without any incident."],
+    [30,"If combat has not yet started, the monster is busy with something else and does not initially see the PC as a threat. If the PC does not attack, they can probably pass without any incident."],
+    [31,"If combat has not yet started, the monster is busy with something else and does not initially see the PC as a threat. If the PC does not attack, they can probably pass without any incident."],
+    [32,"If combat has not yet started, the monster is busy with something else and does not initially see the PC as a threat. If the PC does not attack, they can probably pass without any incident."],
+    [33,"Creature uses its main attack"],
+    [34,"Creature uses its main attack"],
+    [35,"Creature uses its main attack"],
+    [36,"Creature uses its main attack"],
+    [37,"Creature uses its main attack"],
+    [38,"Creature uses its main attack"],
+    [39,"Creature uses its main attack"],
+    [40,"Creature uses its main attack"],
+    [41,"Creature uses its main attack"],
+    [42,"Creature uses its main attack"],
+    [43,"Creature uses its main attack"],
+    [44,"Creature uses its main attack"],
+    [45,"Creature uses its main attack"],
+    [46,"Creature uses its main attack"],
+    [47,"Creature uses its main attack"],
+    [48,"Creature uses its main attack"],
+    [49,"Creature uses its main attack"],
+    [50,"Creature uses its main attack"],
+    [51,"Creature uses its main attack"],
+    [52,"Creature uses its main attack"],
+    [53,"Creature uses its main attack"],
+    [54,"Creature uses its main attack"],
+    [55,"Creature uses its main attack"],
+    [56,"Creature uses its main attack"],
+    [57,"Creature uses its main attack"],
+    [58,"Creature uses its main attack"],
+    [59,"Creature uses its main attack"],
+    [60,"Creature uses its main attack"],
+    [61,"Creature uses its main attack"],
+    [62,"Creature uses its main attack"],
+    [63,"Creature uses its main attack"],
+    [64,"Creature uses its main attack"],
+    [65,"Creature uses its main attack"],
+    [66,"Creature uses its main attack"],
+    [67,"Creature uses its main attack"],
+    [68,"Creature uses its main attack"],
+    [69,"Creature uses its main attack"],
+    [70,"Creature uses its main attack"],
+    [71,"Creature uses its main attack"],
+    [72,"Creature uses its main attack"],
+    [73,"Roll on Random Combat Event Table (eg Slips, Trips and Flying Turnips, or any random event table)."],
+    [74,"Roll on Random Combat Event Table (eg Slips, Trips and Flying Turnips, or any random event table)."],
+    [75,"Roll on Random Combat Event Table (eg Slips, Trips and Flying Turnips, or any random event table)."],
+    [76,"Roll on Random Combat Event Table (eg Slips, Trips and Flying Turnips, or any random event table)."],
+    [77,"Enemy takes your presence here as a personal affront, and attempts to intimidate you. It makes an intimidation check against your wisdom (as DC). If it succeeds, make your next attack at disadvantage. If it fails, it goes straight into melee brawl."],
+    [78,"Enemy takes your presence here as a personal affront, and attempts to intimidate you. It makes an intimidation check against your wisdom (as DC). If it succeeds, make your next attack at disadvantage. If it fails, it goes straight into melee brawl."],
+    [79,"Enemy takes your presence here as a personal affront, and attempts to intimidate you. It makes an intimidation check against your wisdom (as DC). If it succeeds, make your next attack at disadvantage. If it fails, it goes straight into melee brawl."],
+    [80,"Enemy takes your presence here as a personal affront, and attempts to intimidate you. It makes an intimidation check against your wisdom (as DC). If it succeeds, make your next attack at disadvantage. If it fails, it goes straight into melee brawl."],
+    [81,"Monster inspiration: If the monster has a feat that needs to recharge, it recharges automatically without needing to make a roll."],
+    [82,"Monster inspiration: If the monster has a feat that needs to recharge, it recharges automatically without needing to make a roll."],
+    [83,"Monster inspiration: If the monster has a feat that needs to recharge, it recharges automatically without needing to make a roll."],
+    [84,"Monster inspiration: If the monster has a feat that needs to recharge, it recharges automatically without needing to make a roll."],
+    [85,"If your last attack missed, the creature feels a swelling of courage. It makes a wisdom check (DC=PC Charisma). If it succeeds, it attacks with advantage. If unsuccessful, it attacks as normal"],
+    [86,"If your last attack missed, the creature feels a swelling of courage. It makes a wisdom check (DC=PC Charisma). If it succeeds, it attacks with advantage. If unsuccessful, it attacks as normal"],
+    [87,"If your last attack missed, the creature feels a swelling of courage. It makes a wisdom check (DC=PC Charisma). If it succeeds, it attacks with advantage. If unsuccessful, it attacks as normal"],
+    [88,"If your last attack missed, the creature feels a swelling of courage. It makes a wisdom check (DC=PC Charisma). If it succeeds, it attacks with advantage. If unsuccessful, it attacks as normal"],
+    [89,"If the creature won initiative, then it was aware of your presence (even though it may not have appeared to be) and has a surprise attack readied."],
+    [90,"If the creature won initiative, then it was aware of your presence (even though it may not have appeared to be) and has a surprise attack readied."],
+    [91,"If the creature won initiative, then it was aware of your presence (even though it may not have appeared to be) and has a surprise attack readied."],
+    [92,"If the creature won initiative, then it was aware of your presence (even though it may not have appeared to be) and has a surprise attack readied."],
+    [93,"Creature makes an intelligence or perception check (whichever is highest) with the DC being the PC’s main combat\ ability (strength or dex). If successful (and if appropriate for the monster), it discerns information about the PC’s combat skill. If it is obviously outclassed, it will take the dash action to get as far from the PC as possible (provoking an opportunity attack if necessary). If it is equally matched or clearly superior to the PC, the PC makes their next attack at disadvantage."],
+    [94,"Creature makes an intelligence or perception check (whichever is highest) with the DC being the PC’s main combat\ ability (strength or dex). If successful (and if appropriate for the monster), it discerns information about the PC’s combat skill. If it is obviously outclassed, it will take the dash action to get as far from the PC as possible (provoking an opportunity attack if necessary). If it is equally matched or clearly superior to the PC, the PC makes their next attack at disadvantage."],
+    [95,"Creature makes an intelligence or perception check (whichever is highest) with the DC being the PC’s main combat\ ability (strength or dex). If successful (and if appropriate for the monster), it discerns information about the PC’s combat skill. If it is obviously outclassed, it will take the dash action to get as far from the PC as possible (provoking an opportunity attack if necessary). If it is equally matched or clearly superior to the PC, the PC makes their next attack at disadvantage."],
+    [96,"Creature makes an intelligence or perception check (whichever is highest) with the DC being the PC’s main combat\ ability (strength or dex). If successful (and if appropriate for the monster), it discerns information about the PC’s combat skill. If it is obviously outclassed, it will take the dash action to get as far from the PC as possible (provoking an opportunity attack if necessary). If it is equally matched or clearly superior to the PC, the PC makes their next attack at disadvantage."],
+    [97,"Monster roars for help / reinforcements, in its own tongue. Make a d100 roll. On a roll of 10 or below, another one of its type appears in two rounds. (This only happens once)"],
+    [98,"Monster roars for help / reinforcements, in its own tongue. Make a d100 roll. On a roll of 10 or below, another one of its type appears in two rounds. (This only happens once)"],
+    [99,"Monster roars for help / reinforcements, in its own tongue. Make a d100 roll. On a roll of 10 or below, another one of its type appears in two rounds. (This only happens once)"],
+    [100,"Monster roars for help / reinforcements, in its own tongue. Make a d100 roll. On a roll of 10 or below, another one of its type appears in two rounds. (This only happens once)"]
+  ];
+  return monsterReactionArray;
+};
+
+function objectifyMonsterReactionRow(monsterReactionRowNum) {
+  
+  var monsterReactionRow = monsterReactionArray[monsterReactionRowNum - 1];
+
+  var monsterReactionDataObject = {
+    rollResult: monsterReactionRow[0],
+    text: monsterReactionRow[1]
+  };
+  return monsterReactionDataObject;
+};
+
+function rollMonsterReaction() {
+  var monsterReactionRollResult = rollDice(100);
+  var monsterReactionDataObject = objectifyMonsterReactionRow(monsterReactionRollResult);
+  var monsterReactionString = monsterReactionDataObject.text;
+  return monsterReactionString;
+}
 /******* ENCOUNTER END ***********/
