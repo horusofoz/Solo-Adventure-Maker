@@ -38,7 +38,7 @@ section {
   outline: none;
   cursor: pointer;
   padding: 14px 0px;
-  width: 20%;
+  width: 16%;
   font-family: 'Roboto Condensed',Helvetica,sans-serif;
   font-size: x-large;
   
@@ -61,8 +61,17 @@ section {
   color: #FFFFFF;
 }
 
+#tab-button-encounter {
+  background-color: #503875;
+}
+
 #tab-button-oracle {
   background-color: #5D5704;
+  color: #FFFFFF;
+}
+
+#tab-button-portent {
+  background-color: #804000;
   color: #FFFFFF;
 }
 
@@ -71,9 +80,7 @@ section {
   color: #FFFFFF;
 }
 
-#tab-button-encounter {
-  background-color: #503875;
-}
+
 
 /***** TAB END ****/
 
@@ -136,7 +143,7 @@ section {
 
   .tab-link {
     padding: 14px 0;
-    font-size: large;
+    font-size: medium;
   }
 
 }
@@ -196,35 +203,6 @@ section {
 
 /***** QUEST END *****/
 
-/***** ORACLE START *****/
-
-#tab-oracle .roll-button, .roll-modifier-wrapper {
-  border-color: #5D5704;
-  color: #5D5704;
-}
-
-#tab-oracle .roll-button:hover, #tab-oracle .roll-modifier-wrapper:hover {
-  background-color: #5D5704;
-  color: #FFFFFF;
-}
-
-#tab-oracle .content-wrapper {
-  border-color: #5D5704;
-}
-
-#tab-oracle .content-label {
-  background-color: #FCFCBF;
-  color: #5D5704;
-}
-
-.oracle-modifier {
-  border-color: #5D5704;
-}
-
-
-/***** ORACLE END *****/
-
-
 /***** ENCOUNTER START *****/
 
 #tab-encounter .roll-button {
@@ -250,10 +228,64 @@ section {
   border-color: #503875;
 }
 
-
 /***** ENCOUNTER END *****/
 
-/***** about START *****/
+/***** ORACLE START *****/
+
+#tab-oracle .roll-button,  #tab-oracle .roll-modifier-wrapper {
+  border-color: #5D5704;
+  color: #5D5704;
+}
+
+#tab-oracle .roll-button:hover, #tab-oracle .roll-modifier-wrapper:hover {
+  background-color: #5D5704;
+  color: #FFFFFF;
+}
+
+#tab-oracle .content-wrapper {
+  border-color: #5D5704;
+}
+
+#tab-oracle .content-label {
+  background-color: #FCFCBF;
+  color: #5D5704;
+}
+
+.oracle-modifier {
+  border-color: #5D5704;
+}
+
+
+/***** ORACLE END *****/
+
+/***** PORTENT START *****/
+
+#tab-portent .roll-button, #tab-portent .roll-modifier-wrapper {
+  border-color: #804000;
+  color: #804000;
+}
+
+#tab-portent .roll-button:hover, #tab-portent .roll-modifier-wrapper:hover, #tab-portent .toggle-selected {
+  background-color: #804000;
+  color: #FFFFFF;
+}
+
+#tab-portent .content-wrapper {
+  border-color: #804000;
+}
+
+#tab-portent .content-label {
+  background-color: #FFEEE5;
+  color: #804000;
+}
+
+.portent-modifier {
+  border-color: #804000;
+}
+
+/***** PORTENT END *****/
+
+/***** ABOUT START *****/
 
 #tab-about .roll-button {
   border-color: #8b0000; /*#C4E1F2*/
@@ -274,4 +306,4 @@ section {
   width: 0%;
 }
 
-/***** about END *****/
+/***** ABOUT END *****/

@@ -65,6 +65,26 @@
     </section>
   </div>
 
+  <div id="tab-encounter" class="tab-content">
+
+    <section class="button-column">
+      <button class="roll-button encounter-button" id="urban-encounter-roller">Urban</button>
+      <button class="roll-button encounter-button" id="wilderness-encounter-roller">Wilderness</button>
+      <button class="roll-button encounter-button" id="dungeon-encounter-roller">Dungeon</button>
+      <button class="roll-button encounter-button" id="encounter-combat-roller">Combat</button>
+      <button class="roll-button encounter-button" id="monster-intention-roller">Monster Intention</button>
+      <button class="roll-button encounter-button" id="monster-reaction-roller">Monster Reaction</button>
+    </section>
+
+    
+    <section class="content-column">
+      <div class="content-wrapper">
+        <div id="encounter-content-label" class="content-label">Encounter</div>
+        <div id="encounter-content-result" class="content-result">Select an encounter coward.</div>
+      </div>
+    </section>
+  </div>
+
   <div id="tab-oracle" class="tab-content">
 
     <section class="button-column">
@@ -95,7 +115,6 @@
 
       </div>
       <button class="roll-button oracle-button" id="sat-question-roller">SAT Question</button>
-      <button class="roll-button oracle-button" id="portent-roller">Portent</button>
     </section>
 
     
@@ -107,22 +126,32 @@
     </section>
   </div>
 
-  <div id="tab-encounter" class="tab-content">
+  <div id="tab-portent" class="tab-content">
 
     <section class="button-column">
-      <button class="roll-button encounter-button" id="urban-encounter-roller">Urban</button>
-      <button class="roll-button encounter-button" id="wilderness-encounter-roller">Wilderness</button>
-      <button class="roll-button encounter-button" id="dungeon-encounter-roller">Dungeon</button>
-      <button class="roll-button encounter-button" id="encounter-combat-roller">Combat</button>
-      <button class="roll-button encounter-button" id="monster-intention-roller">Monster Intention</button>
-      <button class="roll-button encounter-button" id="monster-reaction-roller">Monster Reaction</button>
+      <div class="roll-modifier-wrapper">
+        <label for="portent-word-number-modifier">Word Count</label><br />
+        <select name="portent-word-number-modifier" id="portent-word-number-modifier" class="portent-modifier modifier-input">
+          <option value="1">1</option>
+		      <option value="2" selected>2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+	  
+      <button class="roll-button portent-button toggle-selected" id="verb-toggle">Verbs</button>
+      <button class="roll-button portent-button toggle-selected" id="noun-toggle">Nouns</button>
+      <button class="roll-button portent-button toggle-selected" id="adjective-toggle">Adjectives</button>
+      <button class="roll-button portent-button" id="portent-roller">Portent</button>
     </section>
 
     
     <section class="content-column">
       <div class="content-wrapper">
-        <div id="encounter-content-label" class="content-label">Encounter</div>
-        <div id="encounter-content-result" class="content-result">Select an encounter coward.</div>
+        <div id="portent-content-label" class="content-label">Portent</div>
+        <div id="portent-content-result" class="content-result">Select the number of and types of words for your portent, then select Portent.</div>
       </div>
     </section>
   </div>
@@ -155,8 +184,9 @@
   <div id="tabs-wrapper">
     <button id="tab-button-dungeon" class="tab-link"><span>Dungeon</span></button>
     <button id="tab-button-quest" class="tab-link"><span>Quest</span></button>
-    <button id="tab-button-oracle" class="tab-link"><span>Oracle</span></button>
     <button id="tab-button-encounter" class="tab-link"><span>Encounter</span></button>
+    <button id="tab-button-oracle" class="tab-link"><span>Oracle</span></button>
+    <button id="tab-button-portent" class="tab-link"><span>Portent</span></button>
     <button id="tab-button-about" class="tab-link"><span>About</span></button>
   </div>
   </main>
