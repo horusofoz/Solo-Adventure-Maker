@@ -2236,21 +2236,27 @@ function rollMuneIntervention() {
   switch(rollResult) {
     case 1:
       interventionType = "New entity";
+      interventionType += "<br /><br />A new entity appears. Maybe this introduction is beneficial to you, maybe not. The specifics can be gleaned from asking the oracle, with some potential help from a Portent.";
       break;
     case 2:
       interventionType = "Entity positive";
+      interventionType += "<br /><br />Something bad happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
       break;
     case 3:
       interventionType = "Entity negative";
+      interventionType += "<br /><br />Something bad happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
       break;
     case 4:
       interventionType = "Advance plot";
+      interventionType += "<br /><br />Advancing a plot pushes an unresolved hook in a certain direction. A plot advancement should always see the adventure progress and does so by helping a certain goal or plot point.";
       break;
     case 5:
       interventionType = "Regress plot";
+      interventionType += "<br /><br />Regressing a plot pushes an unresolved hook in a certain direction. A plot regression should always see the adventure progress and does so by hindering a certain goal or plot point.";
       break;
     case 6:
       interventionType = "Wild";
+      interventionType += "<br /><br />Wild Interventions simulate the completely unexpected. It can be good, bad, neutral, or downright crazy. This allows for sudden twists of fate, such as a dragon swooping down to attack the village and allowing the slaves to escape in the ensuing chaos.<br /><br />Because a wild Intervention is so vague in what it can represent, you kinda have to use a Portent to figure out what the heck it actually means."
       break;
   }
 

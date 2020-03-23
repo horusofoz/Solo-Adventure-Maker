@@ -49,6 +49,7 @@ section {
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
+  margin: .25em 0;
 }
 
 #tab-button-dungeon {
