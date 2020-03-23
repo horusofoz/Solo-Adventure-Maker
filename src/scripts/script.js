@@ -16,6 +16,7 @@ var questTypeArray = initializeQuestTypeArray();
 var questSourceArray = initializeQuestSourceArray();
 var encounterWildernessArray = initializeEncounterWildernessArray();
 var encounterUrbanArray = initializeUrbanEncounterArray();
+var encounterDungeonArray = initializeDungeonEncounterArray();
 var monsterIntentionArray = initializeMonsterIntentionArray();
 var monsterReactionArray = initializeMonsterReactionArray();
 var verbArray = initializeVerbArray();
@@ -53,6 +54,7 @@ window.onload = function() {
   // Encounter Elements
   var encounterUrbanRoller = document.getElementById("urban-encounter-roller");
   var encounterWildernessRoller = document.getElementById("wilderness-encounter-roller");
+  var encounterDungeonRoller = document.getElementById("dungeon-encounter-roller");
   var encounterCombatRoller = document.getElementById("encounter-combat-roller");
   var monsterReactionRoller = document.getElementById("monster-reaction-roller");
   var monsterIntentionRoller = document.getElementById("monster-intention-roller");
@@ -199,6 +201,13 @@ encounterWildernessRoller.onclick = function() {
 
   encounterContentLabel.innerHTML = "Wilderness Encounter";
   encounterContentResult.innerHTML = wildernessEncounter;
+}
+
+encounterDungeonRoller.onclick = function() {
+  var dungeonEncounter = rollEncounterDungeon();
+
+  encounterContentLabel.innerHTML = "Dungeon Encounter";
+  encounterContentResult.innerHTML = dungeonEncounter;
 }
 
 encounterCombatRoller.onclick = function() {
@@ -3089,6 +3098,133 @@ function rollEncounterWilderness() {
   var encounterWildernessDataObject = objectifyEncounterWildernessRow(encounterWildernessRollResult);
   var encounterWildernessString = encounterWildernessDataObject.text;
   return encounterWildernessString;
+}
+
+function initializeDungeonEncounterArray() {
+  var encounterDungeonArray = [
+    [1,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics /dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use Q/A rolls or Story Element Interaction tables (chapter 14) to find out what."],
+    [2,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics /dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use Q/A rolls or Story Element Interaction tables (chapter 14) to find out what."],
+    [3,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics /dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use Q/A rolls or Story Element Interaction tables (chapter 14) to find out what."],
+    [4,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics /dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use Q/A rolls or Story Element Interaction tables (chapter 14) to find out what."],
+    [5,"Something occurs, or you find something, that requires a (roll d10) 1: acrobatics /dex check or save, 2: strength or athletics check, 3: stealth check, 4: con check or save, 5: int check, 6: investigation check, 7: arcana check, 8: history check, 9: nature check, 10: religion check. Use Q/A rolls or Story Element Interaction tables (chapter 14) to find out what."],
+    [6,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. Use Q/A rolls or Story Element Interaction Tables (chapter 14) to find out what."],
+    [7,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. Use Q/A rolls or Story Element Interaction Tables (chapter 14) to find out what."],
+    [8,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. Use Q/A rolls or Story Element Interaction Tables (chapter 14) to find out what."],
+    [9,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. Use Q/A rolls or Story Element Interaction Tables (chapter 14) to find out what."],
+    [10,"Something occurs, or you find something, that requires a (roll d10), 1: animal handling check, 2: insight check, 3: survival check, 4: medicine check 5: perception check, 6: persuasion check, 7: performance check, 8: deception check, 9: inimidation check, 10: charisma check. Use Q/A rolls or Story Element Interaction Tables (chapter 14) to find out what."],
+    [11,"NPC gives you information about possible quest. Go to Chapter 7 and generate a quest, which you may or may not accept. (Generate NPC as well – Chapter 13)."],
+    [12,"NPC gives you information about possible quest. Go to Chapter 7 and generate a quest, which you may or may not accept. (Generate NPC as well – Chapter 13)."],
+    [13,"NPC gives you information about possible quest. Go to Chapter 7 and generate a quest, which you may or may not accept. (Generate NPC as well – Chapter 13)."],
+    [14,"NPC gives you information about possible quest. Go to Chapter 7 and generate a quest, which you may or may not accept. (Generate NPC as well – Chapter 13)."],
+    [15,"NPC gives you information about possible quest. Go to Chapter 7 and generate a quest, which you may or may not accept. (Generate NPC as well – Chapter 13)."],
+    [16,"Monster: Level-appropriate easy encounter."],
+    [17,"Monster: Level-appropriate easy encounter."],
+    [18,"Monster: Level-appropriate easy encounter."],
+    [19,"Monster: Level-appropriate easy encounter."],
+    [20,"Monster: Level-appropriate easy encounter."],
+    [21,"Monster: Level-appropriate medium encounter."],
+    [22,"Monster: Level-appropriate medium encounter."],
+    [23,"Monster: Level-appropriate medium encounter."],
+    [24,"Monster: Level-appropriate medium encounter."],
+    [25,"Monster: Level-appropriate medium encounter."],
+    [26,"Monster: Level appropriate hard encounter."],
+    [27,"Monster: Level appropriate hard encounter."],
+    [28,"Monster: Level appropriate hard encounter."],
+    [29,"Monster: Level appropriate hard encounter."],
+    [30,"Monster: Level appropriate hard encounter."],
+    [31,"Level appropriate deadly encounter. Your PC might want to flee!"],
+    [32,"Level appropriate deadly encounter. Your PC might want to flee!"],
+    [33,"Level appropriate deadly encounter. Your PC might want to flee!"],
+    [34,"Level appropriate deadly encounter. Your PC might want to flee!"],
+    [35,"Level appropriate deadly encounter. Your PC might want to flee!"],
+    [36,"Dead beast or monster carcass. What happened here?"],
+    [37,"You find a strange growth in this area, on the dungeon walls. Is it a moss of some kind?"],
+    [38,"Part of the floor has crumbled away, revealing a black, empty space below."],
+    [39,"A door covered in moss, with a large knocker. Looks like it’s been transplanted here from someone’s garden."],
+    [40,"You enter a tomblike area. All of the coffins are child-sized."],
+    [41,"Strange vines have grown all through here, creeping around the stonework and gradually, over time, destroying parts of the masonry. How did they get in here?"],
+    [42,"You see a statue of a wizard in the middle of this area. The plaque beneath reads “I am Fennishaw Eldsight. Speak my name and bring me to life, if you dare!”"],
+    [43,"You hear voices ahead, and turn the corner to see a barbarian parleying with an ogre! Apparently they are discussing what the ogre’s price is for releasing the half-orc he is currently holding hostage."],
+    [44,"A voice repeatedly whispers, “What do you seek?” No matter how you respond, it repeats the same question. (Perhaps until you give the true answer, at which point, you may get what you seek, but not as you expected!) Who does this voice belong to, if anyone?"],
+    [45,"The ceiling above you opens, and an unexpected NPC falls through screaming, hitting the ground in front of you! Roll NPC Tables to find out who it is."],
+    [46,"This area is home to a mining operation. Enslaved humanoid children are toiling away, loading rocks into mine carts for ore processing. Their masters whip and force them to continue on, despite their obvious fatigue."],
+    [47,"A middle-aged woman is slumped against the wall, sobbing. She is dressed in rags."],
+    [48,"From nowhere, you hear a booming voice: “Take up your weapon, adventurer! You dare to trespass here, now you will face me in battle!” But no one appears. At least not yet… You hear laughing..."],
+    [49,"Suddenly a vision flickers before you, a vision of your ultimate goal in this dungeon. You do not recognize the room, but get some prior information about what you might be headed towards."],
+    [50,"TRAP! Roll on Traps table to find out what."],
+    [51,"TRAP! Roll on Traps table to find out what."],
+    [52,"TRAP! Roll on Traps table to find out what."],
+    [53,"TRAP! Roll on Traps table to find out what."],
+    [54,"TRAP! Roll on Traps table to find out what."],
+    [55,"TRAP! Roll on Traps table to find out what."],
+    [56,"Graffiti on the wall: “Stop! Bridge out ahead! Go back, your doom is at hand!”"],
+    [57,"Nearby, you hear a dog barking madly, then another voice telling it to shut up!"],
+    [58,"You hear screaming, very faint, as if from far, far away."],
+    [59,"You round the next corner and see two humanoids engaged in a heated quarrel."],
+    [60,"Make a perception check, DC 14. If unsuccessful, you suddenly notice your pack is lighter. Randomly choose one item from your inventory (perhaps figure out a way to randomly roll for it). It has been stolen! You might get it back, but then again..."],
+    [61,"You come to a door on which a parchment is nailed. “Dungeon caretaker. Enquiries/complaints within.”"],
+    [62,"Suddenly the wall behind you explodes, and two adventurers enter through it. One is a goliath who has just punched his way through the masonry, the other appears to be a halfling sorcerer."],
+    [63,"Ahead, two orc guards sit at a guard post. They appear to be playing dice."],
+    [64,"A giant rat runs past you, closely followed by three hungry-looking goblins. They pay you no attention."],
+    [65,"As you move through this area, make a perception check, DC 15. If you fail, you do not see a glyph on the wall and trigger an alarm spell! What comes to check?"],
+    [66,"In a corner, a huge pile of rubbish festers. It is being picked through by some horrid beast or other."],
+    [67,"You get the distinct impression that you are being followed. You even fancy you can smell whoever it is, and they smell rank."],
+    [68,"You happen upon a massacre. The corpses of a dozen humanoids lie scattered."],
+    [69,"A mist swirls about your feet."],
+    [70,"You feel a hard shove in your back. When you turn to look, is anyone there?"],
+    [71,"Roll perception, DC 14. If successful you notice something in your periphery. A stone in the wall shuts with a scrape. Investigation roll, DC 12, to find the mechanism to open it. Beyond is a (d4) 1-2: passage, 3-4: room, containing an encounter (d4) 1: Easy, 2: Medium, 3: Hard, 4: No encounter. Clue 75%, Individual Loot 50%."],
+    [72,"An old timer, clearly mad, is perched on a soapbox to the side of this passage, ranting about the current state of political affairs to an audience of one slightly amused boggart."],
+    [73,"As you round the next corner, you catch sight of a lone humanoid. Make a stealth check, DC 14. If successful, you stay hidden and watch as they move a stone in the wall, place something behind it, then replace the stone. Then they depart."],
+    [74,"You come across a proper dungeon - a locked room with bars, in which you see several ragged-looking prisoners. “Quick, break us out!” one of them exclaims when he sees you."],
+    [75,"You come across an ornate door, attended by a spectral figure dressed in opulent clothes. The thing is non-hostile, and manning this door, like a doorman. Roll a d4. On a 1: He praises you and your obvious prowess as an adventurer. He seems to know a lot. The spectral doorman admits opens the door for you. On a 2: He begins insulting you, pointing out how awful your clothes are, how ugly you are, how terrible you smell! Make a wisdom check, DC 15. If you succeed, he congratulates you on your poise in the face of abuse and lets you through the door. On 3-4: He begins debating with you as to why you shouldn’t be admitted through the door. Make an intelligence check or a persuasion check, DC 14. If successful, you win the debate and he lets you through the door. The spectral doorkeeper cannot be attacked or moved. And the door only opens for him. (40% boss encounter)."],
+    [76,"A kindly little goblin appears with hat in hand, and begs your help in ridding him of a problem. He has just returned from a trip to the nearest town to find that his home has been taken over! Two levels down, his humble little abode that he shares with his wife and two little goblings, has been invaded by a horrible (insert level appropriate hard encounter here). If he could get your assistance in getting rid of this scourge, he will reward you with all his profits from his recent sales trip - 250 gp! And his wife will cook you a delicious pot of Tunnelslug Stew, finest in the dungeon, they say!"],
+    [77,"You run into some rival adventurers, who happen to be there following the same leads as you. Will you team up with these NPCs? (Use NPC tables to determine who they are, skipping Profession and going straight to Class Tables)."],
+    [78,"You take one more step and… boom! You are in an utterly unfamiliar part of the dungeon. Abandon the map you have so far. You have stepped through a portal, and now are not even sure you are in the same dungeon, realm, or world! Where have you been transported?"],
+    [79,"You find a secret entrance to an opulent room, lined with bookshelves. A fire crackles in the hearth, and richly-patterned rugs and furniture decorate this cosy space. Who lives here?"],
+    [80,"You find small circular openings in the walls. Each contains a scroll. Withdrawing them, you see that they bear writing from some ancient civilization. These could be of great worth to an archaeologist, but first you will need to get them translated. What secrets do they hold? (Roll a d8. The scrolls are in 1: Infernal, 2: Abyssal, 3: Celestial, 4: Draconic, 5: Druidic, 6: Giant, 7: Primordial, 8: Undercommon. If you happen to speak the resultant language, use Q/A rolls to determine what they contain. Perhaps a quest! Or some valuable knowledge. They might be worth something, too, to the right buyer)."],
+    [81,"1d4-1 humanoids are arguing and do not notice your approach. One is a commander, the other(s) subordinate. The subordinate has failed in the execution of some task. The rest of your story will hopefully provide the context here. If you choose to attack, this will be a (d4) 1: Easy, 2-3: Medium, 4: Hard encounter. You may choose an appropriate enemy based on the encounter guidelines in Chapter 16. Individual loot 50% (roll twice, once for each humanoid)"],
+    [82,"You find the shrine of a long-forgotten deity. (Loot Hoard 30%). Perhaps this deity tries to commune with you, attempting to find a new worshipper?"],
+    [83,"You see an ornate historical mural on a nearby wall, faded but obviously painted / carved by a master artist. As you watch, the figures in the mural come to life and begin to play out a scene hitherto unknown to you. You gain knowledge of this episode of history, and possibly of some previously undiscovered location/quest/relic associated with it. (Consult the history of your setting / use Q/A rolls to find out what… player’s choice!)"],
+    [84,"You enter a chamber where a sacrificial ceremony is taking place. Several humanoids are gathered around a plinth, about to sacrifice a live beast. Who knows what the outcome of this ritual will be?"],
+    [85,"You get the feeling you are being stalked by something, some invisible force. You see shadows, hear noises, feel a presence, but every time you turn you see nothing. Perhaps it will show itself eventually. Perhaps it is another adventurer, or perhaps… something more sinister."],
+    [86,"In the next room, a gnome sits at a table in a sparse room before a chess board. He invites you to play. Playing requires a DC 15 deception or intelligence check. If successful, the gnome will gift you with a useful trinket of gnomish invention, or 50 gp. If unsuccessful, you surrender an item of 50 gp worth. You can refuse this"],
+    [87,"You find an underground tavern, where dungeon denizens like to stop and get an ale every now and then before returning to their murderous exploits! It’s called The Delver’s Rest and the patronage is steady! (If this is too silly, re-roll)."],
+    [88,"You find a secret door to a chamber where an alchemist is busy preparing potions and tinctures of all kinds. He might be open to bartering, but is currently trying to prepare something that will “stop all hell breaking out in this place.” If you try to attack him, you find he is protected by an impenetrable magic barrier, which only he can let down."],
+    [89,"You find a dimensional door into a forest, but can’t be sure if this wilderness is real, or simply an illusion to lead you into even greater danger."],
+    [90,"In this area are some pools of greyish-green slime of unknown nature. Q/A and nature rolls to determine more about their nature."],
+    [91,"If the party are holding torches, or there are torches or candles present in the area, something blows them all out suddenly."],
+    [92,"The area is filled with a thick mist/fog, that hangs heavy and low to the ground."],
+    [93,"In the distance a small girl dressed in rags can be seen standing near the wall. If players move toward her, she will turn and run through the nearest wall and disappear."],
+    [94,"To the far side three skeletons hang on manacles, if they are inspected 1d6 rats will jump out at the PCs."],
+    [95,"The ground here is earthen and covered with a top soil. It smells heavily of must and dirt. Root-like tendrils will start to appear out of the ground and start to grow up the walls."],
+    [96,"A player is bitten on the hand (causing minimal if no damage). What did it?"],
+    [97,"A low rumble, then a deep cracking noise is heard directly above. The area shakes slightly, dust and small debris falls from the ceiling, then it stops."],
+    [98,"A bard has stopped in this area to belt out a quick song to try and lift his own spirits. He’s been lost down here for days! He tells you that he’s managed to find his way up to this level with some difficulty, but that this dungeon descends many levels downward. He was held captive by some kind of humanoid until just recently. He’s absolutely starving, having had to subsist on dungeon moss and tunnelslugs for weeks."],
+    [99,"You hear the sound of something heavy being dragged, coming from up ahead."],
+    [100,"A large group of humanoids comes running down the tunnel towards you, their expressions showing absolute, abject terror. “RUN!” the lead one yells at you. “Save yourself, run, now!!!” Behind them, you see something BIG following..."]
+  ];
+
+  return encounterDungeonArray;
+}
+
+function objectifyEncounterDungeonRow(encounterDungeonRowNum) {
+  
+  console.log(JSON.stringify(encounterDungeonRow));
+  
+  var encounterDungeonRow = encounterDungeonArray[encounterDungeonRowNum - 1];
+
+  var encounterDungeonDataObject = {
+    rollResult: encounterDungeonRow[0],
+    text: encounterDungeonRow[1]
+  };
+  return encounterDungeonDataObject;
+}
+
+function rollEncounterDungeon() {
+  var encounterDungeonRollResult = rollDice(100);
+  var encounterDungeonDataObject = objectifyEncounterDungeonRow(encounterDungeonRollResult);
+  var encounterDungeonString = encounterDungeonDataObject.text;
+  return encounterDungeonString;
 }
 
 function rollCombatEncounter() {
