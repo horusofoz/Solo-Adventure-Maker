@@ -285,7 +285,7 @@ portentRoller.onclick = function() {
     return false;
   }
 
-  tabButtonAbout.click();
+  tabButtonDungeon.click();
 
   return false;
 }
@@ -1280,8 +1280,6 @@ function addDoorTraps(doorDataObject) {
   return doorTrapString;
 }
 
-
-
 /*********   DOOR END *********/
 
 /********* SECRET DOOR START *********/
@@ -2166,6 +2164,10 @@ function rollQuest() {
   return result;
 }
 
+function rollStoryQuest() {
+  
+}
+
 /******* QUEST END ***********/
 
 /****** ORACLE START *********/
@@ -2270,33 +2272,43 @@ function rollMuneTwene() {
   switch(rollResult) {
     case 1:
       result = "Increase simple element";
+      result += "<br /><br />A simple element is something of minimal importance. This element increases in scale or importance.";
       break;
     case 2:
       result = "Decrease simple element";
+      result += "<br /><br />A simple element is something of minimal importance. This element decreases in scale or importance.";
       break;
     case 3:
       result = "Add simple element";
+      result += "<br /><br />A simple element is something of minimal importance. This element is added to the scene.";
       break;
     case 4:
       result = "Remove simple element";
+      result += "<br /><br />A simple element is something of minimal importance. This element is removed from the scene.";
       break;
     case 5:
       result = "Increase major element";
+      result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element decreases in scale or importance.";
       break;
     case 6:
       result = "Decrease major element";
+      result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element decreases in scale or importance.";
       break;
     case 7:
       result = "Add major element";
+      result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element is added to the scene.";
       break;
     case 8:
       result = "Remove major element";
+      result += "<br /><br />A wild positive indicates an unexpected and significant alteration to the scene that has a positive impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
     case 9:
       result = "Wild positive";
+      result += "<br /><br />A wild positive indicates an unexpected and significant alteration to the scene that has a positive impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
     case 10:
       result = "Wild negative";
+      result += "<br /><br />A wild negative indicates an unexpected and significant alteration to the scene that has a negative impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
   }
 
@@ -5680,7 +5692,5 @@ function rollPortent() {
   }
   return portent;
 }
-
-
 
 /******* PORTENT END ***********/
