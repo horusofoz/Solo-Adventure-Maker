@@ -2120,6 +2120,8 @@ function rollQuest() {
   var result = "PROBLEM: " + questType.problem;
   result += "<br />OBJECTIVE: " + questType.objective;
   result += "<br />SOURCE: " + questSource.source;
+  result += "<br /><br />Ask the Oracle to clear up the What, Why, When, Where, How and Who of your quest.";
+  result += "<br />If still unsure, use a Portent to provide inspiration.";
   return result;
 }
 
