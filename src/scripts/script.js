@@ -58,6 +58,7 @@ window.onload = function() {
   var muneQuestionRoller = document.getElementById("mune-question-roller");
   var muneInterventionRoller = document.getElementById("mune-intervention-roller");
   var muneTwneneRoller = document.getElementById("mune-twene-roller");
+  var muneNpcStartRoller = document.getElementById("mune-npc-start-roller");
   var satQuestionRoller = document.getElementById("sat-question-roller");
   var oracleContentLabel = document.getElementById("oracle-content-label");
   var oracleContentResult = document.getElementById("oracle-content-result");
@@ -225,6 +226,13 @@ muneTwneneRoller.onclick = function() {
   
   oracleContentLabel.innerHTML = "MUNE TWENE";
   oracleContentResult.innerHTML = tweneResult;
+}
+
+muneNpcStartRoller.onclick = function() {
+  var npcResult = rollMuneNpcStartingAttitude();
+  
+  oracleContentLabel.innerHTML = "MUNE NPC Starting Attitude";
+  oracleContentResult.innerHTML = npcResult;
 }
 
 satQuestionRoller.onclick = function() {
@@ -2313,6 +2321,29 @@ function rollMuneTwene() {
   }
 
   return result;
+}
+
+function rollMuneNpcStartingAttitude() {
+  var npcStartingAttitude = "";
+  var rollResult = rollDice(6);
+  
+  switch(rollResult) {
+    case 1:
+    case 2:
+      npcStartingAttitude = "Hostile";
+      break;
+    case 3:
+    case 4:
+      npcStartingAttitude = "Neutral";
+      break;
+    case 5:
+    case 6:
+      npcStartingAttitude = "Friendly";
+      break;
+  }
+	npcStartingAttitude += "<br /><br />If unsure of an NPCs desired topic of conversation, roll a Portent.";
+
+  return npcStartingAttitude;
 }
 
 function rollSATQuestion() {
