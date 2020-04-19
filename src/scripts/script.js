@@ -2250,7 +2250,7 @@ function rollMuneIntervention() {
       break;
     case 2:
       interventionType = "Entity positive";
-      interventionType += "<br /><br />Something bad happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
+      interventionType += "<br /><br />Something good happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
       break;
     case 3:
       interventionType = "Entity negative";
