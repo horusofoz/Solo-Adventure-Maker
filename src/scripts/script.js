@@ -2185,6 +2185,8 @@ function rollMuneQuestion() {
   var rollResult = rollDice(6);
   var interventionPoints = 0;
   
+  answer = "Roll Result: " + rollResult;
+
   if(rollResult == 6) {
     interventionPoints++;
   }
@@ -2205,26 +2207,30 @@ function rollMuneQuestion() {
       rollResult = Math.min(rollResult, modifierRollResult)
     }
     document.getElementById("mune-question-modifier").value = "";
+
+    answer += " & " + rollResult;
   }
+
+  answer += "<br /><br />Answer: ";
 
   switch(rollResult) {
     case 1:
-      answer = "No, and...";
+      answer += "No, and...";
       break;
     case 2:
-      answer = "No";
+      answer += "No";
       break;
     case 3:
-      answer = "No, but...";
+      answer += "No, but...";
       break;
     case 4:
-      answer = "Yes, but...";
+      answer += "Yes, but...";
       break;
     case 5:
-      answer = "Yes";
+      answer += "Yes";
       break;
     case 6:
-      answer = "Yes, and..."
+      answer += "Yes, and..."
       break;
   }
 
