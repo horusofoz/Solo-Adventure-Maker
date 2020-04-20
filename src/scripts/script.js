@@ -2208,7 +2208,7 @@ function rollMuneQuestion() {
     }
     document.getElementById("mune-question-modifier").value = "";
 
-    answer += " & " + rollResult;
+    answer += " & " + modifierRollResult;
   }
 
   answer += "<br /><br />Answer: ";
@@ -2248,30 +2248,32 @@ function rollMuneQuestion() {
 function rollMuneIntervention() {
   var interventionType = "";
   var rollResult = rollDice(6);
+
+  interventionType = "Roll Result: " + rollResult + "<br /><br />";
   
   switch(rollResult) {
     case 1:
-      interventionType = "New entity";
+      interventionType += "New entity";
       interventionType += "<br /><br />A new entity appears. Maybe this introduction is beneficial to you, maybe not. The specifics can be gleaned from asking the oracle, with some potential help from a Portent.";
       break;
     case 2:
-      interventionType = "Entity positive";
+      interventionType += "Entity positive";
       interventionType += "<br /><br />Something good happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
       break;
     case 3:
-      interventionType = "Entity negative";
+      interventionType += "Entity negative";
       interventionType += "<br /><br />Something bad happens to an entity. The specifics of which can be determined by asking the Oracle with some optional help from a Portent.";
       break;
     case 4:
-      interventionType = "Advance plot";
+      interventionType += "Advance plot";
       interventionType += "<br /><br />Advancing a plot pushes an unresolved hook in a certain direction. A plot advancement should always see the adventure progress and does so by helping a certain goal or plot point.";
       break;
     case 5:
-      interventionType = "Regress plot";
+      interventionType += "Regress plot";
       interventionType += "<br /><br />Regressing a plot pushes an unresolved hook in a certain direction. A plot regression should always see the adventure progress and does so by hindering a certain goal or plot point.";
       break;
     case 6:
-      interventionType = "Wild";
+      interventionType += "Wild";
       interventionType += "<br /><br />Wild Interventions simulate the completely unexpected. It can be good, bad, neutral, or downright crazy. This allows for sudden twists of fate, such as a dragon swooping down to attack the village and allowing the slaves to escape in the ensuing chaos.<br /><br />Because a wild Intervention is so vague in what it can represent, you kinda have to use a Portent to figure out what the heck it actually means."
       break;
   }
@@ -2283,45 +2285,47 @@ function rollMuneTwene() {
   var result = "";
   var rollResult = rollDice(10);
   
+  result += "Roll Result: " + rollResult + "<br /><br />"
+
   switch(rollResult) {
     case 1:
-      result = "Increase simple element";
+      result += "Increase simple element";
       result += "<br /><br />A simple element is something of minimal importance. This element increases in scale or importance.";
       break;
     case 2:
-      result = "Decrease simple element";
+      result += "Decrease simple element";
       result += "<br /><br />A simple element is something of minimal importance. This element decreases in scale or importance.";
       break;
     case 3:
-      result = "Add simple element";
+      result += "Add simple element";
       result += "<br /><br />A simple element is something of minimal importance. This element is added to the scene.";
       break;
     case 4:
-      result = "Remove simple element";
+      result += "Remove simple element";
       result += "<br /><br />A simple element is something of minimal importance. This element is removed from the scene.";
       break;
     case 5:
-      result = "Increase major element";
+      result += "Increase major element";
       result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element decreases in scale or importance.";
       break;
     case 6:
-      result = "Decrease major element";
+      result += "Decrease major element";
       result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element decreases in scale or importance.";
       break;
     case 7:
-      result = "Add major element";
+      result += "Add major element";
       result += "<br /><br />A major element is something that is affecting the scene, and may even be a Plot or Entity. This element is added to the scene.";
       break;
     case 8:
-      result = "Remove major element";
+      result += "Remove major element";
       result += "<br /><br />A wild positive indicates an unexpected and significant alteration to the scene that has a positive impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
     case 9:
-      result = "Wild positive";
+      result += "Wild positive";
       result += "<br /><br />A wild positive indicates an unexpected and significant alteration to the scene that has a positive impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
     case 10:
-      result = "Wild negative";
+      result += "Wild negative";
       result += "<br /><br />A wild negative indicates an unexpected and significant alteration to the scene that has a negative impact. A Portent can help to define the change if no ideas spring to mind.";
       break;
   }
@@ -2332,19 +2336,21 @@ function rollMuneTwene() {
 function rollMuneNpcStartingAttitude() {
   var npcStartingAttitude = "";
   var rollResult = rollDice(6);
+
+  npcStartingAttitude = "Roll Result: " + rollResult + "<br /><br />"
   
   switch(rollResult) {
     case 1:
     case 2:
-      npcStartingAttitude = "Hostile";
+      npcStartingAttitude += "Hostile";
       break;
     case 3:
     case 4:
-      npcStartingAttitude = "Neutral";
+      npcStartingAttitude += "Neutral";
       break;
     case 5:
     case 6:
-      npcStartingAttitude = "Friendly";
+      npcStartingAttitude += "Friendly";
       break;
   }
 	npcStartingAttitude += "<br /><br />If unsure of an NPCs desired topic of conversation, roll a Portent.";
@@ -2356,14 +2362,27 @@ function rollSATQuestion() {
   var answer = "";
   var rollResult = rollDice(20);
 
-  var questionModifier = document.getElementById("sat-question-modifier").value;
-  document.getElementById("sat-question-modifier").value = "0";
+  answer = "Roll Result: " + rollResult;
 
-  questionModifier = parseInt(questionModifier, 10);
-  rollResult += questionModifier; 
+  var questionModifier = document.getElementById("sat-question-modifier").value;
+  var questionModifierSelector = document.getElementById("sat-question-modifier");
+  questionModifierlabel = questionModifierSelector.options[questionModifierSelector.selectedIndex].text;
+
+  if(questionModifier != "0") {
+    answer += " with '" + questionModifierlabel + "' modifier of " + questionModifier + " = ";
+
+    document.getElementById("sat-question-modifier").value = "0";
+    questionModifier = parseInt(questionModifier, 10);
+    rollResult += questionModifier;
+
+    rollResult = enforceMinMaxValue("minimum", rollResult, 1);
+    rollResult = enforceMinMaxValue("maximum", rollResult, 20);
+    answer += rollResult;
+  }
+
   
-  rollResult = enforceMinMaxValue("minimum", rollResult, 1);
-  rollResult = enforceMinMaxValue("maximum", rollResult, 20);
+  
+  
   
   switch(rollResult) {
     case 1:
@@ -2372,16 +2391,16 @@ function rollSATQuestion() {
     case 4:
     case 5:
     case 6:
-        answer = "No";
-        break;
+      answer += "<br /><br />Answer: No";
+      break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
     case 12:
-        answer = "Maybe";
-        break;
+      answer += "<br /><br />Answer: Maybe";
+      break;
     case 13:
     case 14:
     case 15:
@@ -2389,14 +2408,11 @@ function rollSATQuestion() {
     case 17:
     case 18:
     case 19:
-        answer = "Yes";
-      break;
     case 20:
-        answer = "Yes";
-		answer += " add 1 Intervention Point";
-		break;
+      answer += "<br /><br />Answer: Yes";
+		  break;
     default:
-	  answer = rollResult + " " + "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
+	    answer = rollResult + " " + "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
   }
 
   return answer;
