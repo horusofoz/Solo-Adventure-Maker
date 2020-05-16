@@ -2361,29 +2361,28 @@ function rollMuneNpcStartingAttitude() {
 function rollSATQuestion() {
   var answer = "";
   var rollResult = rollDice(20);
-
-  answer = "Roll Result: " + rollResult;
+  var response = "";
 
   var questionModifier = document.getElementById("sat-question-modifier").value;
   var questionModifierSelector = document.getElementById("sat-question-modifier");
+  var modifierText = ""
+
   questionModifierlabel = questionModifierSelector.options[questionModifierSelector.selectedIndex].text;
 
-  if(questionModifier != "0") {
-    answer += " with '" + questionModifierlabel + "' modifier of " + questionModifier + " = ";
 
+
+  if(questionModifier != "0") {
+    modifierText = "Modifier: " + questionModifierlabel + " (" + questionModifier + ")<br />";
     document.getElementById("sat-question-modifier").value = "0";
     questionModifier = parseInt(questionModifier, 10);
     rollResult += questionModifier;
 
     rollResult = enforceMinMaxValue("minimum", rollResult, 1);
     rollResult = enforceMinMaxValue("maximum", rollResult, 20);
-    answer += rollResult;
   }
 
-  
-  
-  
-  
+  rollResultText = "Roll Result: " + rollResult;
+
   switch(rollResult) {
     case 1:
     case 2:
@@ -2391,7 +2390,7 @@ function rollSATQuestion() {
     case 4:
     case 5:
     case 6:
-      answer += "<br /><br />Answer: No";
+      response = "<br />Answer: No";
       break;
     case 7:
     case 8:
@@ -2399,7 +2398,7 @@ function rollSATQuestion() {
     case 10:
     case 11:
     case 12:
-      answer += "<br /><br />Answer: Maybe";
+      response = "<br />Answer: Maybe";
       break;
     case 13:
     case 14:
@@ -2409,11 +2408,13 @@ function rollSATQuestion() {
     case 18:
     case 19:
     case 20:
-      answer += "<br /><br />Answer: Yes";
+      response = "<br />Answer: Yes";
 		  break;
     default:
-	    answer = rollResult + " " + "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
+	    response = rollResult + " " + "ERROR GENERATING ANSWER. PLEASE ADVISE DEV";
   }
+
+  answer = modifierText + rollResultText + response;
 
   return answer;
 }
